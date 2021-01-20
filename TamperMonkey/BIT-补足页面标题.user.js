@@ -6,6 +6,7 @@
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
 // @match        http://*.bit.edu.cn/*
+// @exclude      http://lexue.bit.edu.cn/*
 // @grant        none
 // ==/UserScript==
 
