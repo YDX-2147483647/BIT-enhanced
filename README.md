@@ -1,6 +1,6 @@
 # BIT-enhanced
 
-一些方便大家使用BIT相关网站的油猴脚本……
+一些方便大家使用BIT相关网站的油猴脚本等……
 
 油猴可以向网页注入JavaScript，从而修改之。油猴支持很多浏览器，如果您使用Microsoft Edge (Chromium)，那么可以在[这里](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)获取。
 
