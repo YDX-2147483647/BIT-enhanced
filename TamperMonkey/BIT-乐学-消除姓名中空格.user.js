@@ -12,7 +12,6 @@
 
 (function() {
     'use strict';
-    console.log("!!!");
     document.querySelectorAll("a[href*='/user/view.php'], .author-info > .text-truncate, .usertext, .fullname").forEach(e => {
         if(!e.textContent.match(/[a-zA-Z]/)){
             e.textContent = e.textContent.replaceAll(" ", "");
