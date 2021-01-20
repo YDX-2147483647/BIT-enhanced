@@ -5,6 +5,7 @@
 // @description  简化预设代码的复制操作
 // @author       Y.D.X.
 // @match        http://lexue.bit.edu.cn/mod/programming/view.php?*
+// @match        http://lexue.bit.edu.cn/mod/programming/history.php?*
 // @grant        none
 // ==/UserScript==
 
@@ -34,7 +35,7 @@
             }, interval);
         });
     }
-    
+
     function get_this_code(sender){
         while (sender != null && sender.className.indexOf('dp-highlighter') == -1)
             sender = sender.parentNode;
@@ -44,8 +45,8 @@
         code = code.replaceAll('\u00a0', '\u0020');
         return code;
     }
-    
-    if(document.querySelector(".presetcode")){
+
+    if(document.querySelector(".presetcode") || window.location.pathname.includes("history")){
         wait_until_presence(".dp-highlighter > .bar > .tools", 100).then(toolbar => {
             let copy_button = document.createElement("pre");
             copy_button.textContent = "(copy me to copy the whole)";
@@ -58,12 +59,12 @@
             copy_button.style.marginLeft = "10px";
             copy_button.style.fontFamily = "sans-serif";
             copy_button.style.display = "inline";
-            
+
             copy_button.addEventListener("copy", function(e){
                 e.clipboardData.setData("text/plain", get_this_code(e.target));
                 e.preventDefault();
             });
-            
+
             toolbar.appendChild(copy_button);
         });
     }
