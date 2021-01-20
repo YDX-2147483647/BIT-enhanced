@@ -1,0 +1,32 @@
+/* ==UserStyle==
+@name           BIT-Programming-测试用例表格
+@namespace      github.com/openstyles/stylus
+@version        1.0.1
+@description     隐藏一些列，调整列宽
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url-prefix("http://lexue.bit.edu.cn/mod/programming/result.php"), url-prefix("http://lexue.bit.edu.cn/mod/programming/view.php") {
+	.testcase-table > .generaltable .c3,
+	.testcase-table > .generaltable .c4,
+	.testcase-table > .generaltable .c5,
+	#test-result-detail > .generaltable .c2,
+	#test-result-detail > .generaltable .c3,
+	#test-result-detail > .generaltable .c9,
+	#test-result-detail > .generaltable .c10,
+	#test-result-detail > .generaltable .c11
+	{
+		display: none;
+	}
+
+	.generaltable td.programming-io > div {
+		width: auto;
+	}
+	.testcase-table > .generaltable td.programming-io > div {
+		max-width: 30em;
+	}
+	#test-result-detail > .generaltable td.programming-io > div {
+		max-width: 20em;
+	}
+	
+}
