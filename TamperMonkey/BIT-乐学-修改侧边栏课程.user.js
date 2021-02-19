@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  在侧边栏隐藏、重命名、增加一些课程
 // @author       Y.D.X.
 // @match        http://lexue.bit.edu.cn/*
@@ -13,16 +13,28 @@
 (function() {
     'use strict';
 
-    let hide_list = ["信息技术基础"];
+    let hide_list = [
+        "C语言程序设计（2020级电子信息-中文班）期末考试",
+        "习近平新时代中国特色社会主义思想概论",
+        "思想道德修养与法律基础",
+        "2020网络安全宣传周",
+        "信息技术基础",
+    ];
     let change_list = {
-        "C语言程序设计": null,
-        "思想道德修养与法律基础": null,
-        "习近平新时代中国特色社会主义思想概论": "习思想概论",
-        "CUMCM": null
-    }; // null 表示值与键相同
+        "数据结构": null,
+        "线性代数B": null,
+        "线性代数A": null,
+        "工科数学分析 II": null,
+        // "C语言程序设计（2020级电子信息-中文班）期末考试": "C语言程序设计-期末考试",
+        // "CUMCM": null,
+        // "习近平新时代中国特色社会主义思想概论": "习思想概论",
+        // "思想道德修养与法律基础": null,
+        // "C语言程序设计": null,
+    }; // null 表示值与键相同；优先匹配前面的键，但键重复时只保留后面的
     let append_list = [
-        {name: "学术用途英语I", id: "5889"},
-        {name: "工科数学分析I", id: "5836"}
+        // {name: "MCM辅导", id: "1988"},
+        // {name: "工科数学分析I", id: "5836"},
+        // {name: "学术用途英语I", id: "5889"},
     ];
 
     function hide_and_change_courses(){
