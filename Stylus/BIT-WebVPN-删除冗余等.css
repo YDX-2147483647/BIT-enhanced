@@ -1,0 +1,40 @@
+/* ==UserStyle==
+@name           BIT-WebVPN-删除冗余等
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    去除图标，修改多列布局
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url("https://webvpn.bit.edu.cn/") {
+	
+	/* Remove avatars. */
+	.vpn-content-block-panel__image {
+		display: none;
+	}
+	.vpn-content-block-panel__content {
+		padding-left: 15px;
+	}
+	
+	/* Customize multi-column. */
+	@media screen and (min-width: 540px) {
+		.layui-col-sm1, .layui-col-sm10, .layui-col-sm11, .layui-col-sm12, .layui-col-sm2, .layui-col-sm3, .layui-col-sm4, .layui-col-sm5, .layui-col-sm6, .layui-col-sm7, .layui-col-sm8, .layui-col-sm9 {
+			float: left;
+		}
+	}
+	@media screen and (min-width: 540px) {
+			.vpn-content .layui-col-sm6 {
+			width: calc(100% / 2);
+		}
+	}
+	@media screen and (min-width: 768px) {
+			.vpn-content .layui-col-sm6 {
+			width: calc(100% / 3);
+		}
+	}
+	@media screen and (min-width: 1000px) {
+			.vpn-content .layui-col-sm6 {
+			width: calc(100% / 4);
+		}
+	}
+}
