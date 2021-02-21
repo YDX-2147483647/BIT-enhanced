@@ -8,5 +8,5 @@
 
 ---
 
-另外有个好东西值得一提：[spencerwooo](https://github.com/spencerwooo/bit-webvpn-converter/commits?author=spencerwooo)做的[🥑BIT WebVPN Converter](https://webvpn.vercel.app/)。BIT的WebVPN其实也支持访问[WebVPN主页](https://webvpn.bit.edu.cn/)所列项目以外的网站（~~例如[万方](http://new.wanfangdata.com.cn/)~~如果你本来在校外浏览，忽然碰到校内URL，那么就可直接复制其到转换器，访问，而不用在校内站从头再来），用这个转换器就可以在校外访问了。
+另外有个好东西值得一提：[spencerwooo](https://github.com/spencerwooo/bit-webvpn-converter/commits?author=spencerwooo)做的[🥑BIT WebVPN Converter](https://webvpn.vercel.app/)。BIT的WebVPN其实也支持访问[WebVPN主页](https://webvpn.bit.edu.cn/)所列项目以外的网站，用这个转换器就可以在校外访问了。如果你本来在校外浏览，忽然碰到校内URL，那么就可直接复制之到转换器，访问，而不用在校内站从头再来。
 
