@@ -1,0 +1,32 @@
+/* ==UserStyle==
+@name           BIT-本科生教务-学生个人考试成绩
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    删除一般没数据的列，加镶边行等
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url("https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fae04c8f69326144300d8db9d6562d/jsxsd/kscj/cjcx_list"), url("http://jwms.bit.edu.cn/jsxsd/kscj/cjcx_list") {
+    /* 这是一个既没有 <colgroup> 也没有 <thead> 的表格…… */
+	
+	#dataList > * > tr > :nth-child(6), /* 成绩标识 */
+	#dataList > * > tr > :nth-child(13), /* 课程归属 */
+	#dataList > * > tr > :nth-child(14) /* 课程种类 */
+	{
+		display: none;
+	}
+	
+	#dataList > * > tr:nth-child(odd):not(:first-child) {
+		background-color: #eee;
+	}
+	
+	/* 课程编号 */
+	#dataList > * > tr > td:nth-child(3){
+		text-align: center;
+	}
+	
+	/* 课程名称 */
+	#dataList > * > tr > td:nth-child(4){
+		padding: 1em;
+	}
+}
