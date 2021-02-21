@@ -1,0 +1,17 @@
+/* ==UserStyle==
+@name           BIT-本硕博一体化-课表
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    调整课表中文字对齐方式
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url-prefix("http://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*default/index.do") {
+	.mtt_item_kcmc {
+		text-align: center;
+	}
+	
+	.mtt_item_room {
+		text-align: start;
+	}
+}
