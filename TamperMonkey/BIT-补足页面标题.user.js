@@ -7,6 +7,9 @@
 // @match        https://*.bit.edu.cn/*
 // @match        http://*.bit.edu.cn/*
 // @exclude      http://lexue.bit.edu.cn/*
+// @exclude      https://www.bit.edu.cn/xww/*
+// @exclude      https://webvpn.bit.edu.cn/*
+// @exclude      http://jxzxehallapp.bit.edu.cn/*
 // @grant        none
 // ==/UserScript==
 
