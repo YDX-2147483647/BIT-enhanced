@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         BIT-本硕博一体化-课表
 // @namespace    http://tampermonkey.net/
-// @version      0.2
-// @description  去除课表中课程及教学班编号
+// @version      0.3
+// @description  去除课表中的“本”、课程及教学班编号、星期等
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*
 // @grant        none
@@ -36,20 +36,42 @@
 
 
     function shrink_titles(){
-        document.querySelectorAll(".mtt_item_kcmc").forEach(c => {
-            c.textContent = c.childNodes[1].textContent.replace(
-                /^\d{8,9}\s(.+)\[(\d{2}|\d{9})\]$/,
-                "$1");
-        })
-    }
-    function wait_and_shrink_titles(){
-        wait_until_presence("#kcb_container", 1000).then(shrink_titles);
+        // 这里选出来的是每节课中的“本”或“研”字
+        // 根据 weekUnitTableInfo.js ，存在漏选的理论可能性
+        document.querySelectorAll(".mtt_item_kcmc > span.mtt_item_bybz").forEach(icon => {
+            // 课程名称
+            let course_name = icon.parentNode;
+            course_name.textContent = icon.nextSibling.textContent.replace(
+                /^\d{8,9}\s(.+)\[(\d{2}|\d{9})\]$/, "$1");
+
+            // 课程详细信息
+            let course_detail = course_name.parentNode.querySelector(".mtt_item_room");
+            course_detail.textContent = course_detail.textContent.replace(
+                /良乡校区,?/, "").replace(/星期\d,/, "").replace("节-第", "-");
+            // 例：第8节-第10节 -> 第8-10节
+        });
     }
 
-    wait_and_shrink_titles();
+    function wait_and_shrink_titles(){
+        wait_until_presence("#kcb_container", 200).then(shrink_titles);
+    }
+
+
+    wait_until_presence("#kcb_container", 1000).then(function(){
+        shrink_titles();
+
+        // 周/学期课表切换栏
+        let change_buttons_selectors = [
+            "i.icon-keyboardarrowleft", "i.icon-keyboardarrowright",
+            "[data-action='周课表学年学期']", "[data-action='周课表周课表']"
+        ];
+        for(const s of change_buttons_selectors){
+            document.querySelector(s).addEventListener("click", wait_and_shrink_titles);
+        }
+    });
 
     wait_until_presence("#dqxnxq2 + a[data-action='更改2']", 1000).then(button => {
-        // 更改学期时的对话框是每次现画的……所以每次都要加
+        // 更改学期时的对话框是每次现画的……所以每次更改都要加
         button.addEventListener("click", function(){
             document.querySelector("#buttons > button.bh-btn-primary").addEventListener(
                 "click", wait_and_shrink_titles);
