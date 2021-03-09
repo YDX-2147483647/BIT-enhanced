@@ -1,0 +1,20 @@
+/* ==UserStyle==
+@name           BIT-乐学-首页简化
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url("http://lexue.bit.edu.cn/") {
+   /* 毕业设计（论文）专题培训 */
+   /* [role=main] > .box.generalbox.sitetopic >  ul.section > li:nth-child(-n+4) */
+	#module-152004, #module-152020, #module-166220, #module-166319,
+	/* 课程申请方法 */
+	section[aria-label='课程/网站简介']#inst429,
+   /* 我的课程-教师列表 */
+	#frontpage-course-list > div.courses > .coursebox > .content > .teachers
+	{
+		display: none;
+	}
+}
