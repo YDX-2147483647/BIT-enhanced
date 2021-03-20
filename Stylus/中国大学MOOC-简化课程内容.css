@@ -1,0 +1,18 @@
+/* ==UserStyle==
+@name           中国大学MOOC-简化课程内容
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    “课件”页每节的每行显示多个视频、文件
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document regexp("https?://www.icourse163.org/learn/.+#/learn/content") {
+	.u-learnLesson.normal .lsicon {
+		display: inline-flex;
+		margin: .5em;
+	}
+	.u-learnLesson.normal .lsicon:hover {
+		color: #00c758;
+		text-decoration: underline;
+	}
+}
