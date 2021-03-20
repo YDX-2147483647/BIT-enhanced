@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  显示控件
 // @author       You
-// @match        http://h5.cyol.com/special/daxuexi/*
+// @match        *://h5.cyol.com/special/daxuexi/*
 // @grant        none
 // @run-at       document-end
 // ==/UserScript==
