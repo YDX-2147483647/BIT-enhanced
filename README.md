@@ -1,10 +1,12 @@
 # BIT-enhanced
 
-一些方便大家使用BIT相关网站的油猴脚本等……
+一些方便大家使用 BIT 相关网站的用户脚本和用户样式表、
 
-油猴可以向网页注入JavaScript，从而修改之。油猴支持很多浏览器，如果您使用Microsoft Edge (Chromium)，那么可以在[这里](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)获取。
+油猴（TamperMonkey）可以向网页注入 JavaScript，从而修改之。油猴支持很多浏览器，如果您使用 Microsoft Edge (Chromium)，那么可以在[这里](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)获取。
 
 这里很多脚本是随便写的，说明不一定完备。如果看了文件名和文件开头的注释后仍不清楚某个脚本是干什么的，可以直接问。
+
+Stylus/Stylish 等很多插件可以注入 CSS，改变网页的外观。这些插件也支持很多浏览器。
 
 ---
 
