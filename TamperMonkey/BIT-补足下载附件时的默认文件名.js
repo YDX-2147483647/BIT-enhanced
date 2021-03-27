@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  补充附件中 <a> 元素的 download 属性
 // @author       Y.D.X.
-// @match        https://jxzx.bit.edu.cn/tzgg/*
-// @match        https://jwc.bit.edu.cn/tzgg/*
+// @match        https://jxzx.bit.edu.cn/*.htm
+// @match        https://jwc.bit.edu.cn/*.htm
 // @grant        none
 // ==/UserScript==
 
 // 旧版本：BIT-教学运行与考务中心（0.1）。
 
-(function() {
+(function () {
     'use strict';
 
     // 优先使用在前面的 title_selector
@@ -26,18 +26,18 @@
         }
     ];
 
-    function set_attachments_filenames(){
+    function set_attachments_filenames() {
         let site_host = window.location.host;
 
-        for(const s of matches) {
-            if(site_host == `${s.host}.bit.edu.cn`) {
+        for (const s of matches) {
+            if (site_host == `${s.host}.bit.edu.cn`) {
                 document.querySelectorAll(s.attachments_selector).forEach(attach => {
-                    if(!attach.download) {
+                    if (!attach.download) {
                         let attach_filename = attach.textContent;
 
-                        if(attach.textContent.indexOf(".") == -1) {
+                        if (!/\.[0-9a-zA-Z]+$/.test(attach_filename)) {
                             // textContent 不含扩展名
-                            attach_filename += attach.href.match("\.[0-9a-zA-Z]+$");
+                            attach_filename += attach.href.match(/\.[0-9a-zA-Z]+$/);
                         }
 
                         attach.download = attach_filename;
