@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  在侧边栏添加并重新排列课程
 // @author       Y.D.X.
 // @match        http://lexue.bit.edu.cn/*
@@ -18,18 +18,18 @@
     let show_list = [
         // 有序，显示时前面的在上
         // icon 指 FontAwesome 的图标名称，默认为'graduation-cap'。→ http://www.fontawesome.com.cn/faicons/
-        { name: "工科数学分析 2", id: "6712", icon: "superscript" },
-        { name: "线性代数A", id: "6721", icon: "square-o" },
-        { name: "物理A 1", id: "7348", icon: "globe" },
         { name: "物理实验B-绪论", id: "7661", icon: "flask" },
         { name: "数据结构", id: "6556", icon: "database" },
-        { name: "中国近现代史", id: "7880", icon: "book" },
-        { name: "工训", id: "7297", icon: "wrench" },
         { name: "唐宋诗词欣赏", id: "7154", icon: "paragraph" },
         { name: "MCM", id: "4246", icon: "line-chart" },
     ]
     let hide_list = [
         "更多",
+        { name: "工科数学分析 2", id: "6712", icon: "superscript" },
+        { name: "线性代数A", id: "6721", icon: "square-o" },
+        { name: "物理A 1", id: "7348", icon: "globe" },
+        { name: "中国近现代史", id: "7880", icon: "book" },
+        { name: "工训", id: "7297", icon: "wrench" },
         "乐学使用简明教程",
         "C语言程序设计（2020级电子信息-中文班）期末考试",
         "习近平新时代中国特色社会主义思想概论",
@@ -42,7 +42,8 @@
             function (course) {
                 let name = course.querySelector(".media > span.media-body");
                 for (let i of hide_list) {
-                    if (name.textContent.includes(i)) {
+                    if ((i.hasOwnProperty('id') && course.dataset.key == i.id)
+                        || name.textContent.includes(i)) {
                         course.hidden = true;
                         return;
                     }
