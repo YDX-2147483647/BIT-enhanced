@@ -15,7 +15,7 @@
 
 // 旧版本：BIT-教学运行与考务中心（0.1）。
 
-(function() {
+(function () {
     'use strict';
 
     // 优先使用在前面的 title_selector
@@ -52,17 +52,23 @@
                 ".service-name",
                 "table.mini-tabs-header > tbody > tr > td.mini-tab-active > span.mini-tab-text"
             ]
+        },
+        { // 学生事务中心
+            host: "student", title_selectors: [
+                "#home .page_box .txt > h2",
+                "#home .page_box .top > h2"
+            ]
         }
     ];
 
-    function change_title(){
+    function change_title() {
         let title = null;
 
-        for(var s of matches){
-            if(site_host == `${s.host}.bit.edu.cn`){
-                for(var title_selector of s.title_selectors){
+        for (var s of matches) {
+            if (site_host == `${s.host}.bit.edu.cn`) {
+                for (var title_selector of s.title_selectors) {
                     // console.log(title_selector);
-                    if(document.querySelector(title_selector)){
+                    if (document.querySelector(title_selector)) {
                         title = document.querySelector(title_selector).textContent.trim();
                         break;
                     }
@@ -71,11 +77,11 @@
             }
         }
 
-        if(title){
-            page_title.text = `${title} - ${site_name}${site_name? " |": ""} 北京理工大学`;
+        if (title) {
+            page_title.text = `${title} - ${site_name}${site_name ? " |" : ""} 北京理工大学`;
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
@@ -83,10 +89,10 @@
     var page_title = document.querySelector("head > title");
     var site_name = page_title.text.match(/北京理工大学(.*)/);
     var site_host = window.location.host;
-    if(site_name){
+    if (site_name) {
         site_name = site_name[1].trim();
 
-        if(!change_title()){
+        if (!change_title()) {
             // 搞成这样只是为了适应 i.bit.edu.cn ！
             setTimeout(change_title, 1500);
         }
