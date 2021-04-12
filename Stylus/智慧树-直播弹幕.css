@@ -1,0 +1,13 @@
+/* ==UserStyle==
+@name           智慧树-直播弹幕
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    调整透明度
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url-prefix("https://lc.zhihuishu.com/live/live_room.html") {
+	.cmt {
+		opacity: .5;
+	}
+}
