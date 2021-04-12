@@ -1,0 +1,14 @@
+/* ==UserStyle==
+@name           智慧树-加粗视频进度条
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url-prefix("https://studyh5.zhihuishu.com/videoStudy.html#/studyVideo") {
+	#vjs_container > div.controlsBar > div.progress > .progressBar,
+	#vjs_container > div.controlsBar > div.progress > .progressBar .passTime{
+		height: 6px;
+	}
+}
