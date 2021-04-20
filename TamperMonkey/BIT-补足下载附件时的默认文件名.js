@@ -6,6 +6,7 @@
 // @author       Y.D.X.
 // @match        https://jxzx.bit.edu.cn/*.htm
 // @match        https://jwc.bit.edu.cn/*.htm
+// @match        http://www.bit.edu.cn/*.htm
 // @grant        none
 // ==/UserScript==
 
@@ -23,6 +24,10 @@
         { // 教务处
             host: "jwc",
             attachments_selector: ".pageArticle > .fujian > ul > li > a:not([download])"
+        },
+        { // World Wide Web
+            host: "www",
+            attachments_selector: ".article .Annex > ul > li > a:not([download])"
         }
     ];
 
