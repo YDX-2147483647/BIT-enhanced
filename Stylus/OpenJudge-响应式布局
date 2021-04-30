@@ -1,0 +1,246 @@
+/* ==UserStyle==
+@name           OpenJudge-响应式布局
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    主要是适应桌面的半屏
+@author         Y.D.X.
+==/UserStyle== */
+@-moz-document regexp("http://\\w+\\.openjudge\\.cn/\\w+/\\w+/.*") {
+	/* 所有四个页面 */
+	#topMenu li a:hover {
+		text-decoration: underline;
+	}
+
+	.wrapper,
+	#pagebody > .wrapper {
+		width: auto;
+	}
+
+	#headerTop > .wrapper {
+		padding: 0 max(2em, 10%);
+	}
+
+	#header > .wrapper {
+		padding: 2em max(2em, 10%) 0;
+	}
+
+	#pageTitle {
+		width: 100%;
+		margin: auto;
+		padding: 0;
+	}
+	#pageTitle h2 {
+		margin: 0.5em max(1em, 10%);
+		height: 1.2em;
+		font-size: 1.5em;
+	}
+
+	#topMenu {
+		position: absolute;
+		right: max(2em, 10%);
+		top: calc(30px + 1.2em + 1em - 1.5em);
+	}
+	#topMenu li.current-show a {
+		margin: 0;
+		padding: 0.25em 1em 0.25em;
+	}
+	#topMenu li a {
+		margin: 0.3rem 0 0;
+		height: 1.5rem;
+		padding: 0.25em 1em 0.25em;
+	}
+
+	#footer > .wrapper {
+		padding: 0 max(2em, 10%);
+	}
+	#footer > .wrapper > ul {
+		margin: 0 0 .5em;
+	}
+}
+
+@-moz-document regexp("http://\\w+\\.openjudge\\.cn/\\w+/\\w+/") {
+	/* 查看 */
+	#pagebody .problem-page,
+	#pagebody .problem-statistics {
+		width: auto;
+		float: none;
+		display: block;
+	}
+
+
+	/* Problem Page */
+	#pagebody .problem-page {
+		margin: 1em 10%;
+	}
+	@media(max-width: 780px) {
+		#pagebody .problem-page {
+			margin: 1em;
+		}
+	}
+	@media (min-width: 950px) {
+		#pagebody .problem-page {
+			margin: 0;
+		}
+	}
+
+	#pagebody .problem-page dt {
+		margin: 1.5em 0 1em;
+		line-height: normal;
+	}
+
+	#pagebody .problem-page dd p {
+		text-indent: 2em;
+	}
+
+	#pagebody .problem-page dd pre {
+		width: 80%;
+		margin: auto;
+	}
+
+	@media(max-width: 780px) {
+		#pagebody .problem-page .bottomMenu {
+			text-align: center;
+		}
+	}
+
+
+	/* Problem Statistics */
+	#pagebody .problem-statistics dl {
+		margin: 1em;
+	}
+	@media(max-width: 950px) {
+		#pagebody .problem-statistics dl {
+			justify-content: center;
+		}
+	}
+
+	#pagebody .problem-statistics dl {
+		display: grid;
+		grid-template-columns: 4em 8em;
+		gap: 0.5em 1em;
+	}
+	#pagebody .problem-statistics dl * {
+		margin: 0;
+	}
+
+	#pagebody .problem-statistics h4 {
+		margin: 1em;
+	}
+
+	@media (max-width: 950px) {
+		#pagebody .problem-statistics {
+			margin: 1em 10%;
+
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			place-items: center;
+		}
+	}
+	@media (max-width: 780px) {
+		#pagebody .problem-statistics {
+			margin: 1em;
+		}
+	}
+
+
+	/* Whole layout (wide screen) */
+	@media (min-width: 950px) {
+		#pagebody > .wrapper {
+			display: grid;
+			grid-template-columns: 10% 2fr 1fr 10%;
+			gap: 1em;
+		}
+
+		#pageTitle,
+		#topMenu {
+			grid-column: 1 / -1;
+		}
+
+		#pagebody .problem-page {
+			grid-column: 2;
+		}
+	}
+}
+
+@-moz-document regexp("http://\\w+\\.openjudge\\.cn/\\w+/\\w+/submit/") {
+	/* 提交 */
+	#submit {
+		margin: 1em 10%;
+	}
+	@media(max-width: 780px) {
+		#submit {
+			margin: 1em;
+		}
+	}
+
+	#submit p {
+		margin: 1em;
+	}
+
+	#submit form dt,
+	#submit form dd {
+		float: none;
+		height: auto;
+		width: auto;
+		margin: 1em;
+		padding: 0;
+		text-align: inherit;
+	}
+
+	/* 编程语言 */
+	#submit > form > dl > dd:nth-child(4) {
+		display: grid;
+		grid-template-columns: repeat(3, auto 1fr);
+		column-gap: 1em;
+	}
+	#submit > form > dl > dd:nth-child(4) > input[type='radio'] {
+		margin: 0.5em;
+	}
+	#submit > form > dl > dd:nth-child(4) > br {
+		display: none;
+	}
+}
+
+@-moz-document regexp("http://\\w+\\.openjudge\\.cn/\\w+/\\w+/statistics/(\\?page=\\d+)?") {
+	/* 统计 */
+	#main {
+		margin: 1em 10%;
+		text-align: center;
+	}
+	@media (min-width: 950px) {
+		#main {
+			margin: 0;
+		}
+	}
+	
+	
+	#side {
+		margin: 1em 10%;
+	}
+	@media (min-width: 950px) {
+		#side {
+			margin: 0;
+		}
+	}
+	
+
+	/* Whole layout (wide screen) */
+	@media (min-width: 950px) {
+		#pagebody > .wrapper {
+			margin: 1em;
+			
+			display: grid;
+			grid-template-columns: 10% 2fr 1fr 10%;
+			gap: 1em;
+		}
+
+		#pageTitle,
+		#topMenu {
+			grid-column: 1 / -1;
+		}
+
+		#pagebody #main {
+			grid-column: 2;
+		}
+	}
+}
