@@ -41,6 +41,7 @@
         },
         { // World Wide Web
             host: "www", title_selectors: [
+                ".subPage > .container > .subRight  > .newsTitle > h1",
                 ".subPage > .container > .listTitle02 > h2",
                 ".bread > .container > a:nth-last-child(1)"
             ]
