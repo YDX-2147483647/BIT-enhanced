@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         BIT-第二课堂-修改背景颜色
+// @name         BIT-第二课堂-所有课程-修改背景颜色
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  给可报名的课程设置颜色
