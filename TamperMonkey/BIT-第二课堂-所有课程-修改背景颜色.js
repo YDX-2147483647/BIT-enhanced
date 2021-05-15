@@ -26,6 +26,14 @@
         #main > form[name='form1'] tr.unavailable-course {
             background-color: #ff000026;
         }
+        #main > form[name='form1'] tr.obsolete > td,
+        #main > form[name='form1'] tr.obsolete > td > a {
+            color: lightgray;
+        }
+        #main > form[name='form1'] tr.obsolete > td:nth-child(2) > font {
+            color: darkred;
+            /* 原来是 green，搞不懂为何报名不了的要弄成绿色…… */
+        }
 
         `;
         document.head.appendChild(sheet);
@@ -50,7 +58,7 @@
         for (const row of table_rows) {
             let state = row.children[1].textContent;
             if (state == '课程结束') {
-                row.children[1].children[0].style.color = 'darkred';
+                row.classList.add('obsolete');
                 // 原来是 green，搞不懂为何报名不了的要弄成绿色……
             } else if (state == '正常') {
                 let [applicants, capacity] = row.children[8].textContent.split('/').map(x => parseInt(x));
