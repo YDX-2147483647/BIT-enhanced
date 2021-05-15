@@ -1,12 +1,14 @@
 // ==UserScript==
-// @name         BIT-Programming-编程题状态
+// @name         BIT-乐学-编程题和测验状态
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  读取编程题状态并显示
 // @author       Y.D.X.
 // @match        http://lexue.bit.edu.cn/course/view.php*
 // @grant        none
 // ==/UserScript==
+
+// 上一版本：BIT-Programming-编程题状态（0.1）。
 
 (function () {
     'use strict';
@@ -14,7 +16,8 @@
     function add_style_sheet() {
         let sheet = document.createElement('style');
         sheet.innerHTML = `
-        .problem-state-true::after
+        .problem-state-true::after,
+        .quiz-state-true::after
         {
             content: " ✓";
             color: #00ff00;
@@ -36,11 +39,13 @@
             color: purple;
         }
         
-        .problem-state-null
+        .problem-state-null,
+        .quiz-state-false
         {
             font-weight: bold;
         }
-        .problem-state-null::after
+        .problem-state-null::after,
+        .quiz-state-false::after
         {
             content: "（未）";
             color: skyblue;
@@ -52,32 +57,41 @@
     async function check_all_problems() {
         const problems = document.querySelectorAll("a[href*='lexue.bit.edu.cn/mod/programming/']");
         for (const p of problems) {
-            let state = await check_state(get_problem_id(p.href));
+            let state = await get_problem_state(get_URL_id(p.href));
             p.classList.add("problem-state-" + String(state));
         }
     }
+    async function check_all_quizzes() {
+        const quizzes = document.querySelectorAll("a[href*='lexue.bit.edu.cn/mod/quiz/']");
+        for (const q of quizzes) {
+            let state = await get_quiz_state(q.href);
+            q.classList.add('quiz-state-' + String(state));
+        }
+    }
 
-    function get_problem_id(href) {
+
+    function get_URL_id(href) {
         let params = (new URL(href)).searchParams;
         return params.get('id');
     }
-    function get_result_URL(problem_id) {
+    function get_problem_result_URL(problem_id) {
         return document.location.origin + "/mod/programming/result.php?" + `id=${problem_id}`;
     }
 
+    const parser = new DOMParser();
+
     /**
-     * 检查编程题的情况
+     * 获取编程题的情况
      * @param {String} problem_id 编程题的 id
      * @returns null 尚未提交
      * @returns undefined 正在排队或正在编译
      * @returns true 全部通过
      * @returns false 已提交但尚未全部通过
      */
-    async function check_state(problem_id) {
-        let response = await fetch(get_result_URL(problem_id));
-        let response_text = await response.text();
-        let parser = new DOMParser();
-        let doc = parser.parseFromString(response_text, 'text/html');
+    async function get_problem_state(problem_id) {
+        const response = await fetch(get_problem_result_URL(problem_id));
+        const response_text = await response.text();
+        const doc = parser.parseFromString(response_text, 'text/html');
 
         const headings = doc.querySelectorAll("[role=main] > h3");
         if (headings[0].textContent == "查看程序的测试结果" &&
@@ -95,8 +109,24 @@
         }
     }
 
+    /**
+     * 获取测验的情况
+     * @param {String} href 测验的 URL
+     * @returns true 已完成
+     * @returns false 未完成
+     */
+    async function get_quiz_state(href) {
+        let response = await fetch(href);
+        const response_text = await response.text();
+        const doc = parser.parseFromString(response_text, 'text/html');
+
+        const heading = doc.querySelector("[role=main] > h3");
+        return heading != null && heading.textContent == "您上次尝试的概要";
+    }
+
 
     add_style_sheet();
     check_all_problems();
+    check_all_quizzes();
 
 })();
