@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-第二课堂-所有课程-修改背景颜色
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  给可报名的课程设置颜色
 // @author       Y.D.X.
 // @match        http://dekt.bit.edu.cn/course/QueryAllCourseList.jsp*
@@ -25,14 +25,6 @@
         }
         #main > form[name='form1'] tr.unavailable-course {
             background-color: #ff000026;
-        }
-        #main > form[name='form1'] tr.obsolete > td,
-        #main > form[name='form1'] tr.obsolete > td > a {
-            color: lightgray;
-        }
-        #main > form[name='form1'] tr.obsolete > td:nth-child(2) > font {
-            color: darkred;
-            /* 原来是 green，搞不懂为何报名不了的要弄成绿色…… */
         }
 
         `;
@@ -58,24 +50,25 @@
         for (const row of table_rows) {
             let state = row.children[1].textContent;
             if (state == '课程结束') {
-                row.classList.add('obsolete');
-                continue;
+                row.children[1].children[0].style.color = 'darkred';
+                // 原来是 green，搞不懂为何报名不了的要弄成绿色……
+            } else if (state == '正常') {
+                let [applicants, capacity] = row.children[8].textContent.split('/').map(x => parseInt(x));
+                set_row_state(row, applicants < capacity);
             }
-
-            let [applicants, capacity] = row.children[8].textContent.split('/').map(x => parseInt(x));
-            if (state == '正常' && applicants < capacity)
-                set_row_state(row, true);
         }
     }
 
-    function check_academy() {
+    async function check_academy() {
         for (const row of table_rows) {
-            get_detail(row.children[2].querySelector('a').href).then(detail => {
+            if (row.classList.contains('available-course')) {
+                let detail = await get_detail(row.children[2].querySelector('a').href);
                 if (detail['可报学院'].indexOf(my_academy) == -1)
                     set_row_state(row, false);
-            });
+            }
         }
     }
+
 
     function get_detail(href) {
         return new Promise(function (resolve, reject) {
