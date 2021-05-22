@@ -1,8 +1,8 @@
 /* ==UserStyle==
 @name           BIT-Programming-测试用例表格
 @namespace      github.com/openstyles/stylus
-@version        1.0.1
-@description     隐藏一些列，调整列宽
+@version        1.0.2
+@description     隐藏一些列，调整列宽，允许错误信息折行
 @author         Y.D.X.
 ==/UserStyle== */
 
@@ -27,6 +27,10 @@
 	}
 	#test-result-detail > .generaltable td.programming-io > div {
 		max-width: 20em;
+	}
+	#test-result-detail > .generaltable .c7 span {
+		overflow-wrap: break-word;
+		white-space: normal;
 	}
 	
 }
