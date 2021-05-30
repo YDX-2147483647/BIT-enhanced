@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-第二课堂-所有课程-修改背景颜色
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  给可报名的课程设置颜色
 // @author       Y.D.X.
 // @match        http://dekt.bit.edu.cn/course/QueryAllCourseList.jsp*
@@ -71,7 +71,7 @@
         for (const row of table_rows) {
             if (row.classList.contains('available-course')) {
                 let detail = await get_detail(row.children[2].querySelector('a').href);
-                if (detail['可报学院'].indexOf(my_academy) == -1)
+                if (detail['其他学院'] != '不限' && detail['可报学院'].indexOf(my_academy) == -1)
                     set_row_state(row, false);
             }
         }
