@@ -1,0 +1,25 @@
+/* ==UserStyle==
+@name           BIT-本科生教务-首页
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    灰化无用功能
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url("http://jwms.bit.edu.cn/jsxsd/framework/main.jsp"), url("http://jwms.bit.edu.cn/jsxsd/framework/xsMain.jsp") {
+    /* 选课中心，已被[单独站点](http://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/index.do)替换 */
+	.block2,
+	/* 已收留言 */
+	.block5,
+	/* 已收公告 */
+	.block6,
+	/* 教学周历 */
+	.block8,
+	/* 选择线路 */
+	.block10,
+	/* 考试安排查询，已被[本硕博一体化](http://jxzxehall.bit.edu.cn/new/index.html)的“我的考试安排”替代 */
+	.block12
+	{
+		background-color: lightgray;
+	}
+}
