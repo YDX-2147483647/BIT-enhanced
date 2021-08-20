@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.2.1
 // @description  补充附件中 <a> 元素的 download 属性
 // @author       Y.D.X.
 // @match        https://jxzx.bit.edu.cn/*.htm
 // @match        https://jwc.bit.edu.cn/*.htm
-// @match        http://www.bit.edu.cn/*.htm
+// @match        https://www.bit.edu.cn/*.htm
 // @grant        none
 // ==/UserScript==
 
