@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         BIT-选课
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.3.1
 // @description  计算饱和度
 // @author       Y.D.X.
 // @match        http://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/curriculavariable.do*
+// @match        https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421e8fc0f9e2e2426557a1dc7af96/xsxkapp/*
 // @grant        none
 // ==/UserScript==
 
@@ -90,7 +91,7 @@
         let rate = calculate_rate(info);
 
         rate_span.textContent = rate.toFixed(3);
-        if(rate >= 10)
+        if(rate >= 10 || isNaN(rate))
             rate_span.style.color = "Red";
         else if(rate >= 3.162)
             rate_span.style.color = "OrangeRed";
