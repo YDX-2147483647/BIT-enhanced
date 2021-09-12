@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.1.1
 // @description  修改页面标题
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
@@ -59,6 +59,16 @@
                 "#home .page_box .txt > h2",
                 "#home .page_box .top > h2"
             ]
+        },
+        { // 第二课堂
+            host: "dekt", title_selectors: [
+                ".xx_content h1"
+            ]
+        },
+        { // 世纪（学生工作部、武装部、心理健康教育与咨询中心）
+            host: "century", title_selectors: [
+                "h2"
+            ]
         }
     ];
 
@@ -88,8 +98,13 @@
     }
 
     var page_title = document.querySelector("head > title");
-    var site_name = page_title.text.match(/北京理工大学(.*)/);
+    var site_name = page_title.text.match(/北京?理工?(?:大学)?(.*)/);
     var site_host = window.location.host;
+
+    if (site_host == "dekt.bit.edu.cn") {
+        site_name = ["", "第二课堂"];
+    }
+
     if (site_name) {
         site_name = site_name[1].trim();
 
