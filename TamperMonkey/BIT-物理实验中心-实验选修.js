@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-物理实验中心-实验选修
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.1.1
 // @description  上色
 // @author       Y.D.X.
 // @match        http://10.133.22.200:7100/XPK/StuCourseElective
@@ -24,6 +24,11 @@
      * @returns {boolean}
      */
     function my_conflict_referee(course) {
+        if (8 <= course.class_time.week && course.class_time.week <= 11 &&
+            course.class_time.day == 3 && course.class_time.section == 5) {
+            return true
+        }
+
         /**
          * 不能上的时间
          * @type {number[][]} [[星期几（1-7）, 第几大节（1-5）]]
