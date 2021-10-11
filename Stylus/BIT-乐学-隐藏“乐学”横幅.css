@@ -1,12 +1,12 @@
 /* ==UserStyle==
 @name           BIT-乐学-隐藏“乐学”横幅
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.0.1
 @description    首页除外
 @author         Y.D.X.
 ==/UserStyle== */
 
-@-moz-document domain("lexue.bit.edu.cn"), url-prefix("https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/") {
+@-moz-document domain("lexue.bit.edu.cn"), url-prefix("https://webvpn.bit.edu.cn/https/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/") {
 	#page-wrapper > div.header-main > div.container {
 		display: none;
 	}

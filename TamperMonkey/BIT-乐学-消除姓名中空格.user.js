@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-乐学-消除姓名中空格
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @description  消除中文姓名中间的空格
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/mod/forum/discuss.php*
@@ -11,7 +11,7 @@
 // @match        https://lexue.bit.edu.cn/mod/assign/view.php*
 // @match        https://lexue.bit.edu.cn/grade/report/*
 // @match        https://lexue.bit.edu.cn/*
-// @match        https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/*
+// @match        https://webvpn.bit.edu.cn/https/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/*
 // @grant        none
 // ==/UserScript==
 

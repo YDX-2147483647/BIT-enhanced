@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @description  在侧边栏添加并重新排列课程
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/*
-// @match        https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/*
+// @match        https://webvpn.bit.edu.cn/https/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/*
 // @grant        none
 // ==/UserScript==
 
@@ -18,12 +18,18 @@
     let show_list = [
         // 有序，显示时前面的在上
         // icon 指 FontAwesome 的图标名称，默认为'graduation-cap'。→ http://www.fontawesome.com.cn/faicons/
-        { name: "物理实验B-绪论", id: "7661", icon: "flask" },
-        { name: "数据结构", id: "6556", icon: "database" },
-        { name: "唐宋诗词欣赏", id: "7154", icon: "paragraph" },
-        { name: "MCM", id: "4246", icon: "line-chart" },
+        { name: "物理 2", id: "8853", icon: "globe"},
     ]
     let hide_list = [
+        { name: "ECE实习", id: "8369", icon: "code" },
+        { name: '学术用途英语12021-2022-1许子艳', id: '8751', comment: '错误课程'},
+        { name: "工程制图习题", id: "1038"},
+        { name: "MCM 2021春", id: "6693", icon: "line-chart" },
+        { name: "数据结构", id: "6556", icon: "database" },
+        { name: "唐宋诗词欣赏", id: "7154", icon: "paragraph" },
+        "2020网络安全宣传周",
+        { name: "CUMCM", id: "4246", icon: "line-chart" },
+        { name: "物理实验B-绪论", id: "7661", icon: "flask" },
         "更多",
         { name: "工科数学分析 2", id: "6712", icon: "superscript" },
         { name: "线性代数A", id: "6721", icon: "square-o" },
