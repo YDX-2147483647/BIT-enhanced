@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         BIT-Programming-Copy testcases
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.2.1
 // @description  简化测试输入、输出的复制操作
 // @author       Y.D.X.
-// @match        http://lexue.bit.edu.cn/mod/programming/view.php?*
-// @match        http://lexue.bit.edu.cn/mod/programming/result.php?*
+// @match        https://lexue.bit.edu.cn/mod/programming/view.php?*
+// @match        https://lexue.bit.edu.cn/mod/programming/result.php?*
 // @grant        none
 // ==/UserScript==
 
