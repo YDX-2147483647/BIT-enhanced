@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-Programming-Change background color
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  给AC、WA以外的测试结果设置颜色
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/mod/programming/result.php?*
@@ -9,29 +9,29 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    function set_color(row, color){
-        for(let column of row.querySelectorAll(".cell")){
+    function set_color(row, color) {
+        for (let column of row.querySelectorAll(".cell")) {
             column.style.backgroundColor = color;
         }
     }
 
-    for(let r of document.querySelectorAll("#test-result-detail > table > tbody > tr")){
-        var result = r.querySelector(".cell.c12").innerText;
-        var color = undefined;
+    for (let r of document.querySelectorAll("#test-result-detail > table > tbody > tr")) {
+        const result = r.querySelector(".cell.c12").innerText;
+        let color = null;
 
-        if(result.includes("RE:"))
+        if (result.includes("RE:"))
             color = "LightBlue";
-        else if(result.includes("FPE:"))
+        else if (result.includes("FPE:"))
             color = "BlanchedAlmond";
-        else if(result.includes("TLE:"))
+        else if (result.includes("TLE:"))
             color = "Tomato";
-        else if(result.includes("KS:"))
+        else if (result.includes("KS:"))
             color = "Violet";
 
-        if(color){
+        if (color) {
             set_color(r, color);
         }
     }

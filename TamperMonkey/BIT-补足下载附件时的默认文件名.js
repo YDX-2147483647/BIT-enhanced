@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2.1
+// @version      0.2.2
 // @description  补充附件中 <a> 元素的 download 属性
 // @author       Y.D.X.
 // @match        https://jxzx.bit.edu.cn/*.htm
@@ -16,7 +16,7 @@
     'use strict';
 
     // 优先使用在前面的 title_selector
-    var matches = [
+    const matches = [
         { // 教学中心
             host: "jxzx",
             attachments_selector: ".pageArticle > .Annex > ul > li > a:not([download])"

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.1.2
+// @version      1.1.3
 // @description  修改页面标题
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
@@ -19,7 +19,7 @@
     'use strict';
 
     // 优先使用在前面的 title_selector
-    var matches = [
+    const matches = [
         { // 教学中心
             host: "jxzx", title_selectors: [
                 ".pageArticle > .articleTitle > h2",
@@ -75,9 +75,9 @@
     function change_title() {
         let title = null;
 
-        for (var s of matches) {
+        for (const s of matches) {
             if (site_host == `${s.host}.bit.edu.cn`) {
-                for (var title_selector of s.title_selectors) {
+                for (const title_selector of s.title_selectors) {
                     // console.log(title_selector);
                     if (document.querySelector(title_selector)) {
                         title = document.querySelector(title_selector).textContent.trim();
@@ -97,9 +97,9 @@
         }
     }
 
-    var page_title = document.querySelector("head > title");
-    var site_name = page_title.text.match(/北京?理工?(?:大学)?(.*)/);
-    var site_host = window.location.host;
+    const page_title = document.querySelector("head > title");
+    const site_name = page_title.text.match(/北京?理工?(?:大学)?(.*)/);
+    const site_host = window.location.host;
 
     if (site_host == "dekt.bit.edu.cn") {
         site_name = ["", "第二课堂"];

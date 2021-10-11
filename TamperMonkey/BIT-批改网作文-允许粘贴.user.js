@@ -1,16 +1,16 @@
 // ==UserScript==
 // @name         BIT-批改网作文-允许粘贴
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  根据 init_no_paste() ，逐一删除事件侦听器
 // @author       Y.D.X.
 // @match        http://www.pigai.org/index.php?c=v2&a=write*
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
-    var cobj = $("#contents");
+    const cobj = $("#contents");
     cobj.off("contextmenu");
     cobj.off("keydown");
     cobj.off("dragenter");
