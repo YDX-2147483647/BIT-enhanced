@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         中国大学MOOC-讨论区-停止复读
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  隐藏复读内容（有评论的回复始终显示）
 // @author       Y.D.X.
 // @match        https://www.icourse163.org/learn*
+// @match        https://www.icourse163.org/spoc/learn*
 // @grant        none
 // ==/UserScript==
 
