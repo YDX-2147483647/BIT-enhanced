@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @description  修改页面标题
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
 // @match        http://*.bit.edu.cn/*
-// @exclude      http://lexue.bit.edu.cn/*
+// @exclude      https://lexue.bit.edu.cn/*
 // @exclude      https://www.bit.edu.cn/xww/*
 // @exclude      https://webvpn.bit.edu.cn/*
 // @exclude      http://jxzxehallapp.bit.edu.cn/*

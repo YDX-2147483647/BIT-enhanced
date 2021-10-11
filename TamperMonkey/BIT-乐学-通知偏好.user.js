@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         BIT-乐学-通知偏好
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  将“打开”“关闭”换成“开”“关”，因为设计只允许一个字
 // @author       Y.D.X.
-// @match        http://lexue.bit.edu.cn/message/notificationpreferences.php*
+// @match        https://lexue.bit.edu.cn/message/notificationpreferences.php*
 // @grant        none
 // ==/UserScript==
 

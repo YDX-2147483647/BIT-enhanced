@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         BIT-乐学-折叠每节的公告等重复内容
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  try to take over the world!
 // @author       Y.D.X.
-// @match        http://lexue.bit.edu.cn/course/view.php?id=*&section=*
+// @match        https://lexue.bit.edu.cn/course/view.php?id=*&section=*
 // @grant        none
 // ==/UserScript==
 
