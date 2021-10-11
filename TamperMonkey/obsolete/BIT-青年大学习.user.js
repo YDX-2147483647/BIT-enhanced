@@ -2,7 +2,7 @@
 // @name         BIT-青年大学习
 // @namespace    http://tampermonkey.net/
 // @version      0.3
-// @description  暂停背景音乐，收起广告，填表格
+// @description  【网站已弃用】暂停背景音乐，收起广告，填表格
 // @author       Y.D.X.
 // @match        https://a.eqxiu.com/s/shUZuta8*
 // @grant        none

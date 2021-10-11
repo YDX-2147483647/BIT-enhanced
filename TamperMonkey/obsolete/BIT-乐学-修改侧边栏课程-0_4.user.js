@@ -2,7 +2,7 @@
 // @name         BIT-乐学-修改侧边栏课程
 // @namespace    http://tampermonkey.net/
 // @version      0.4
-// @description  在侧边栏隐藏、重命名、增加一些课程
+// @description  【已有新版本】在侧边栏隐藏、重命名、增加一些课程
 // @author       Y.D.X.
 // @match        http://lexue.bit.edu.cn/*
 // @match        https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/*

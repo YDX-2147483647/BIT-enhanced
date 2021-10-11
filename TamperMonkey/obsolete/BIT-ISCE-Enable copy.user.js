@@ -2,7 +2,7 @@
 // @name         BIT-ISCE-Enable copy
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Enable copy function
+// @description  【网站似已关闭】Enable copy function
 // @author       Y.D.X.
 // @match        http://iscp.isclab.org/user/schoice
 // @grant        none
