@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1
 // @description  在侧边栏添加并重新排列课程
 // @author       Y.D.X.
-// @match        https://lexue.bit.edu.cn/*
+// @match        http://lexue.bit.edu.cn/*
 // @match        https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/*
 // @grant        none
 // ==/UserScript==
@@ -66,7 +66,7 @@
         }
 
         let list_item = document.createElement("li");
-        list_item.innerHTML = `<a class="list-group-item list-group-item-action ${is_current_page ? 'active' : ''}" href="https://lexue.bit.edu.cn/course/view.php?id=${course.id}" data-key="${course.id}">
+        list_item.innerHTML = `<a class="list-group-item list-group-item-action ${is_current_page ? 'active' : ''}" href="http://lexue.bit.edu.cn/course/view.php?id=${course.id}" data-key="${course.id}">
             <div class="ml-1">
                 <div class="media">
                     <span class="media-left">

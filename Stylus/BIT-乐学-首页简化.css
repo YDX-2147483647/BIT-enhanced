@@ -1,12 +1,12 @@
 /* ==UserStyle==
 @name           BIT-乐学-首页简化
 @namespace      github.com/openstyles/stylus
-@version        1.0.1
+@version        1.0.0
 @description    A new userstyle
 @author         Y.D.X.
 ==/UserStyle== */
 
-@-moz-document url("https://lexue.bit.edu.cn/") {
+@-moz-document url("http://lexue.bit.edu.cn/") {
    /* 毕业设计（论文）专题培训 */
    /* [role=main] > .box.generalbox.sitetopic >  ul.section > li:nth-child(-n+4) */
 	#module-152004, #module-152020, #module-166220, #module-166319,

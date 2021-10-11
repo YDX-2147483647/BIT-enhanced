@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         BIT-Programming-Change background color
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1
 // @description  给AC、WA以外的测试结果设置颜色
 // @author       Y.D.X.
-// @match        https://lexue.bit.edu.cn/mod/programming/result.php?*
+// @match        http://lexue.bit.edu.cn/mod/programming/result.php?*
 // @grant        none
 // @run-at       document-end
 // ==/UserScript==

@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         BIT-乐学-编程题和测验状态
 // @namespace    http://tampermonkey.net/
-// @version      0.2.1
+// @version      0.2
 // @description  读取编程题状态并显示
 // @author       Y.D.X.
-// @match        https://lexue.bit.edu.cn/course/view.php*
+// @match        http://lexue.bit.edu.cn/course/view.php*
 // @grant        none
 // ==/UserScript==
 

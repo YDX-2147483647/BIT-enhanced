@@ -1,12 +1,12 @@
 /* ==UserStyle==
 @name           BIT-Programming-测试用例表格
 @namespace      github.com/openstyles/stylus
-@version        1.0.3
+@version        1.0.2
 @description     隐藏一些列，调整列宽，允许错误信息折行
 @author         Y.D.X.
 ==/UserStyle== */
 
-@-moz-document url-prefix("https://lexue.bit.edu.cn/mod/programming/result.php"), url-prefix("https://lexue.bit.edu.cn/mod/programming/view.php") {
+@-moz-document url-prefix("http://lexue.bit.edu.cn/mod/programming/result.php"), url-prefix("http://lexue.bit.edu.cn/mod/programming/view.php") {
 	.testcase-table > .generaltable .c3,
 	.testcase-table > .generaltable .c4,
 	.testcase-table > .generaltable .c5,

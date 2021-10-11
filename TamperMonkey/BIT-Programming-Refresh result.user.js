@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         BIT-Programming-Refresh result
 // @namespace    http://tampermonkey.net/
-// @version      0.2.2
+// @version      0.2
 // @description  自动刷新结果页
 // @author       Y.D.X.
-// @match        https://lexue.bit.edu.cn/mod/programming/result.php?*
+// @match        http://lexue.bit.edu.cn/mod/programming/result.php?*
 // @grant        none
 // ==/UserScript==
 

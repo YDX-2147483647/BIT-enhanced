@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         BIT-Programming-Copy preset code
 // @namespace    http://tampermonkey.net/
-// @version      0.5.1
+// @version      0.5
 // @description  简化预设代码的复制操作
 // @author       Y.D.X.
-// @match        https://lexue.bit.edu.cn/mod/programming/view.php?*
-// @match        https://lexue.bit.edu.cn/mod/programming/history.php?*
+// @match        http://lexue.bit.edu.cn/mod/programming/view.php?*
+// @match        http://lexue.bit.edu.cn/mod/programming/history.php?*
 // @grant        none
 // ==/UserScript==
 
