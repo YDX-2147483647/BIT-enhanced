@@ -62,7 +62,8 @@
         },
         { // 第二课堂
             host: "dekt", title_selectors: [
-                ".xx_content h1"
+                ".xx_content h1",
+                ".tilte01"
             ]
         },
         { // 世纪（学生工作部、武装部、心理健康教育与咨询中心）
@@ -78,7 +79,6 @@
         for (const s of matches) {
             if (site_host == `${s.host}.bit.edu.cn`) {
                 for (const title_selector of s.title_selectors) {
-                    // console.log(title_selector);
                     if (document.querySelector(title_selector)) {
                         title = document.querySelector(title_selector).textContent.trim();
                         break;
