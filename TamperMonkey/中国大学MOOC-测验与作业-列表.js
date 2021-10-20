@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         中国大学MOOC-测验与作业-列表
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  获取作业列表（然后什么也干不了）
 // @author       Y.D.X.
 // @match        https://www.icourse163.org/learn*
@@ -91,7 +91,7 @@
 
         const button = document.createElement('button');
         button.type = 'button';
-        button.innerText = "测试";
+        button.innerText = "下载作业列表";
         button.style.padding = '0.5em .2em';
         button.addEventListener("click", () => {
             const blob = new Blob(
