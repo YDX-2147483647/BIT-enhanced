@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         BIT-本硕博一体化-考试安排-下载日历
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  生成未完成考试的 iCalendar 文件并下载
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do
+// @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do*
 // @grant        none
 // ==/UserScript==
 
