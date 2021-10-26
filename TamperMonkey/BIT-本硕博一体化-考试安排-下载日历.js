@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-本硕博一体化-考试安排-下载日历
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.2.0
 // @description  生成未完成考试的 iCalendar 文件并下载
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do
@@ -25,10 +25,15 @@
     }
 
 
+    /**
+     * 左补零，最多补一位
+     * @param {number} number 
+     * @returns {string}
+     */
     function pad(number) {
         if (number < 10)
-            return '0' + number;
-        return number;
+            return '0' + number.toString();
+        return number.toString();
     }
     function iCal_time_format(date) {
         // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString#description
@@ -50,9 +55,9 @@
             'Z';
     }
     function filename_date_format(date) {
-        return date.getFullYear() +
-            pad(date.getMonth() + 1) +
-            pad(date.getDate());
+        return [date.getFullYear(),
+        pad(date.getMonth() + 1),
+        pad(date.getDate())].join('');
     }
 
 
