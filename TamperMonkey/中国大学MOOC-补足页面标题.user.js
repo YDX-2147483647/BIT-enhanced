@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         中国大学MOOC-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.3.1
 // @description  补充每个课程内作业、考试等页面的信息
 // @author       Y.D.X.
 // @match        https://www.icourse163.org/learn/*
@@ -121,7 +121,7 @@
     }
 
     function update_page_title() {
-        console.log(`%cupdate_page_title: ${document.title}`, "color: green;");
+        // console.log(`%cupdate_page_title: ${document.title}`, "color: green;");
         const titles = [get_subtitle(), get_course_name()].filter(t => Boolean(t));
         document.title = combine_title(...titles);
     }
