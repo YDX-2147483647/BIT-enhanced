@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         中国大学MOOC-测验与作业-互评
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @description  将所有空项设为满分，显示图片附件
 // @author       Y.D.X.
 // @match        https://www.icourse163.org/learn*
+// @match        https://www.icourse163.org/spoc/learn*
 // @grant        none
 // ==/UserScript==
 
@@ -30,9 +31,9 @@
     }
 
     /**
-     * 
-     * @param {string} text 
-     * @param {(ev: MouseEvent) => *} listener 
+     *
+     * @param {string} text
+     * @param {(ev: MouseEvent) => *} listener
      */
     function add_button(text, listener) {
         const header = document.querySelector("#g-body > div.m-learnhead > div");
@@ -49,8 +50,8 @@
 
     /**
      * 在`anchor`前插入图片
-     * @param {Blob} blob 
-     * @param {HTMLElement} anchor 
+     * @param {Blob} blob
+     * @param {HTMLElement} anchor
      */
     function insert_img(blob, anchor) {
         const img = document.createElement('img');
@@ -65,12 +66,12 @@
 
     /**
      * 给一个“下载附件”显示图片，不是图片时只标注文件扩展名。
-     * @param {HTMLAnchorElement} anchor 
+     * @param {HTMLAnchorElement} anchor
      */
     async function fetch_one_attachment(anchor) {
         const response = await fetch(anchor.href);
         const ext = response.url.slice(response.url.lastIndexOf('.'));
-        if (['.jpg', '.png'].includes(ext)) {
+        if (['.jpg', '.png', '.jpeg'].includes(ext)) {
             const blob = await response.blob();
             insert_img(blob, anchor);
         } else {
