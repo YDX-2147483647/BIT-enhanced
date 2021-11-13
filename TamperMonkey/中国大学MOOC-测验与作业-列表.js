@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         中国大学MOOC-测验与作业-列表
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  获取作业列表（然后什么也干不了）
 // @author       Y.D.X.
 // @match        https://www.icourse163.org/learn*
+// @match        https://www.icourse163.org/spoc/learn*
 // @grant        none
 // ==/UserScript==
 
