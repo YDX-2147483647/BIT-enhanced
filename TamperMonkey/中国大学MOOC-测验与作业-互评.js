@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         中国大学MOOC-测验与作业-互评
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.1.0
 // @description  将所有空项设为满分，显示图片附件
 // @author       Y.D.X.
+// @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/mooc/TamperMonkey/lib/mooc.js
 // @match        https://www.icourse163.org/learn*
 // @match        https://www.icourse163.org/spoc/learn*
 // @grant        none
@@ -34,12 +35,14 @@
      *
      * @param {string} text
      * @param {(ev: MouseEvent) => *} listener
+     * @param {{css_class: str}} options
      */
-    function add_button(text, listener) {
+    function add_button(text, listener, { css_class = 'user-created' } = {}) {
         const header = document.querySelector("#g-body > div.m-learnhead > div");
 
         const button = document.createElement('button');
         button.type = 'button';
+        button.classList.add(css_class);
         button.innerText = text;
         button.style.padding = '0.5em .2em';
         button.addEventListener("click", listener);
@@ -87,9 +90,19 @@
     }
 
 
-    if (/#\/learn\/hw\?id=\d+/.test(window.location.hash)) {
-        add_button("全部设为满分", fill_full_mark);
-        add_button("下载图片附件", () => fetch_all_attachments());
-    }
+    Mooc.on_every_loaded(() => {
+        const existed_button = document.querySelector('button.fill-full-mark');
+        if (/#\/learn\/hw\?id=\d+/.test(window.location.hash)) {
+            if (!existed_button) {
+                add_button("全部设为满分", fill_full_mark,
+                    { css_class: 'fill-full-mark' });
+                add_button("下载图片附件", () => fetch_all_attachments(),
+                    { css_class: 'fetch-all-attachments' });
+            }
+        } else {
+            existed_button?.remove();
+            document.querySelector('button.fetch-all-attachments')?.remove();
+        }
+    });
 
 })();
