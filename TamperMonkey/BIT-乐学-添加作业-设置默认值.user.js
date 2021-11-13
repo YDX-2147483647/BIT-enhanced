@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-乐学-添加作业-设置默认值
 // @namespace    http://tampermonkey.net/
-// @version      0.2.1
+// @version      0.3.0
 // @description  适用于教师和高级助教。
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/course/modedit.php*
@@ -105,8 +105,15 @@
 
     }
 
+    function next_two_sunday() {
+        let ret = new Date();
+        ret.setDate(ret.getDate() - ret.getDay());  // last Sunday
+        ret.setDate(ret.getDate() + 14);
+        return ret;
+    }
+
     const defaults = new Settings({
-        due_date: '2021-11-09',
+        due_date: next_two_sunday(),
         file_max_size: '10KB',
         feedback_comments: true,
         attempt_reopen_method: 'until pass',
