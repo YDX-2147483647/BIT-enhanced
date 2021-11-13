@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         中国大学MOOC-讨论区-停止复读
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.3.1
 // @description  隐藏复读内容（有评论的回复始终显示）
 // @author       Y.D.X.
 // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/mooc/TamperMonkey/lib/mooc.js
@@ -13,7 +13,12 @@
 (function () {
     "use strict";
 
+    let already_add_style_sheet = false;
+
     function add_style_sheet() {
+        if (already_add_style_sheet)
+            return;
+
         let sheet = document.createElement('style');
         sheet.innerHTML = `
         .copycat {
@@ -21,6 +26,7 @@
         }
         `;
         document.head.appendChild(sheet);
+        already_add_style_sheet = true;
     }
 
     function get_main_content(reply_div) {
@@ -57,13 +63,15 @@
         }
     }
 
-    async function main_controller() {
-        check_all_copycat();
-        Mooc.on_every_loaded(check_all_copycat);
+    function main() {
+        if (/#\/learn\/forumdetail\?pid=\d+/.test(window.location.hash)) {
+            add_style_sheet();
+            check_all_copycat();
+            Mooc.on_every_loaded(check_all_copycat);
+        }
     }
 
-    if (/#\/learn\/forumdetail\?pid=\d+/.test(window.location.hash)) {
-        add_style_sheet();
-        main_controller();
-    }
+    Mooc.on_every_loaded(main);
+    window.addEventListener('hashchange', () => Mooc.on_every_loaded(main));
+
 })();

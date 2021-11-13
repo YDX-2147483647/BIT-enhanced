@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         中国大学MOOC-测验与作业-互评
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @version      1.1.1
 // @description  将所有空项设为满分，显示图片附件
 // @author       Y.D.X.
 // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/mooc/TamperMonkey/lib/mooc.js
@@ -90,7 +90,7 @@
     }
 
 
-    Mooc.on_every_loaded(() => {
+    function main() {
         const existed_button = document.querySelector('button.fill-full-mark');
         if (/#\/learn\/hw\?id=\d+/.test(window.location.hash)) {
             if (!existed_button) {
@@ -103,6 +103,9 @@
             existed_button?.remove();
             document.querySelector('button.fetch-all-attachments')?.remove();
         }
-    });
+    }
+
+    Mooc.on_every_loaded(main);
+    window.addEventListener('hashchange', () => Mooc.on_every_loaded(main));
 
 })();

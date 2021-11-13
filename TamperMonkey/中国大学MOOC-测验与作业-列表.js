@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         中国大学MOOC-测验与作业-列表
 // @namespace    http://tampermonkey.net/
-// @version      0.2.0
+// @version      0.2.1
 // @description  获取作业列表（然后什么也干不了）
 // @author       Y.D.X.
 // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/mooc/TamperMonkey/lib/mooc.js
@@ -13,9 +13,9 @@
 (function () {
     'use strict';
 
-    Mooc.on_every_loaded(() => {
+    function main() {
         const button = document.querySelector('button.download-homework-list');
-        
+
         if (window.location.hash === '#/learn/testlist') {
             if (!button) {
                 add_button();
@@ -23,7 +23,11 @@
         } else {
             button?.remove();
         }
-    });
+    }
+
+    Mooc.on_every_loaded(main);
+    window.addEventListener('hashchange', () => Mooc.on_every_loaded(main));
+
 
     function get_course_title() {
         return document.querySelector('h4.courseTxt').textContent;
