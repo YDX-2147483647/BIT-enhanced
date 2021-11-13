@@ -10,6 +10,21 @@
  */
 const Mooc = {
     /**
+     * 检查是否存在加载条
+     * @returns {true|false|null} `null`表示不确定
+     */
+    _exist_loading_bar() {
+        /** @type {HTMLElement} */
+        const loading_bars = document.querySelectorAll('#loadingPb, .u-loading');
+        for (const bar of loading_bars) {
+            if (bar) {
+                return bar.style.display !== 'none';
+            }
+        }
+        return null;
+    },
+
+    /**
      * 页面加载完后 resolve。
      * @param {{interval: number}} options `interval`的单位为 ms。
      * @returns {Promise}
@@ -17,9 +32,7 @@ const Mooc = {
     loaded({ interval = 200 } = {}) {
         return new Promise((resolve, reject) => {
             let check = setInterval(() => {
-                /** @type {HTMLElement} */
-                const loading_bar = document.querySelector('#loadingPb');
-                if (loading_bar && loading_bar.style.display === 'none') {
+                if (Mooc._exist_loading_bar() === false) {
                     clearInterval(check);
                     resolve('Loaded.');
                 }
@@ -35,9 +48,7 @@ const Mooc = {
     reloading_started({ interval = 100 } = {}) {
         return new Promise((resolve, reject) => {
             let check = setInterval(() => {
-                /** @type {HTMLElement} */
-                const loading_bar = document.querySelector('#loadingPb');
-                if (loading_bar && loading_bar.style.display !== 'none') {
+                if (Mooc._exist_loading_bar() === true) {
                     clearInterval(check);
                     resolve('Reloading started.');
                 }
