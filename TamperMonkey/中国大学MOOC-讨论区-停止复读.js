@@ -4,7 +4,7 @@
 // @version      0.3.1
 // @description  隐藏复读内容（有评论的回复始终显示）
 // @author       Y.D.X.
-// @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/mooc/TamperMonkey/lib/mooc.js
+// @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/main/TamperMonkey/lib/mooc.js
 // @match        https://www.icourse163.org/learn*
 // @match        https://www.icourse163.org/spoc/learn*
 // @grant        none

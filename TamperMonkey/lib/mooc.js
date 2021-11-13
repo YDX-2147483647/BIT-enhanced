@@ -1,8 +1,8 @@
 /**
  * @tutorial 可以通过脚本的`@require`来引入此文件。
  * 例如
- * // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/mooc/TamperMonkey/lib/mooc.js
- * // @require      https://github.com/YDX-2147483647/BIT-enhanced/raw/mooc/TamperMonkey/lib/mooc.js
+ * // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/main/TamperMonkey/lib/mooc.js
+ * // @require      https://github.com/YDX-2147483647/BIT-enhanced/raw/main/TamperMonkey/lib/mooc.js
  */
 
 /**
