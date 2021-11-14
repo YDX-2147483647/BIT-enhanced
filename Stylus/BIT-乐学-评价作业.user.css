@@ -1,0 +1,15 @@
+/* ==UserStyle==
+@name           BIT-乐学-评价作业
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         Me
+==/UserStyle== */
+
+@-moz-document url-prefix("https://lexue.bit.edu.cn/mod/assign/view.php") {
+	.gradingtable table .c1,
+	.gradingtable table .c3.idnumber
+	{
+		display: none;
+	}
+}

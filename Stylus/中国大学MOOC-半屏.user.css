@@ -1,0 +1,39 @@
+/* ==UserStyle==
+@name           中国大学MOOC-半屏
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    适用于单元测试。有些东西就直接隐藏了。
+@author         Y.D.X.
+==/UserStyle== */
+
+@-moz-document url-prefix("https://www.icourse163.org/spoc/learn/"), url-prefix("https://www.icourse163.org/learn/") {
+	@media (max-width: 800px) {
+		body {
+			min-width: 0;
+		}
+		
+		.learnPage > .g-sd1 {
+			display: none;
+		}
+		
+		.learnPage > .g-mn1 > .g-mn1c {
+			margin: auto;
+		}
+		
+		
+		/* 隐藏无用物 */
+		.m-navTop-func > .m-navTop-func-i > .u-navLogin-container,
+		.u-questionItem .qaDescription
+		{
+			width: auto;
+		}
+		
+		body > .spoc-pre-nav-container,
+		#g-container > .m-nav-container,
+		.web-nav-right-part > .u-navLogin-searchFunc,
+		.m-learnhead #j-learn-hours
+		{
+			display: none;
+		}
+	}
+}
