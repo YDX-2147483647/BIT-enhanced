@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         中国大学MOOC-讨论区-停止复读
 // @namespace    http://tampermonkey.net/
-// @version      0.3.1
+// @version      0.3.2
 // @description  隐藏复读内容（有评论的回复始终显示）
 // @author       Y.D.X.
 // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/main/TamperMonkey/lib/mooc.js
@@ -12,6 +12,18 @@
 
 (function () {
     "use strict";
+
+    // interval's unit: ms.
+    function wait_until_presence(selector, interval) {
+        return new Promise((resolve, reject) => {
+            let check = setInterval(function () {
+                if (document.querySelector(selector)) {
+                    clearInterval(check);
+                    resolve(document.querySelector(selector));
+                }
+            }, interval);
+        });
+    }
 
     let already_add_style_sheet = false;
 
@@ -63,11 +75,17 @@
         }
     }
 
-    function main() {
+    async function main() {
         if (/#\/learn\/forumdetail\?pid=\d+/.test(window.location.hash)) {
             add_style_sheet();
+
+            await wait_until_presence("#courseLearn-inner-box .j-detailBox .rinfobox > h4", 1000);
             check_all_copycat();
-            Mooc.on_every_loaded(check_all_copycat);
+    
+            const page_selector = document.querySelector(".j-reply-all > div > .j-list > .j-data-list + .u-pager");
+            page_selector.addEventListener('click', function () {
+                setTimeout(() => check_all_copycat(), 500)
+            });
         }
     }
 
