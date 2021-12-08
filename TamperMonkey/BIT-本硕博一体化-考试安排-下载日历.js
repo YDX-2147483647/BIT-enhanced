@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-本硕博一体化-考试安排-下载日历
 // @namespace    http://tampermonkey.net/
-// @version      0.2.0
+// @version      0.3.0
 // @description  生成未完成考试的 iCalendar 文件并下载
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do
@@ -10,18 +10,23 @@
 // ==/UserScript==
 
 (function () {
-    'use strict';
+    'use strict'
 
-    // interval's unit: ms.
+    /**
+     * 等待元素出现
+     * @param {string} selector 元素的 CSS 选择器
+     * @param {number} interval 单位为 ms
+     * @returns {Promise<HTMLElement>}
+     */
     function wait_until_presence(selector, interval) {
         return new Promise((resolve, reject) => {
-            let check = setInterval(function () {
+            const check = setInterval(function () {
                 if (document.querySelector(selector)) {
-                    clearInterval(check);
-                    resolve(document.querySelector(selector));
+                    clearInterval(check)
+                    resolve(document.querySelector(selector))
                 }
-            }, interval);
-        });
+            }, interval)
+        })
     }
 
 
@@ -32,8 +37,8 @@
      */
     function pad(number) {
         if (number < 10)
-            return '0' + number.toString();
-        return number.toString();
+            return '0' + number.toString()
+        return number.toString()
     }
     function iCal_time_format(date) {
         // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString#description
@@ -42,7 +47,7 @@
             pad(date.getDate()) +
             'T' + pad(date.getHours()) +
             pad(date.getMinutes()) +
-            pad(date.getSeconds());
+            pad(date.getSeconds())
     }
     function iCal_UTC_time_format(date) {
         // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString#description
@@ -52,12 +57,12 @@
             'T' + pad(date.getUTCHours()) +
             pad(date.getUTCMinutes()) +
             pad(date.getUTCSeconds()) +
-            'Z';
+            'Z'
     }
     function filename_date_format(date) {
         return [date.getFullYear(),
         pad(date.getMonth() + 1),
-        pad(date.getDate())].join('');
+        pad(date.getDate())].join('')
     }
 
 
@@ -87,29 +92,29 @@
     }
 
     function get_detail(card_view) {
-        const select = selector => card_view.querySelector(selector).textContent;
+        const select = selector => card_view.querySelector(selector).textContent
 
-        let event = {};
-        event["summary"] = "期末考试：" + trim_course_name(select("h3"));
-        event["location"] = trim_place_name(select(".bh-mt-16 >  div:nth-child(2) span"));
+        const event = {}
+        event["summary"] = "期末考试：" + trim_course_name(select("h3"))
+        event["location"] = trim_place_name(select(".bh-mt-16 >  div:nth-child(2) span"))
 
         const time_range_str = card_view.querySelector(
             ".bh-mt-16 >  div:nth-child(1) > div:first-child > span"
         ).childNodes[1].textContent,
             time_range_groups = time_range_str.match(
                 /^(?<date>\d{4}-\d{2}-\d{2}) (?<start_time>\d{2}:\d{2})-(?<end_time>\d{2}:\d{2})\(星期.\)$/
-            ).groups;
+            ).groups
 
-        event["start"] = new Date(time_range_groups["date"] + " " + time_range_groups["start_time"]);
-        event["end"] = new Date(time_range_groups["date"] + " " + time_range_groups["end_time"]);
+        event["start"] = new Date(time_range_groups["date"] + " " + time_range_groups["start_time"])
+        event["end"] = new Date(time_range_groups["date"] + " " + time_range_groups["end_time"])
 
-        return event;
+        return event
     }
 
-    let _count_iCal = 0;
+    let _count_iCal = 0
     function detail_to_iCal_event(detail) {
-        let uid = `${(new Date()).toISOString()}-${pad(_count_iCal)}@ydx`;
-        _count_iCal++;
+        const uid = `${(new Date()).toISOString()}-${pad(_count_iCal)}@ydx`
+        _count_iCal++
 
         return `BEGIN:VEVENT
             SUMMARY:${detail['summary']}
@@ -119,36 +124,38 @@
             UID:${uid}
             LOCATION:${detail['location']}
             END:VEVENT
-            `.replace(/\s{4,}/gm, "\n");
+            `.replace(/\s{4,}/gm, "\n")
     }
 
     function generate_iCal() {
         let cal = `BEGIN:VCALENDAR
             VERSION:2.0
             PRODID:-//YDX//BIT iCalendar//
-            `.replace(/\s{4,}/gm, "\n");
+            `.replace(/\s{4,}/gm, "\n")
         document.querySelectorAll(tests_to_take).forEach(c => {
-            cal += detail_to_iCal_event(get_detail(c));
-        });
-        cal += "END:VCALENDAR\n";
+            cal += detail_to_iCal_event(get_detail(c))
+        })
+        cal += "END:VCALENDAR\n"
 
-        return cal;
+        return cal
     }
 
 
     function create_download_btn() {
-        const btn = document.createElement('a');
-        let blob = new Blob([generate_iCal()], { type: "text/calendar" });
-        btn.innerText = "🡇下载";
-        btn.download = `考试安排-${filename_date_format(new Date())}.ics`;
-        btn.href = URL.createObjectURL(blob);
+        const btn = document.createElement('a')
+        btn.innerText = "🡇下载"
+        btn.download = `考试安排-${filename_date_format(new Date())}.ics`
+        document.querySelector(tests_to_take_btn).children[1].children[0].appendChild(btn)
 
-        document.querySelector(tests_to_take_btn).children[1].children[0].appendChild(btn);
+        btn.addEventListener('click',()=>{
+            const blob = new Blob([generate_iCal()], { type: "text/calendar" })
+            btn.href = URL.createObjectURL(blob)
+        })
     }
 
     const tests_to_take_btn = "#wdksap-wkks-btn", // 我的考试安排-未考考试-button
-        tests_to_take = tests_to_take_btn + " ~ .wdksap-wkks-content .scenes-cbrt-card-view";
+        tests_to_take = tests_to_take_btn + " ~ .wdksap-wkks-content .scenes-cbrt-card-view"
 
-    wait_until_presence(tests_to_take_btn, 1000).then(create_download_btn);
+    wait_until_presence(tests_to_take_btn, 1000).then(create_download_btn)
 
-})();
+})()
