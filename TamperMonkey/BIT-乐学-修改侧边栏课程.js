@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程
 // @namespace    http://tampermonkey.net/
-// @version      1.2.0
+// @version      1.2.1
 // @description  在侧边栏添加并重新排列课程
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/*
@@ -99,16 +99,20 @@
 
     /**
      * 当前页面是否是是这个课程的页面
-     * @param {Element} course 
+     * @param {CourseDescription} course 
      * @todo 打开文件夹时，`id`不是课程id
      */
     function is_current_page(course) {
-        const current_id_match = window.location.href.match(/\?id=(\d+)/)
-        if (current_id_match) {
-            return current_id_match[1] === course.id
-        } else {
+        /** @type {HTMLAnchorElement} */
+        const course_home = document.querySelector("[data-key='coursehome']")
+        if (!course_home) {
+            // 未打开课程
             return false
         }
+
+        const url = new URL(course_home.href)
+        const params = url.searchParams
+        return params.get('id') === course.id
     }
 
     /**
