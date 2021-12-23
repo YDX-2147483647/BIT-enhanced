@@ -8,8 +8,10 @@
 
 Stylus/Stylish 等很多插件可以注入 CSS，改变网页的外观。这些插件也支持很多浏览器。
 
----
+## 提示
 
-另外有个好东西值得一提：[spencerwooo](https://github.com/spencerwooo/bit-webｖｐｎ-converter)做的[🥑BIT WebＶＰＮ Converter](https://webｖｐｎ.vercel.app/)。BIT的 WebＶＰＮ 其实也支持访问 [WebＶＰＮ 主页](https://webｖｐｎ.bit.edu.cn/)所列项目以外的网站，用这个转换器就可以在校外访问了。如果你本来在校外浏览，忽然碰到校内 URL，那么就可直接复制之到转换器，访问，而不用在校内站从头再来。
+[BIT 云盘](http://pan.bit.edu.cn/)已变为`None`，不久`BIT-Cloud-Share.user.js`将移入`obsolete`。（仅为纪念而保留）
 
-（~~请将 URL 里的全角字符改为半角~~一般都会自动转换）
+下次也会将所有的`*.js`更名为`*.user.js`，这样大家单击相应页面的“原始数据”（“raw”）就能直接安装。
+
+如果您以前通过 TamperMonkey“实用工具”“从 URL 安装”过，现在需要手动更改一下更新脚本的地址：编辑脚本，设置 → 更新 → 更新 URL。
