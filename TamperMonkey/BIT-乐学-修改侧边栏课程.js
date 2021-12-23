@@ -88,7 +88,6 @@
                     name: course_el.querySelector(".media > span.media-body").textContent,
                     id: course_el.dataset.key
                 }
-                console.log(course)
 
                 if ([].concat(config.hide, config.show)
                     .some(ref => course_match(ref, course))) {
