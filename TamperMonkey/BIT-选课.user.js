@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-选课
 // @namespace    http://tampermonkey.net/
-// @version      0.3.2
+// @version      0.3.3
 // @description  计算饱和度
 // @author       Y.D.X.
 // @match        http://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/curriculavariable.do*
@@ -29,7 +29,7 @@
     let pattern = /(\d+)/u;
     // 系统推荐课程、体育课
     let pattern1 = /课容量：(?<capacity>\d+)人?/u;
-    let pattern2 = /^已报第一志愿：(?<applicant>\d+)人?，已选(中人数)?：(?<accepted>\d+)$/u;
+    let pattern2 = /^已报第一志愿：(?<applicant>\d+)人?，已选中?(人数)?：(?<accepted>\d+)$/u;
 
     function calculate_rate(course_info){
         return course_info.applicant / (course_info.capacity - (course_info.accepted? course_info.accepted: 0));
