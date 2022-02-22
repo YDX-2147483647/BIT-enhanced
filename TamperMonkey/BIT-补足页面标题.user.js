@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.1.5
+// @version      1.2.0
 // @description  修改页面标题
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
 // @match        http://*.bit.edu.cn/*
+// @match        https://www.yanhekt.cn/*
 // @exclude      https://lexue.bit.edu.cn/*
 // @exclude      https://www.bit.edu.cn/xww/*
 // @exclude      https://webvpn.bit.edu.cn/*
@@ -18,8 +19,17 @@
 (function () {
     'use strict'
 
-    // 优先使用在前面的 title_selector
-    const matches = [
+    /**
+     * @typedef {Object} Site
+     * @property {String} host 例：“jwc”“jwc.bit.edu.cn”
+     * @property {String[]} title_selectors 优先使用在前面的 selector
+     * @property {String?} name 默认从`<title>`获取
+     */
+
+    /* spell-checker: disable */
+
+    /** @type {Site[]} */
+    const sites = [
         { // 教学中心
             host: "jxzx", title_selectors: [
                 ".pageArticle > .articleTitle > h2",
@@ -61,7 +71,8 @@
             ]
         },
         { // 第二课堂
-            host: "dekt", title_selectors: [
+            host: "dekt", name: '第二课堂',
+            title_selectors: [
                 ".xx_content h1",
                 ".tilte01",
                 ".sui-breadcrumb > li:last-child"
@@ -76,47 +87,66 @@
             host: "xuteli", title_selectors: [
                 ".articleTitle h2"
             ]
-        }
+        },
+        { // 延河课堂
+            host: "www.yanhekt.cn", title_selectors: [
+                '.header-menu .ant-menu-item-selected',
+                "#root div[class^=secHeading] > span[class^=title]",
+                "[class^=liveHeader], [class^=mobileLiveHeader]",
+                ".title-bar > :last-child",
+            ]
+        },
     ]
+    /* spell-checker: enable */
 
-    function change_title() {
-        let title = null
 
-        for (const s of matches) {
-            if (site_host == `${s.host}.bit.edu.cn`) {
-                for (const title_selector of s.title_selectors) {
-                    if (document.querySelector(title_selector)) {
-                        title = document.querySelector(title_selector).textContent.trim()
-                        break
-                    }
-                }
-                break
+
+    function match_site() {
+        const site = sites.find(s => [
+            `${s.host}.bit.edu.cn`,
+            s.host
+        ].includes(window.location.host))
+
+        if (site === undefined) {
+            return null
+
+        } else {
+            if (!site.name) {
+                site.name = document.title
+                    .match(/(北京)?(理工)?(大学)?(?<name>.+)/)
+                    .groups.name.trim()
             }
+            return site
         }
+    }
 
-        if (title) {
-            page_title.text = `${title} - ${site_name}${site_name ? " |" : ""} 北京理工大学`
-            return true
-        }
-        else {
+    /**
+     * @param {Site} site
+     * @returns success
+     */
+    function change_title_for(site) {
+        const selector = site.title_selectors.find(s => document.querySelector(s))
+        if (!selector) {
             return false
         }
+
+        const title = document.querySelector(selector).textContent
+            .replace(/^[>-]/, '').trim()
+        if (!title) {
+            return false
+        }
+
+        document.title = `${title} - ${site.name}${site.name ? " |" : ""} 北京理工大学`
+        return true
     }
 
-    const page_title = document.querySelector("head > title")
-    let site_name = page_title.text.match(/北京?理工?(?:大学)?(.*)/)
-    const site_host = window.location.host
 
-    if (site_host == "dekt.bit.edu.cn") {
-        site_name = ["", "第二课堂"]
-    }
-
-    if (site_name) {
-        site_name = site_name[1].trim()
-
-        if (!change_title()) {
-            // 搞成这样只是为了适应 i.bit.edu.cn ！
-            setTimeout(change_title, 1500)
+    const site = match_site()
+    if (site) {
+        const success = change_title_for(site)
+        if (!success) {
+            // 适应 I、延河课堂
+            setTimeout(() => change_title_for(site), 1500)
         }
     }
 })()
