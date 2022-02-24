@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.0
+// @version      1.2.1
 // @description  修改页面标题
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
@@ -94,6 +94,7 @@
                 "#root div[class^=secHeading] > span[class^=title]",
                 "[class^=liveHeader], [class^=mobileLiveHeader]",
                 ".title-bar > :last-child",
+                ".course-intro-title",
             ]
         },
     ]
