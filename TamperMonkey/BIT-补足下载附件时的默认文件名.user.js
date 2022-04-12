@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2.2
+// @version      0.2.3
 // @description  补充附件中 <a> 元素的 download 属性
 // @author       Y.D.X.
 // @match        https://jxzx.bit.edu.cn/*.htm
 // @match        https://jwc.bit.edu.cn/*.htm
+// @match        https://student.bit.edu.cn/*
 // @match        https://www.bit.edu.cn/*.htm
 // @grant        none
 // ==/UserScript==
@@ -28,7 +29,11 @@
         { // World Wide Web
             host: "www",
             attachments_selector: ".article .Annex > ul > li > a:not([download])"
-        }
+        },
+        { // Student
+            host: 'student',
+            attachments_selector: ".fujian > ul  > li > a:not([download])"
+        },
     ];
 
     function set_attachments_filenames() {
