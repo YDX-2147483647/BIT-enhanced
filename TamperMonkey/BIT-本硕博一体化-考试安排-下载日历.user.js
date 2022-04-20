@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-本硕博一体化-考试安排-下载日历
 // @namespace    http://tampermonkey.net/
-// @version      0.3.0
+// @version      0.3.1
 // @description  生成未完成考试的 iCalendar 文件并下载
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do
@@ -69,6 +69,7 @@
 
     function trim_course_name(name) {
         // 这是从 python 改过来的
+        name = name.replace(/^\d{9}\[(.+)\]$/, "$1") // 去除课程编号
         name = name.replace(/\s/g, "")
         name = name.replace(/.+\//, "") // "体育/"
         name = name.replace(/[A-E]/, "")
@@ -147,7 +148,7 @@
         btn.download = `考试安排-${filename_date_format(new Date())}.ics`
         document.querySelector(tests_to_take_btn).children[1].children[0].appendChild(btn)
 
-        btn.addEventListener('click',()=>{
+        btn.addEventListener('click', () => {
             const blob = new Blob([generate_iCal()], { type: "text/calendar" })
             btn.href = URL.createObjectURL(blob)
         })
