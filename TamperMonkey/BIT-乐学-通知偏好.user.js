@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1.1
 // @description  将“打开”“关闭”换成“开”“关”，因为设计只允许一个字
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/message/notificationpreferences.php*
 // @grant        none

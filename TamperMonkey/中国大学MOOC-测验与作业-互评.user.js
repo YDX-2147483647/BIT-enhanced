@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.1.1
 // @description  将所有空项设为满分，显示图片附件
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/main/TamperMonkey/lib/mooc.js
 // @match        https://www.icourse163.org/learn*

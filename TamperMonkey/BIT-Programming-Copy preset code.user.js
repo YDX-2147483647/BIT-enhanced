@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.5.1
 // @description  简化预设代码的复制操作
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/mod/programming/view.php?*
 // @match        https://lexue.bit.edu.cn/mod/programming/history.php?*

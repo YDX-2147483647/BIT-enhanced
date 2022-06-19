@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.2.2
 // @description  读取编程题状态并显示
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/course/view.php*
 // @grant        none

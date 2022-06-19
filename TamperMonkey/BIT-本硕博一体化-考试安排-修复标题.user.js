@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1.0
 // @description  将课程号改为课程名称
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do*

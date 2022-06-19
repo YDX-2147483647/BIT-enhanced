@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.3
 // @description  给可报名的课程设置颜色
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://dekt.bit.edu.cn/course/QueryAllCourseList.jsp*
 // @grant        none

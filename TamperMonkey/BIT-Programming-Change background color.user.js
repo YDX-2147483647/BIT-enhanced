@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1.2
 // @description  给AC、WA以外的测试结果设置颜色
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/mod/programming/result.php?*
 // @grant        none

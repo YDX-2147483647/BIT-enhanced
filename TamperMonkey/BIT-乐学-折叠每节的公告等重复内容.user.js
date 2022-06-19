@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.2.0
 // @description  在单独页面显示小节的课程，每个页面开头都会有基本无用的重复内容。这个脚本可以折叠它并提供展开按钮。
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/course/view.php?id=*&section=*
 // @grant        none

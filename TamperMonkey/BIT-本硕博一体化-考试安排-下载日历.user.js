@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.3.1
 // @description  生成未完成考试的 iCalendar 文件并下载
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/studentWdksapApp/*default/index.do*

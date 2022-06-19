@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.2.1
 // @description  简化测试输入、输出的复制操作
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/mod/programming/view.php?*
 // @match        https://lexue.bit.edu.cn/mod/programming/result.php?*

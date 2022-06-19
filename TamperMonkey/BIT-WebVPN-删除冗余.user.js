@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.2.1
 // @description  删除学校名称，简化过长的名字，删除名字里重复的地址
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://webvpn.bit.edu.cn/
 // @grant        none

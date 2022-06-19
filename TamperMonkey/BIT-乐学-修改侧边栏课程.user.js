@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.3.0-beta
 // @description  在侧边栏添加并重新排列课程
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/*
 // @match        https://webvpn.bit.edu.cn/https/77726476706e69737468656265737421fcf25989227e6a596a468ca88d1b203b/*

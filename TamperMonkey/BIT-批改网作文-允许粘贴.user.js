@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1.1
 // @description  根据 init_no_paste() ，逐一删除事件侦听器
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://www.pigai.org/index.php?c=v2&a=write*
 // @grant        none

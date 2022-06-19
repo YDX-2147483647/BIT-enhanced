@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.3.2
 // @description  隐藏复读内容（有评论的回复始终显示）
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/main/TamperMonkey/lib/mooc.js
 // @match        https://www.icourse163.org/learn*

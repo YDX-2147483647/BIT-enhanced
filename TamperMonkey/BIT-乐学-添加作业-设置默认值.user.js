@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.3.0
 // @description  适用于教师和高级助教。
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/course/modedit.php*
 // @grant        none
