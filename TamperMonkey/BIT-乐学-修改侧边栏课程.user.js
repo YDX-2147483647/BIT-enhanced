@@ -30,15 +30,24 @@
          * @type {CourseDescription[]}
          */
         show: [
-            { name: "网络开拓者", id: "877", icon: "star-o" },
-            { name: "模拟电子学-硬件实验", id: "8819", icon: "bolt" },
-            { name: "物理 2", id: "8853", icon: "globe" },
+            { name: '信号与系统-实验', id: '10664', icon: 'signal' },
+            { name: '电磁场与电磁波', id: '10713', icon: 'globe' },
         ],
         /**
          * 想隐藏的课程
          * @type {(string | CourseDescription)[]}
          */
         hide: [
+            { name: "毛泽东思想", id: "9771", icon: "user" },
+            { name: '数字电路-期末考试', id: '11037', icon: 'bolt' },
+            { name: "集合论", id: "9628", icon: "plus-circle" },
+            { name: '半导体物理', id: '10760', icon: 'battery-full' },
+            { name: '电磁场与电磁波-实验', id: '10729', icon: 'rss' },
+            { name: '数字电路-实验', id: '10635', icon: 'bolt' },
+            { name: "网络开拓者", id: "877", icon: "star-o" },
+            { name: 'Java', id: '8989'},
+            { name: "模拟电子学-硬件实验", id: "8819", icon: "bolt" },
+            { name: "物理 2", id: "8853", icon: "globe" },
             { name: "模拟电子学-软件实验", id: "9250", icon: "television" },
             { name: '2021网络安全宣传周', id: '1727' },
             { name: "ECE实习", id: "8369", icon: "code" },
