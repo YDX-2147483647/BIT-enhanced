@@ -1,0 +1,17 @@
+install_url_base: https://github.com/YDX-2147483647/BIT-enhanced/blob/main/Stylus
+files:
+  - BIT-Programming-测试用例表格.css
+  - BIT-WebVPN-删除冗余等.css
+  - BIT-乐学-评价作业.user.css
+  - BIT-乐学-隐藏“乐学”横幅.css
+  - BIT-乐学-首页简化.css
+  - BIT-本硕博一体化-考试安排-设置光标类型.css
+  - BIT-本硕博一体化-课表.css
+  - BIT-本科生教务-学生个人考试成绩.css
+  - BIT-本科生教务-首页.css
+  - BIT-物理实验中心-实验选修.css
+  - OpenJudge-响应式布局.css
+  - 中国大学MOOC-半屏.user.css
+  - 中国大学MOOC-简化课程内容.css
+  - 智慧树-加粗视频进度条.css
+  - 智慧树-直播弹幕.css

@@ -1,1 +1,17 @@
+title: BIT-enhanced
+description: 一些方便大家使用BIT相关网站的油猴脚本等……
+
+lang: zh-CN
+
+domain: ydx-2147483647.github.io
+url: https://ydx-2147483647.github.io
+baseurl: /BIT-enhanced
+
+repository: YDX-2147483647/BIT-enhanced
+
+# Build settings
 theme: jekyll-theme-slate
+plugins:
+  - jekyll-feed
+
+show_downloads: false
