@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.1
+// @version      1.2.2
 // @description  修改页面标题
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -48,6 +48,14 @@
             host: "jwc", title_selectors: [
                 ".pageArticle > .aca_article > h2",
                 ".pageArticle > .articleTitle > h2"
+            ]
+        },
+        { // 教务部
+            name: '教务部',
+            host: "jwb",
+            title_selectors: [
+                "h3#shareTitle",
+                ".gp-bread + h2.gpColumnTitle",
             ]
         },
         { // World Wide Web
