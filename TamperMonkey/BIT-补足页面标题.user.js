@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.2
+// @version      1.2.3
 // @description  修改页面标题
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -106,6 +106,13 @@
                 ".course-intro-title",
             ]
         },
+        { // 信息公开
+            host: "xxgk",
+            title_selectors: [
+                ".pageArticleTitle h3",
+                ".gp-subRight .articleTitle02",
+            ]
+        }
     ]
     /* spell-checker: enable */
 
@@ -125,6 +132,7 @@
                 site.name = document.title
                     .match(/(北京)?(理工)?(大学)?(?<name>.+)/)
                     .groups.name.trim()
+                    .replace(/网$/, '')
             }
             return site
         }
