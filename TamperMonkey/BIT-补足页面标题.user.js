@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.3
+// @version      1.2.4
 // @description  修改页面标题
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -112,7 +112,15 @@
                 ".pageArticleTitle h3",
                 ".gp-subRight .articleTitle02",
             ]
-        }
+        },
+        { // 明德
+            host: "mingde",
+            title_selectors: [
+                ".pageArticleTitle > h3",
+                ".gp-subRight .articleTitle02",
+                ".subPage h2",
+            ]
+        },
     ]
     /* spell-checker: enable */
 
