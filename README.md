@@ -1,5 +1,7 @@
 # BIT-enhanced
 
+[![Mirror Gitee](https://img.shields.io/badge/Mirror-Gitee-red?logo=gitee)](https://gitee.com/YDX-2147483647/BIT-enhanced/)
+
 一些方便大家使用 BIT 相关网站的用户脚本和用户样式表。
 
 油猴（TamperMonkey）可以向网页注入 JavaScript，从而修改之。油猴支持很多浏览器，如果您使用 Microsoft Edge (Chromium)，那么可以在[这里](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)获取。
