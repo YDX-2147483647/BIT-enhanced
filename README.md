@@ -1,5 +1,6 @@
 # BIT-enhanced
 
+[![Source GitHub](https://img.shields.io/badge/Source-GitHub-lightgray?logo=github)](https://github.com/YDX-2147483647/BIT-enhanced/)
 [![Mirror Gitee](https://img.shields.io/badge/Mirror-Gitee-red?logo=gitee)](https://gitee.com/YDX-2147483647/BIT-enhanced/)
 
 一些方便大家使用 BIT 相关网站的用户脚本和用户样式表。
