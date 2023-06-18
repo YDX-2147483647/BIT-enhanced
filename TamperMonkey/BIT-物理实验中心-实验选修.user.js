@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-物理实验中心-实验选修
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @description  上色
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -206,13 +206,13 @@
             this._remove_category();
 
             const is_full = this.student_count >= this.capacity,
-                is_confilct = conflict_referee(this);
+                is_conflict = conflict_referee(this);
 
             if (is_full)
                 this._set_category(Categories.full);
-            if (is_confilct)
+            if (is_conflict)
                 this._set_category(Categories.conflict);
-            if (!is_full && !is_confilct)
+            if (!is_full && !is_conflict)
                 this._set_category(Categories.available);
         }
     };
