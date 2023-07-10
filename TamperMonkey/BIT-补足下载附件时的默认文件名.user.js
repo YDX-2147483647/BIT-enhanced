@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2.6
+// @version      0.2.7
 // @description  补充附件中 <a> 元素的 download 属性
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -12,6 +12,7 @@
 // @match        https://opt.bit.edu.cn/*.htm
 // @match        https://mingde.bit.edu.cn/*.htm
 // @match        https://xuteli.bit.edu.cn/*.htm
+// @match        https://xcb.bit.edu.cn/*.htm
 // @grant        none
 // ==/UserScript==
 
@@ -49,6 +50,10 @@
         { // 徐特立
             host: "xuteli",
             attachments_selector: ".annex > ul > li > a:not([download])",
+        },
+        { // 宣传部
+            host: "xcb",
+            attachments_selector: ".rt_fujian > ul > li > a:not([download])",
         },
     ]
 
