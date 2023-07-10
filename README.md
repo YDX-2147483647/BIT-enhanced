@@ -1,5 +1,6 @@
 # BIT-enhanced
 
+[![best of BITs](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/YDX-2147483647/best-of-bits/main/config/badge/v1.json)](https://github.com/YDX-2147483647/best-of-bits)
 [![Source GitHub](https://img.shields.io/badge/Source-GitHub-lightgray?logo=github)](https://github.com/YDX-2147483647/BIT-enhanced/)
 [![Mirror Gitee](https://img.shields.io/badge/Mirror-Gitee-red?logo=gitee)](https://gitee.com/YDX-2147483647/BIT-enhanced/)
 
