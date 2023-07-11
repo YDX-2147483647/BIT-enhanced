@@ -50,9 +50,9 @@
     }
 
     /**
-     * 
+     *
      * @param original {string}
-     * @returns 
+     * @returns
      */
     function parse_deadline(original) {
         return new Date(original.replace(/截止时间：?/, ''));
@@ -120,8 +120,8 @@
     }
     /**
      * 下载文件
-     * @param {Blob} blob 
-     * @param {string} file_name 
+     * @param {Blob} blob
+     * @param {string} file_name
      */
     function save_file(blob, file_name) {
         const url = URL.createObjectURL(blob);

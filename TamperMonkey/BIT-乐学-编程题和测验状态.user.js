@@ -23,7 +23,7 @@
             content: " ✓";
             color: #00ff00;
         }
-        
+
         .problem-state-false
         {
             font-weight: bold;
@@ -33,13 +33,13 @@
             content: " ✗";
             color: red;
         }
-        
+
         .problem-state-undefined::after
         {
             content: " ↻";
             color: purple;
         }
-        
+
         .problem-state-null,
         .quiz-state-false
         {

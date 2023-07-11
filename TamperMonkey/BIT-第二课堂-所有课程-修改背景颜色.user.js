@@ -50,8 +50,8 @@
 
     /**
      * 给行设定`available`或`unavailable`，支持覆盖既有 CSS 类
-     * @param {Element} row 
-     * @param {Boolean} is_available 
+     * @param {Element} row
+     * @param {Boolean} is_available
      */
     function set_row_state(row, is_available) {
         if (is_available) {
@@ -66,7 +66,7 @@
 
     /**
      * 检查容量
-     * @param {Element} row 
+     * @param {Element} row
      */
     function check_capacity(row) {
         const state = row.children[1].textContent
@@ -86,7 +86,7 @@
     /**
      * 检查学院
      * 只检查“漏网之鱼”。
-     * @param {Element} row 
+     * @param {Element} row
      */
     async function check_academy(row) {
         if (row.classList.contains('available-course')) {
@@ -100,7 +100,7 @@
 
     /**
      * 获取详细信息
-     * @param {string} href 
+     * @param {string} href
      */
     async function get_detail(href) {
         const response_text = await (await fetch(href)).text()
@@ -110,7 +110,7 @@
 
     /**
      * 从HTML提取信息
-     * @param {Document} doc 
+     * @param {Document} doc
      */
     function organize_detail(doc) {
         const ret = {}

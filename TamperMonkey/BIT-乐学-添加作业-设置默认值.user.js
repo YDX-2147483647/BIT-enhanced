@@ -17,8 +17,8 @@
     class LeXue {
         /**
          * 获取`keyword`对应的元素
-         * @param {string} keyword 
-         * @returns 
+         * @param {string} keyword
+         * @returns
          */
         static _get_input(keyword) {
             return document.querySelector(`#id_${keyword}`);
@@ -26,7 +26,7 @@
 
         /**
          * 设置日期
-         * @param {'allowsubmissionsfromdate'|'duedate'|'gradingduedate'} keyword 
+         * @param {'allowsubmissionsfromdate'|'duedate'|'gradingduedate'} keyword
          * @param {Date} date
          */
         static due(keyword, date) {
@@ -40,7 +40,7 @@
 
         /**
          * 设置`<select>`、`<option>`型
-         * @param {string} keyword 
+         * @param {string} keyword
          * @param {string} option `<option>`的`value`
          */
         static select(keyword, option) {
@@ -51,8 +51,8 @@
 
         /**
          * 设置`<input type='checkbox'>`型
-         * @param {string} keyword 
-         * @param {Boolean} is_checked 
+         * @param {string} keyword
+         * @param {Boolean} is_checked
          */
         static check(keyword, is_checked) {
             LeXue._get_input(keyword).checked = is_checked;
@@ -60,8 +60,8 @@
 
         /**
          * 设置`<input type='text'>`型
-         * @param {string} keyword 
-         * @param {*} value 
+         * @param {string} keyword
+         * @param {*} value
          */
         static fill(keyword, value) {
             LeXue._get_input(keyword).value = value;
@@ -123,7 +123,7 @@
     });
 
     /**
-     * 
+     *
      * @param {number} time ms
      * @see https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/%E5%BC%82%E6%AD%A5/Async_await
      */

@@ -1,0 +1,12 @@
+[type.TamperMonkey-BIT-hosts]
+extend-glob = ["BIT-补足页面标题.user.js"]
+
+[type.TamperMonkey-BIT-hosts.extend-words]
+sie = "sie"  # School of Information and Electronics
+
+
+[type.TamperMonkey-BIT-physical-experiments]
+extend-glob = ["BIT-物理实验中心-*.user.js"]
+
+[type.TamperMonkey-BIT-physical-experiments.extend-words]
+lable = "lable"  # 网页上就写错了

@@ -82,7 +82,7 @@
 
             await wait_until_presence("#courseLearn-inner-box .j-detailBox .rinfobox > h4", 1000);
             check_all_copycat();
-    
+
             const page_selector = document.querySelector(".j-reply-all > div > .j-list > .j-data-list + .u-pager");
             page_selector.addEventListener('click', function () {
                 setTimeout(() => check_all_copycat(), 500)

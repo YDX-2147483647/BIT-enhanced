@@ -32,7 +32,7 @@
                 row.classList.add('cancelled');
         }
     }
-    
+
     add_style_sheet();
     check();
 })();

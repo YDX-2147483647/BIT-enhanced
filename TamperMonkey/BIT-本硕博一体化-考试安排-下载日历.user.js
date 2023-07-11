@@ -33,7 +33,7 @@
 
     /**
      * 左补零，最多补一位
-     * @param {number} number 
+     * @param {number} number
      * @returns {string}
      */
     function pad(number) {

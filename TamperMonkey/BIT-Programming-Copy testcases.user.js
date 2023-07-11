@@ -23,9 +23,9 @@
             copy_button.style.margin = "0.5em";
             copy_button.style.display = "inline";
             copy_button.style.color = "darkgray";
-            
+
             a.parentNode.insertBefore(copy_button, a.parentNode.lastChild);
-            
+
             // TODO: 这还是会引起不必要的GET
             fetch(a.href).then(
                 res => res.text()

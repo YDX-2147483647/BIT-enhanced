@@ -47,8 +47,8 @@
 
     /**
      * `test`是否与`ref`是同一课程
-     * @param {CourseDescription|string} ref 
-     * @param {CourseDescription} test 
+     * @param {CourseDescription|string} ref
+     * @param {CourseDescription} test
      */
     function course_match(ref, test) {
         if (typeof ref !== 'string') {
@@ -79,7 +79,7 @@
 
     /**
      * 当前页面是否是是这个课程的页面
-     * @param {CourseDescription} course 
+     * @param {CourseDescription} course
      * @todo 打开文件夹时，`id`不是课程id
      */
     function is_current_page(course) {
@@ -97,7 +97,7 @@
 
     /**
      * 添加课程
-     * @param {CourseDescription} course 
+     * @param {CourseDescription} course
      */
     function append_course(course) {
         const anchor = document.createElement('a')

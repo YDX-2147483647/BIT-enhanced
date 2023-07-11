@@ -212,8 +212,8 @@
 			margin: 0;
 		}
 	}
-	
-	
+
+
 	#side {
 		margin: 1em 10%;
 	}
@@ -222,13 +222,13 @@
 			margin: 0;
 		}
 	}
-	
+
 
 	/* Whole layout (wide screen) */
 	@media (min-width: 950px) {
 		#pagebody > .wrapper {
 			margin: 1em;
-			
+
 			display: grid;
 			grid-template-columns: 10% 2fr 1fr 10%;
 			gap: 1em;

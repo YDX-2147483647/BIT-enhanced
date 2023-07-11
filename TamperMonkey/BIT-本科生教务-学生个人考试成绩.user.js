@@ -36,7 +36,7 @@
     }
 
     /**
-     * @param {{grades: number[], weights: number[]}} param0 
+     * @param {{grades: number[], weights: number[]}} param0
      */
     function calc_GPA({ grades, weights }) {
         const products = grades.map((grade, index) => grade * weights[index])

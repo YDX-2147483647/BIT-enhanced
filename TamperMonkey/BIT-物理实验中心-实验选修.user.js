@@ -21,7 +21,7 @@
 
     /**
      * 判定是否冲突
-     * @param {Course} course 
+     * @param {Course} course
      * @returns {boolean}
      */
     function my_conflict_referee(course) {
@@ -61,11 +61,11 @@
         tr.${Categories.full} {
             background-color: #FF000040;
         }
-        
+
         tr.${Categories.conflict} {
             background-color: yellow;
         }
-        
+
         .datagrid-view1 tr.${Categories.conflict}.${Categories.full} {
             background-color: #FF000040;
         }
@@ -102,7 +102,7 @@
     /**
      * 解析汉字数字
      * @description 只支持一位数
-     * @param {string} s 
+     * @param {string} s
      * @returns {number}
      */
     function parse_int_zh(s) {
@@ -124,7 +124,7 @@
     class Course {
         /**
          * 解析形如“2/3”的比例
-         * @param {string} ratio 
+         * @param {string} ratio
          * @returns {number[]}
          */
         static parse_ratio(ratio) {
@@ -153,7 +153,7 @@
         }
 
         /**
-         * 
+         *
          * @param {HTMLElement} left view1 中的半行
          * @param {HTMLElement} right view2 中的另外半行
          */
@@ -162,7 +162,7 @@
              * @type {HTMLElement[]} */
             this._row = [left, right];
 
-            /** 已选人数 
+            /** 已选人数
              * @type number */
             this.student_count;
             /** 课程容量
@@ -237,7 +237,7 @@
     }
 
     /**
-     * @param {HTMLElement} panel_title 
+     * @param {HTMLElement} panel_title
      */
     function add_painter(panel_title) {
         // 单击“查询”后不会立即出结果……

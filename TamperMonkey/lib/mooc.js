@@ -58,7 +58,7 @@ const Mooc = {
 
     /**
      * 每次页面加载完后调用`listener`
-     * @param {() => *} listener 
+     * @param {() => *} listener
      * @param {{interval: number}} options `interval`的单位为 ms。
      */
     on_every_loaded(listener, options = {}) {

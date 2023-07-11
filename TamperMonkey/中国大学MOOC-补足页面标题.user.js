@@ -40,7 +40,7 @@
 
     /**
      * 组合出页面标题
-     * @param  {...string} titles 
+     * @param  {...string} titles
      * @returns {string}
      */
     function combine_title(...titles) {
@@ -48,7 +48,7 @@
     }
 
     /**
-     * 
+     *
      * @returns {string | null}
      */
     function get_subtitle() {
