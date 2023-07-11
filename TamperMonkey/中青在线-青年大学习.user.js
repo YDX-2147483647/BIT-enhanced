@@ -10,9 +10,9 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(function() {
-    'use strict';
-    let video = document.querySelector("video#Bvideo");
-    video.setAttribute("controls","");
-    video.playbackRate = 1.3;
-})();
+(function () {
+  'use strict'
+  const video = document.querySelector('video#Bvideo')
+  video.setAttribute('controls', '')
+  video.playbackRate = 1.3
+})()

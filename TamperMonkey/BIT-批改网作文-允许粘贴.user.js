@@ -10,11 +10,11 @@
 // ==/UserScript==
 
 (function () {
-    'use strict';
-    const cobj = $("#contents");
-    cobj.off("contextmenu");
-    cobj.off("keydown");
-    cobj.off("dragenter");
+  'use strict'
+  const cobj = $('#contents')
+  cobj.off('contextmenu')
+  cobj.off('keydown')
+  cobj.off('dragenter')
 
-    document.querySelector(".tips2 > ul").firstElementChild.innerText = "作文正文已不再禁止粘贴，但仍不应抄袭。";
-})();
+  document.querySelector('.tips2 > ul').firstElementChild.innerText = '作文正文已不再禁止粘贴，但仍不应抄袭。'
+})()

@@ -13,53 +13,51 @@
 // ==/UserScript==
 
 (function () {
-    'use strict'
+  'use strict'
 
-    /* spell-checker: disable */
-    const selectors = {
-        grade: '#dataList > * > tr > td:nth-child(5)',
-        weight: '#dataList > * > tr > td:nth-child(7)',
-        statistics: 'body > div:nth-child(12) > strong',
-    }
-    /* spell-checker: enable */
+  /* spell-checker: disable */
+  const selectors = {
+    grade: '#dataList > * > tr > td:nth-child(5)',
+    weight: '#dataList > * > tr > td:nth-child(7)',
+    statistics: 'body > div:nth-child(12) > strong'
+  }
+  /* spell-checker: enable */
 
+  function get_data () {
+    const [grade_elements, weight_elements] = [selectors.grade, selectors.weight]
+      .map(s => Array.from(document.querySelectorAll(s)))
 
-    function get_data() {
-        const [grade_elements, weight_elements] = [selectors.grade, selectors.weight]
-            .map(s => Array.from(document.querySelectorAll(s)))
+    const [grades, weights] = [grade_elements, weight_elements].map(elements =>
+      elements.map(e => Number(e.textContent))
+    )
 
-        const [grades, weights] = [grade_elements, weight_elements].map(elements =>
-            elements.map(e => Number(e.textContent))
-        )
+    return { grades, weights }
+  }
 
-        return { grades, weights }
-    }
+  /**
+   * @param {{grades: number[], weights: number[]}} param0
+   */
+  function calc_GPA ({ grades, weights }) {
+    const products = grades.map((grade, index) => grade * weights[index])
+    const sum = products.reduce((sum, p) => sum + p, 0)
+    const total_weight = weights.reduce((sum, w) => sum + w)
+    return sum / total_weight
+  }
 
-    /**
-     * @param {{grades: number[], weights: number[]}} param0
-     */
-    function calc_GPA({ grades, weights }) {
-        const products = grades.map((grade, index) => grade * weights[index])
-        const sum = products.reduce((sum, p) => sum + p, 0)
-        const total_weight = weights.reduce((sum, w) => sum + w)
-        return sum / total_weight
-    }
+  /**
+   * @param {Number} GPA_value
+   */
+  function show_GPA (GPA_value) {
+    const output_element = document.querySelector(selectors.statistics)
+    const { got, to_get } = output_element.textContent
+      .match(/^已获得学分：(?<got>[\d.]+)\s+未获得学分：(?<to_get>[\d.]+)$/)
+      .groups
 
-    /**
-     * @param {Number} GPA_value
-     */
-    function show_GPA(GPA_value) {
-        const output_element = document.querySelector(selectors.statistics)
-        const { got, to_get } = output_element.textContent
-            .match(/^已获得学分：(?<got>[\d.]+)\s+未获得学分：(?<to_get>[\d.]+)$/)
-            .groups
-
-        output_element.textContent = [
+    output_element.textContent = [
             `已获得 ${got} 学分，待获得 ${to_get} 学分。`,
             `当前页平均绩点为 ${GPA_value.toFixed(2)}。`
-        ].join('')
-    }
+    ].join('')
+  }
 
-    show_GPA(calc_GPA(get_data()))
-
+  show_GPA(calc_GPA(get_data()))
 })()

@@ -10,12 +10,12 @@
 // ==/UserScript==
 
 (function () {
-    'use strict';
-    function jump_to_result() {
-        const button = document.querySelector("a[href^=result]");
-        if (button) {
-            button.click();
-        }
+  'use strict'
+  function jump_to_result () {
+    const button = document.querySelector('a[href^=result]')
+    if (button) {
+      button.click()
     }
-    window.setInterval(jump_to_result, 1000);
-})();
+  }
+  window.setInterval(jump_to_result, 1000)
+})()

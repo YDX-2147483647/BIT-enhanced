@@ -9,74 +9,70 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
+(function () {
+  'use strict'
 
-    function timeoutPromise(action, interval){
-        // https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/%E5%BC%82%E6%AD%A5/Async_await
-        return new Promise((resolve, reject) => {
-            setTimeout(function(){
-                action();
-                resolve("done");
-            }, interval);
-        });
-    };
+  function timeoutPromise (action, interval) {
+    // https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/%E5%BC%82%E6%AD%A5/Async_await
+    return new Promise((resolve, reject) => {
+      setTimeout(function () {
+        action()
+        resolve('done')
+      }, interval)
+    })
+  };
 
-    // interval's unit: ms.
-    function wait_until_presence(selector, interval){
-        return new Promise((resolve, reject) => {
-            let check = setInterval(function(){
-                if(document.querySelector(selector)){
-                    clearInterval(check);
-                    resolve(document.querySelector(selector));
-                }
-            }, interval);
-        });
-    }
-
-
-
-    function shrink_titles(){
-        // 这里选出来的是每节课中的“本”或“研”字
-        // 根据 weekUnitTableInfo.js ，存在漏选的理论可能性
-        document.querySelectorAll(".mtt_item_kcmc > span.mtt_item_bybz").forEach(icon => {
-            // 课程名称
-            let course_name = icon.parentNode;
-            course_name.textContent = icon.nextSibling.textContent.replace(
-                /^\d{8,9}\s(.+)\[(\d{2}|\d{9})\]$/, "$1");
-
-            // 课程详细信息
-            let course_detail = course_name.parentNode.querySelector(".mtt_item_room");
-            course_detail.textContent = course_detail.textContent.replace(
-                /良乡校区,?/, "").replace(/星期\d,/, "").replace("节-第", "-");
-            // 例：第8节-第10节 -> 第8-10节
-        });
-    }
-
-    function wait_and_shrink_titles(){
-        wait_until_presence("#kcb_container", 200).then(shrink_titles);
-    }
-
-
-    wait_until_presence("#kcb_container", 1000).then(function(){
-        shrink_titles();
-
-        // 周/学期课表切换栏
-        let change_buttons_selectors = [
-            "i.icon-keyboardarrowleft", "i.icon-keyboardarrowright",
-            "[data-action='周课表学年学期']", "[data-action='周课表周课表']"
-        ];
-        for(const s of change_buttons_selectors){
-            document.querySelector(s).addEventListener("click", wait_and_shrink_titles);
+  // interval's unit: ms.
+  function wait_until_presence (selector, interval) {
+    return new Promise((resolve, reject) => {
+      const check = setInterval(function () {
+        if (document.querySelector(selector)) {
+          clearInterval(check)
+          resolve(document.querySelector(selector))
         }
-    });
+      }, interval)
+    })
+  }
 
-    wait_until_presence("#dqxnxq2 + a[data-action='更改2']", 1000).then(button => {
-        // 更改学期时的对话框是每次现画的……所以每次更改都要加
-        button.addEventListener("click", function(){
-            document.querySelector("#buttons > button.bh-btn-primary").addEventListener(
-                "click", wait_and_shrink_titles);
-        });
-    });
+  function shrink_titles () {
+    // 这里选出来的是每节课中的“本”或“研”字
+    // 根据 weekUnitTableInfo.js ，存在漏选的理论可能性
+    document.querySelectorAll('.mtt_item_kcmc > span.mtt_item_bybz').forEach(icon => {
+      // 课程名称
+      const course_name = icon.parentNode
+      course_name.textContent = icon.nextSibling.textContent.replace(
+        /^\d{8,9}\s(.+)\[(\d{2}|\d{9})\]$/, '$1')
 
-})();
+      // 课程详细信息
+      const course_detail = course_name.parentNode.querySelector('.mtt_item_room')
+      course_detail.textContent = course_detail.textContent.replace(
+        /良乡校区,?/, '').replace(/星期\d,/, '').replace('节-第', '-')
+      // 例：第8节-第10节 -> 第8-10节
+    })
+  }
+
+  function wait_and_shrink_titles () {
+    wait_until_presence('#kcb_container', 200).then(shrink_titles)
+  }
+
+  wait_until_presence('#kcb_container', 1000).then(function () {
+    shrink_titles()
+
+    // 周/学期课表切换栏
+    const change_buttons_selectors = [
+      'i.icon-keyboardarrowleft', 'i.icon-keyboardarrowright',
+      "[data-action='周课表学年学期']", "[data-action='周课表周课表']"
+    ]
+    for (const s of change_buttons_selectors) {
+      document.querySelector(s).addEventListener('click', wait_and_shrink_titles)
+    }
+  })
+
+  wait_until_presence("#dqxnxq2 + a[data-action='更改2']", 1000).then(button => {
+    // 更改学期时的对话框是每次现画的……所以每次更改都要加
+    button.addEventListener('click', function () {
+      document.querySelector('#buttons > button.bh-btn-primary').addEventListener(
+        'click', wait_and_shrink_titles)
+    })
+  })
+})()

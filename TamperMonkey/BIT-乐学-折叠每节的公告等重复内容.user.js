@@ -10,11 +10,11 @@
 // ==/UserScript==
 
 (function () {
-    'use strict';
+  'use strict'
 
-    function add_style_sheet() {
-        let sheet = document.createElement('style');
-        sheet.innerHTML = `
+  function add_style_sheet () {
+    const sheet = document.createElement('style')
+    sheet.innerHTML = `
         [role=main] > .course-content > .collapse-content {
             height: 15em;
             overflow: auto;
@@ -31,43 +31,42 @@
         #show-all {
             z-index: 2;
         }
-        `;
-        document.head.appendChild(sheet);
-    }
+        `
+    document.head.appendChild(sheet)
+  }
 
-    const course_content = document.querySelector("[role=main] > .course-content"),
-        front_content = course_content.querySelector(".course-content > ul:first-child"),
-        single_section = course_content.querySelector(".single-section");
-    const collapse = "collapse-content"; // moodle 已经占用了 .collapse:not(.show)
+  const course_content = document.querySelector('[role=main] > .course-content')
+  const front_content = course_content.querySelector('.course-content > ul:first-child')
+  const single_section = course_content.querySelector('.single-section')
+  const collapse = 'collapse-content' // moodle 已经占用了 .collapse:not(.show)
 
-    function trim_headings() {
-        front_content.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
-            h.textContent = h.textContent.trim();
-        })
-    }
+  function trim_headings () {
+    front_content.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(h => {
+      h.textContent = h.textContent.trim()
+    })
+  }
 
-    function add_show_all_button() {
-        const div = document.createElement('div');
-        div.classList.add("hider");
-        div.innerHTML = `<button id="show-all">▼展开</button>`;
-        course_content.insertBefore(div, single_section);
+  function add_show_all_button () {
+    const div = document.createElement('div')
+    div.classList.add('hider')
+    div.innerHTML = '<button id="show-all">▼展开</button>'
+    course_content.insertBefore(div, single_section)
 
-        div.querySelector('#show-all').addEventListener('click', () => {
-            front_content.classList.remove(collapse);
-            div.hidden = true;
-        })
-    }
+    div.querySelector('#show-all').addEventListener('click', () => {
+      front_content.classList.remove(collapse)
+      div.hidden = true
+    })
+  }
 
-    function initiate_collapse() {
-        front_content.classList.add(collapse);
-    }
+  function initiate_collapse () {
+    front_content.classList.add(collapse)
+  }
 
+  if (front_content.clientHeight > 1 / 3 * window.innerHeight) {
+    add_style_sheet()
 
-    if (front_content.clientHeight > 1 / 3 * window.innerHeight) {
-        add_style_sheet();
-
-        trim_headings();
-        initiate_collapse();
-        add_show_all_button();
-    }
-})();
+    trim_headings()
+    initiate_collapse()
+    add_show_all_button()
+  }
+})()

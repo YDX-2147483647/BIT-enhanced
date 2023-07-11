@@ -13,102 +13,100 @@
 // 使用方法请移步 https://ydx-2147483647.github.io/BIT-enhanced/ 。
 
 (async function () {
-    'use strict'
+  'use strict'
 
-    /**
-     * 课程描述
-     * @typedef {Object} CourseDescription
-     * @property {string} name - 想显示的课程名
-     * @property {string} id - 课程链接最后的id，例如`https://lexue.bit.edu.cn/course/view.php?id=8819`就是`'8819'`
-     * @property {?string} icon - FontAwesome 的图标名称，默认为`'graduation-cap'`。→ http://www.fontawesome.com.cn/faicons/
-     * @property {?string} comment - 给自己看的注释，比如为什么要屏蔽这门课
-     */
+  /**
+   * 课程描述
+   * @typedef {Object} CourseDescription
+   * @property {string} name - 想显示的课程名
+   * @property {string} id - 课程链接最后的id，例如`https://lexue.bit.edu.cn/course/view.php?id=8819`就是`'8819'`
+   * @property {?string} icon - FontAwesome 的图标名称，默认为`'graduation-cap'`。→ http://www.fontawesome.com.cn/faicons/
+   * @property {?string} comment - 给自己看的注释，比如为什么要屏蔽这门课
+   */
 
-    /**
-     * GM 存储的配置
-     * @typedef {Object} Config
-     * @property {CourseDescription[]} show - 想添加的课程，有序，显示时前面的在上
-     * @property {(string | CourseDescription)[]} hide - 想隐藏的课程
-     */
+  /**
+   * GM 存储的配置
+   * @typedef {Object} Config
+   * @property {CourseDescription[]} show - 想添加的课程，有序，显示时前面的在上
+   * @property {(string | CourseDescription)[]} hide - 想隐藏的课程
+   */
 
-
-    /**
-     * 加载 GM 存储的配置
-     * @returns {Promise<Config>}
-     */
-    async function load_config() {
-        return {
-            show: await GM.getValue('show', []),
-            hide: await GM.getValue('hide', []),
-        }
+  /**
+   * 加载 GM 存储的配置
+   * @returns {Promise<Config>}
+   */
+  async function load_config () {
+    return {
+      show: await GM.getValue('show', []),
+      hide: await GM.getValue('hide', [])
     }
+  }
 
-    const config = await load_config()
+  const config = await load_config()
 
-    /**
-     * `test`是否与`ref`是同一课程
-     * @param {CourseDescription|string} ref
-     * @param {CourseDescription} test
-     */
-    function course_match(ref, test) {
-        if (typeof ref !== 'string') {
-            return test.id === ref.id
-        } else {
-            return test.name.includes(ref)
-        }
+  /**
+   * `test`是否与`ref`是同一课程
+   * @param {CourseDescription|string} ref
+   * @param {CourseDescription} test
+   */
+  function course_match (ref, test) {
+    if (typeof ref !== 'string') {
+      return test.id === ref.id
+    } else {
+      return test.name.includes(ref)
     }
+  }
 
-    /**
-     * 隐藏`config.hide`和`config.show`
-     */
-    function hide_courses() {
-        document.querySelectorAll("a.list-group-item[href*='course/view.php'][data-indent='1'], a.list-group-item[href*='my'][data-indent='1']")
-            .forEach(course_el => {
-                const course = {
-                    name: course_el.querySelector(".media > span.media-body").textContent,
-                    id: course_el.dataset.key
-                }
-
-                if ([].concat(config.hide, config.show)
-                    .some(ref => course_match(ref, course))) {
-                    course_el.hidden = true
-                }
-            })
-    }
-
-
-    /**
-     * 当前页面是否是是这个课程的页面
-     * @param {CourseDescription} course
-     * @todo 打开文件夹时，`id`不是课程id
-     */
-    function is_current_page(course) {
-        /** @type {HTMLAnchorElement} */
-        const course_home = document.querySelector("[data-key='coursehome']")
-        if (!course_home) {
-            // 未打开课程
-            return false
+  /**
+   * 隐藏`config.hide`和`config.show`
+   */
+  function hide_courses () {
+    document.querySelectorAll("a.list-group-item[href*='course/view.php'][data-indent='1'], a.list-group-item[href*='my'][data-indent='1']")
+      .forEach(course_el => {
+        const course = {
+          name: course_el.querySelector('.media > span.media-body').textContent,
+          id: course_el.dataset.key
         }
 
-        const url = new URL(course_home.href)
-        const params = url.searchParams
-        return params.get('id') === course.id
+        if ([].concat(config.hide, config.show)
+          .some(ref => course_match(ref, course))) {
+          course_el.hidden = true
+        }
+      })
+  }
+
+  /**
+   * 当前页面是否是是这个课程的页面
+   * @param {CourseDescription} course
+   * @todo 打开文件夹时，`id`不是课程id
+   */
+  function is_current_page (course) {
+    /** @type {HTMLAnchorElement} */
+    const course_home = document.querySelector("[data-key='coursehome']")
+    if (!course_home) {
+      // 未打开课程
+      return false
     }
 
-    /**
-     * 添加课程
-     * @param {CourseDescription} course
-     */
-    function append_course(course) {
-        const anchor = document.createElement('a')
-        anchor.dataset.key = course.id
-        anchor.href = `https://lexue.bit.edu.cn/course/view.php?id=${course.id}`
-        if (is_current_page(course)) {
-            anchor.classList.add('active')
-        }
-        anchor.classList.add('list-group-item', 'list-group-item-action')
+    const url = new URL(course_home.href)
+    const params = url.searchParams
+    return params.get('id') === course.id
+  }
 
-        anchor.innerHTML =
+  /**
+   * 添加课程
+   * @param {CourseDescription} course
+   */
+  function append_course (course) {
+    const anchor = document.createElement('a')
+    anchor.dataset.key = course.id
+    anchor.href = `https://lexue.bit.edu.cn/course/view.php?id=${course.id}`
+    if (is_current_page(course)) {
+      anchor.classList.add('active')
+    }
+    anchor.classList.add('list-group-item', 'list-group-item-action')
+
+    anchor.innerHTML =
             `<div class="ml-1">
                 <div class="media">
                     <span class="media-left">
@@ -118,14 +116,12 @@
                 </div>
             </div>`
 
+    const li = document.createElement('li')
+    li.appendChild(anchor)
+    document.querySelector('#nav-drawer > nav.list-group:last-child > ul')
+      .appendChild(li)
+  }
 
-        const li = document.createElement("li")
-        li.appendChild(anchor)
-        document.querySelector("#nav-drawer > nav.list-group:last-child > ul")
-            .appendChild(li)
-    }
-
-    hide_courses()
-    config.show.forEach(append_course)
-
+  hide_courses()
+  config.show.forEach(append_course)
 })()

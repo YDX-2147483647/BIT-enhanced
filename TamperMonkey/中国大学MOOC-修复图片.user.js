@@ -12,18 +12,17 @@
 // ==/UserScript==
 
 (function () {
-    "use strict"
+  'use strict'
 
-    function change_origin(url) {
-        return 'https://img-ph-mirror.nosdn.127.net' + (new URL(url)).pathname
-    }
+  function change_origin (url) {
+    return 'https://img-ph-mirror.nosdn.127.net' + (new URL(url)).pathname
+  }
 
-    function main() {
-        document.querySelectorAll("img[src^='https://img0.ph.126.net']")
-            .forEach(img => { img.src = change_origin(img.src) })
-    }
+  function main () {
+    document.querySelectorAll("img[src^='https://img0.ph.126.net']")
+      .forEach(img => { img.src = change_origin(img.src) })
+  }
 
-    Mooc.on_every_loaded(main)
-    window.addEventListener('hashchange', () => Mooc.on_every_loaded(main))
-
+  Mooc.on_every_loaded(main)
+  window.addEventListener('hashchange', () => Mooc.on_every_loaded(main))
 })()
