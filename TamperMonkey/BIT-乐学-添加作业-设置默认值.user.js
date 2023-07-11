@@ -155,7 +155,7 @@
     await sleep(1000) // 等待 Moodle / yui 加载完
 
     // 不展开也行
-    // expand_all_section();
+    expand_all_section()
 
     defaults.update_settings()
   }

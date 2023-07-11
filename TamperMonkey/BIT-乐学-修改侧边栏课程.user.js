@@ -14,6 +14,7 @@
 
 (async function () {
   'use strict'
+  /* global GM */
 
   /**
    * 课程描述

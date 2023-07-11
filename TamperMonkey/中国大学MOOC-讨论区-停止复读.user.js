@@ -13,6 +13,7 @@
 
 (function () {
   'use strict'
+  /* global Mooc */
 
   // interval's unit: ms.
   function wait_until_presence (selector, interval) {
@@ -46,7 +47,7 @@
   }
 
   function has_comment (reply_div) {
-    return reply_div.querySelector('.m-commentWrapper') != null
+    return reply_div.querySelector('.m-commentWrapper') !== null
   }
 
   function check_all_copycat () {
@@ -59,7 +60,7 @@
       if (!has_comment(current_reply)) {
         for (let j = replies.length - 1; j > i; j--) {
           const r = replies[j]
-          if (r.classList.contains('copycat')) { continue } else if (get_main_content(r) == get_main_content(current_reply)) {
+          if (r.classList.contains('copycat')) { continue } else if (get_main_content(r) === get_main_content(current_reply)) {
             is_copycat = true
             break
           }

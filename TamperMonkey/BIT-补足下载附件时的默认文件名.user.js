@@ -61,7 +61,7 @@
     const site_host = window.location.host
 
     for (const s of matches) {
-      if (site_host == `${s.host}.bit.edu.cn`) {
+      if (site_host === `${s.host}.bit.edu.cn`) {
         document.querySelectorAll(s.attachments_selector).forEach(attach => {
           if (!attach.download) {
             let attach_filename = attach.textContent

@@ -13,6 +13,7 @@
 
 (function () {
   'use strict'
+  /* global Mooc */
 
   function fill_full_mark () {
     document.querySelectorAll('.j-homework-box .j-list .u-questionItem .u-point .s').forEach(
@@ -25,7 +26,7 @@
     )
     document.querySelectorAll('.j-homework-box .j-list .u-questionItem .comment textarea').forEach(
       (textarea) => {
-        if (textarea.textLength == 0) {
+        if (textarea.textLength === 0) {
           textarea.value = '无误。'
         }
       }

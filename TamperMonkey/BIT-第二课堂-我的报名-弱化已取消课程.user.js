@@ -28,7 +28,7 @@
       row.children[7].style.paddingLeft = '0' // 原来是 5px，会让“开放浏览”分到两行
 
       const cancel_description = row.children[8].textContent.trim()
-      if (cancel_description == '取消原因') { row.classList.add('cancelled') }
+      if (cancel_description === '取消原因') { row.classList.add('cancelled') }
     }
   }
 

@@ -26,7 +26,7 @@
    */
   function my_conflict_referee (course) {
     if (course.class_time.week >= 8 && course.class_time.week <= 11 &&
-            course.class_time.day == 3 && course.class_time.section == 5) {
+      course.class_time.day === 3 && course.class_time.section === 5) {
       return true
     }
 
@@ -43,7 +43,7 @@
     ]
 
     return bans.find(([day, section]) =>
-      day == course.class_time.day && section == course.class_time.section)
+      day === course.class_time.day && section === course.class_time.section)
   }
 
   /**
@@ -136,7 +136,9 @@
     static parse_class_time (time) {
       const match_obj = time.match(
         /第(?<week>\d+)周星期(?<day>[一二三四五六日])(上午|下午|晚上)第(?<section>[一二三四五])大节(?<date>[-\d]{10}) (?<start>[:\d]{5})-(?<end>[:\d]{5})/)
-      if (!match_obj) { throw `无法识别上课时间：${time}。` }
+      if (!match_obj) {
+        throw Error(`无法识别上课时间：${time}。`)
+      }
       const groups = match_obj.groups
 
       return {
@@ -161,10 +163,10 @@
 
       /** 已选人数
        * @type number */
-      this.student_count
+      this.student_count = 0
       /** 课程容量
        * @type number */
-      this.capacity;
+      this.capacity = 0;
       [this.student_count, this.capacity] = Course.parse_ratio(this._row[1]
         .querySelector("td[field='ElectivedNum']").textContent)
 

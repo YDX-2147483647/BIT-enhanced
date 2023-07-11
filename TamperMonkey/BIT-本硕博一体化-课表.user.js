@@ -12,16 +12,6 @@
 (function () {
   'use strict'
 
-  function timeoutPromise (action, interval) {
-    // https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/%E5%BC%82%E6%AD%A5/Async_await
-    return new Promise((resolve, reject) => {
-      setTimeout(function () {
-        action()
-        resolve('done')
-      }, interval)
-    })
-  };
-
   // interval's unit: ms.
   function wait_until_presence (selector, interval) {
     return new Promise((resolve, reject) => {

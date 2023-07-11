@@ -11,6 +11,7 @@
 
 (function () {
   'use strict'
+  /* global $ */
   const cobj = $('#contents')
   cobj.off('contextmenu')
   cobj.off('keydown')

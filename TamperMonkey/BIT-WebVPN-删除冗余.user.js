@@ -19,7 +19,7 @@
     const address = e.parentNode.lastElementChild.textContent
     const redundant_address = e.textContent.match(/[0-9a-zA-Z.]+/)
     if (redundant_address) {
-      if (address.includes(redundant_address[0]) && e.textContent != redundant_address[0]) {
+      if (address.includes(redundant_address[0]) && e.textContent !== redundant_address[0]) {
         e.textContent = e.textContent.replace(redundant_address[0], '')
       }
     }

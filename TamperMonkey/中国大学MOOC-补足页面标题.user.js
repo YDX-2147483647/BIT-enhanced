@@ -13,6 +13,7 @@
 
 (function () {
   'use strict'
+  /* global Mooc */
 
   /**
    * 标题的 CSS 选择器

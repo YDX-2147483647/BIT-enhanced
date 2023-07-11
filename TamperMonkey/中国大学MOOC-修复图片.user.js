@@ -13,6 +13,7 @@
 
 (function () {
   'use strict'
+  /* global Mooc */
 
   function change_origin (url) {
     return 'https://img-ph-mirror.nosdn.127.net' + (new URL(url)).pathname

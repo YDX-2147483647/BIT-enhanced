@@ -87,7 +87,7 @@
   async function check_academy (row) {
     if (row.classList.contains('available-course')) {
       const detail = await get_detail(row.children[2].querySelector('a').href)
-      if (detail['其他学院'] != '不限' && !detail['可报学院'].includes(config.my_academy)) {
+      if (detail['其他学院'] !== '不限' && !detail['可报学院'].includes(config.my_academy)) {
         set_row_state(row, false)
       }
     }

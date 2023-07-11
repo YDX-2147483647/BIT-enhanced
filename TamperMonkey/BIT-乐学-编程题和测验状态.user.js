@@ -94,13 +94,17 @@
     const doc = parser.parseFromString(response_text, 'text/html')
 
     const headings = doc.querySelectorAll('[role=main] > h3')
-    if (headings[0].textContent == '查看程序的测试结果' &&
-            headings[0].nextSibling.textContent == '找不到您的程序') { return null } else if (headings[headings.length - 1].textContent != '测试结果') { return undefined } else {
+    if (headings[0].textContent === '查看程序的测试结果' &&
+      headings[0].nextSibling.textContent === '找不到您的程序') {
+      return null
+    } else if (headings[headings.length - 1].textContent !== '测试结果') {
+      return undefined
+    } else {
       const result_text = doc.querySelector('#test-result-detail > p:first-child').textContent
       const result = result_text.match(/测试结果：共 (?<total>\d+) 个测试用例，您的程序通过了其中的 (?<accepted>\d+) 个，未能通过的有 (?<rejected>\d+) 个。/).groups
       for (const i in result) { result[i] = parseInt(result[i]) }
 
-      return result.rejected == 0
+      return result.rejected === 0
     }
   }
 
@@ -116,7 +120,7 @@
     const doc = parser.parseFromString(response_text, 'text/html')
 
     const heading = doc.querySelector('[role=main] > h3')
-    return heading != null && heading.textContent == '您上次尝试的概要'
+    return heading !== null && heading.textContent === '您上次尝试的概要'
   }
 
   add_style_sheet()

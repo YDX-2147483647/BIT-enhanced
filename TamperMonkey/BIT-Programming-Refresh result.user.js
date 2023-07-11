@@ -13,9 +13,9 @@
   'use strict'
   function auto_refresh () {
     const titles = document.querySelectorAll('[role=main] > h3')
-    if (titles[0].innerText == '查看程序的测试结果' &&
-            titles[0].nextSibling.innerText == '找不到您的程序') { return }
-    if (titles[titles.length - 1].innerText != '测试结果') {
+    if (titles[0].innerText === '查看程序的测试结果' &&
+            titles[0].nextSibling.innerText === '找不到您的程序') { return }
+    if (titles[titles.length - 1].innerText !== '测试结果') {
       location.reload()
     }
   }

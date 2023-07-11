@@ -13,6 +13,7 @@
 
 (function () {
   'use strict'
+  /* global Mooc */
 
   function main () {
     const button = document.querySelector('button.download-homework-list')
@@ -28,10 +29,6 @@
 
   Mooc.on_every_loaded(main)
   window.addEventListener('hashchange', () => Mooc.on_every_loaded(main))
-
-  function get_course_title () {
-    return document.querySelector('h4.courseTxt').textContent
-  }
 
   /**
    * 获取作业章节列表（作为元素）

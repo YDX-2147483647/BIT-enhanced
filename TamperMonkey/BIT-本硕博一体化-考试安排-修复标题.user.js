@@ -37,7 +37,7 @@
       const heading = card.querySelector('h3')
 
       const course_id = heading.textContent
-      if (course_id.match(/\d+/) && heading.title != '') {
+      if (course_id.match(/\d+/) && heading.title !== '') {
         heading.textContent = heading.title
         heading.title = course_id
       }
