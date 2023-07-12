@@ -11,23 +11,23 @@
 		body {
 			min-width: 0;
 		}
-		
+
 		.learnPage > .g-sd1 {
 			display: none;
 		}
-		
+
 		.learnPage > .g-mn1 > .g-mn1c {
 			margin: auto;
 		}
-		
-		
+
+
 		/* 隐藏无用物 */
 		.m-navTop-func > .m-navTop-func-i > .u-navLogin-container,
 		.u-questionItem .qaDescription
 		{
 			width: auto;
 		}
-		
+
 		body > .spoc-pre-nav-container,
 		#g-container > .m-nav-container,
 		.web-nav-right-part > .u-navLogin-searchFunc,

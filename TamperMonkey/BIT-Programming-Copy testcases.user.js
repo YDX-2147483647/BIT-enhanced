@@ -10,33 +10,31 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
+(function () {
+  'use strict'
 
-    document.querySelectorAll("a[href*='download=0']").forEach(
-        function(a){
-            let copy_button = document.createElement("pre");
-            copy_button.textContent = "(copy)";
+  document.querySelectorAll("a[href*='download=0']").forEach(
+    function (a) {
+      const copy_button = document.createElement('pre')
+      copy_button.textContent = '(copy)'
 
-            // Style
-            copy_button.style.fontSize = "9pt";
-            copy_button.style.margin = "0.5em";
-            copy_button.style.display = "inline";
-            copy_button.style.color = "darkgray";
-            
-            a.parentNode.insertBefore(copy_button, a.parentNode.lastChild);
-            
-            // TODO: 这还是会引起不必要的GET
-            fetch(a.href).then(
-                res => res.text()
-            ).then(plaintext => {
-                copy_button.addEventListener("copy", function(event){
-                    event.clipboardData.setData("text/plain", plaintext);
-                    event.preventDefault();
-                });
-            });
-        }
-    );
+      // Style
+      copy_button.style.fontSize = '9pt'
+      copy_button.style.margin = '0.5em'
+      copy_button.style.display = 'inline'
+      copy_button.style.color = 'darkgray'
 
+      a.parentNode.insertBefore(copy_button, a.parentNode.lastChild)
 
-})();
+      // TODO: 这还是会引起不必要的GET
+      fetch(a.href).then(
+        res => res.text()
+      ).then(plaintext => {
+        copy_button.addEventListener('copy', function (event) {
+          event.clipboardData.setData('text/plain', plaintext)
+          event.preventDefault()
+        })
+      })
+    }
+  )
+})()

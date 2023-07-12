@@ -1,0 +1,28 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.16.0
+    hooks:
+      - id: typos
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.44.0
+    hooks:
+      - id: eslint
+        args:
+          - --fix
+        additional_dependencies:
+          - eslint@^8.0.1
+          - eslint-config-standard@latest
+          - eslint-plugin-import@^2.25.2
+          - eslint-plugin-n@^15.0.0 || ^16.0.0
+          - eslint-plugin-promise@^6.0.0
+
+exclude: "/obsolete/"
