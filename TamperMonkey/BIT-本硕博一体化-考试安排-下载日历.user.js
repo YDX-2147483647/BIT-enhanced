@@ -79,7 +79,7 @@
   }
   function trim_place_name (name) {
     // 这是从 python 改过来的
-    if (name !== '良乡工程训练中心') {
+    if (name === '良乡工程训练中心') {
       return '工训楼'
     }
 
