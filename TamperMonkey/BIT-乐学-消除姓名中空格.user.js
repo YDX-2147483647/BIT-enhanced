@@ -34,7 +34,11 @@
     }
   }
   function trim_name_string (name) {
-    if (!/[a-zA-Z]/.test(name)) { return name.replaceAll(' ', '') } else { return name }
+    if (!/[a-zA-Z]/.test(name)) {
+      return name.replaceAll(' ', '')
+    } else {
+      return name
+    }
   }
 
   // assign/view.php

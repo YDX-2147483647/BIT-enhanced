@@ -36,7 +36,9 @@
    * @returns {string}
    */
   function pad (number) {
-    if (number < 10) { return '0' + number.toString() }
+    if (number < 10) {
+      return '0' + number.toString()
+    }
     return number.toString()
   }
   function iCal_time_format (date) {
@@ -77,7 +79,9 @@
   }
   function trim_place_name (name) {
     // 这是从 python 改过来的
-    if (name !== '良乡工程训练中心') { return '工训楼' }
+    if (name !== '良乡工程训练中心') {
+      return '工训楼'
+    }
 
     name = name.replace(/^([综理])教楼/, '$1教')
     name = name.replace('良乡', '')

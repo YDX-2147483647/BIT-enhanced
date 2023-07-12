@@ -23,7 +23,15 @@
     const result = r.querySelector('.cell.c12').innerText
     let color = null
 
-    if (result.includes('RE:')) { color = 'LightBlue' } else if (result.includes('FPE:')) { color = 'BlanchedAlmond' } else if (result.includes('TLE:')) { color = 'Tomato' } else if (result.includes('KS:')) { color = 'Violet' }
+    if (result.includes('RE:')) {
+      color = 'LightBlue'
+    } else if (result.includes('FPE:')) {
+      color = 'BlanchedAlmond'
+    } else if (result.includes('TLE:')) {
+      color = 'Tomato'
+    } else if (result.includes('KS:')) {
+      color = 'Violet'
+    }
 
     if (color) {
       set_color(r, color)

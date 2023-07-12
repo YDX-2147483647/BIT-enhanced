@@ -29,7 +29,9 @@
   }
 
   function get_this_code (sender) {
-    while (sender != null && sender.className.indexOf('dp-highlighter') === -1) { sender = sender.parentNode }
+    while (sender != null && sender.className.indexOf('dp-highlighter') === -1) {
+      sender = sender.parentNode
+    }
 
     let code = sender.querySelector('ol.dp-c').innerText
     // 要把 &nbsp; （U+00A0）换成普通空格，不然到 Dev-C++ 那里就变成“牋爏……”了

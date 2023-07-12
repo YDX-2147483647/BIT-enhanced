@@ -58,7 +58,13 @@
    * @returns {string|null} 类型，null 表示未知
    */
   function parse_redirect_hint (hint) {
-    if (hint === '前往测验') { return '测验' } else if (hint === '前往作业') { return '互评' } else { return null }
+    if (hint === '前往测验') {
+      return '测验'
+    } else if (hint === '前往作业') {
+      return '互评'
+    } else {
+      return null
+    }
   }
 
   /**

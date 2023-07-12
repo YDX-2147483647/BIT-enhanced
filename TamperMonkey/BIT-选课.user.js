@@ -89,7 +89,15 @@
     const rate = calculate_rate(info)
 
     rate_span.textContent = rate.toFixed(3)
-    if (rate >= 10 || isNaN(rate)) { rate_span.style.color = 'Red' } else if (rate >= 3.162) { rate_span.style.color = 'OrangeRed' } else if (rate >= 1) { rate_span.style.color = 'Darkorange' } else if (rate >= 0.9) { rate_span.style.color = 'Black' }
+    if (rate >= 10 || isNaN(rate)) {
+      rate_span.style.color = 'Red'
+    } else if (rate >= 3.162) {
+      rate_span.style.color = 'OrangeRed'
+    } else if (rate >= 1) {
+      rate_span.style.color = 'Darkorange'
+    } else if (rate >= 0.9) {
+      rate_span.style.color = 'Black'
+    }
   }
 
   function add_listeners_for_rate () {

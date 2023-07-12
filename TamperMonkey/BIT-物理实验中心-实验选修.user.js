@@ -207,9 +207,15 @@
       const is_full = this.student_count >= this.capacity
       const is_conflict = conflict_referee(this)
 
-      if (is_full) { this._set_category(Categories.full) }
-      if (is_conflict) { this._set_category(Categories.conflict) }
-      if (!is_full && !is_conflict) { this._set_category(Categories.available) }
+      if (is_full) {
+        this._set_category(Categories.full)
+      }
+      if (is_conflict) {
+        this._set_category(Categories.conflict)
+      }
+      if (!is_full && !is_conflict) {
+        this._set_category(Categories.available)
+      }
     }
   };
 

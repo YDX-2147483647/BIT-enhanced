@@ -30,7 +30,9 @@
   let already_add_style_sheet = false
 
   function add_style_sheet () {
-    if (already_add_style_sheet) { return }
+    if (already_add_style_sheet) {
+      return
+    }
 
     const sheet = document.createElement('style')
     sheet.innerHTML = `
@@ -60,14 +62,20 @@
       if (!has_comment(current_reply)) {
         for (let j = replies.length - 1; j > i; j--) {
           const r = replies[j]
-          if (r.classList.contains('copycat')) { continue } else if (get_main_content(r) === get_main_content(current_reply)) {
+          if (r.classList.contains('copycat')) {
+            continue
+          } else if (get_main_content(r) === get_main_content(current_reply)) {
             is_copycat = true
             break
           }
         }
       }
 
-      if (is_copycat) { current_reply.classList.add('copycat') } else if (current_reply.classList.contains('copycat')) { current_reply.classList.remove('copycat') }
+      if (is_copycat) {
+        current_reply.classList.add('copycat')
+      } else if (current_reply.classList.contains('copycat')) {
+        current_reply.classList.remove('copycat')
+      }
     }
   }
 

@@ -102,7 +102,9 @@
     } else {
       const result_text = doc.querySelector('#test-result-detail > p:first-child').textContent
       const result = result_text.match(/测试结果：共 (?<total>\d+) 个测试用例，您的程序通过了其中的 (?<accepted>\d+) 个，未能通过的有 (?<rejected>\d+) 个。/).groups
-      for (const i in result) { result[i] = parseInt(result[i]) }
+      for (const i in result) {
+        result[i] = parseInt(result[i])
+      }
 
       return result.rejected === 0
     }
