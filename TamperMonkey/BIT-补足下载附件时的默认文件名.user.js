@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2.8
+// @version      0.2.9
 // @description  补充附件中 <a> 元素的 download 属性
-// @licence      GPL-3.0-or-later
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://jxzx.bit.edu.cn/*.htm

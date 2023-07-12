@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.8
+// @version      1.2.9
 // @description  修改页面标题
-// @licence      GPL-3.0-or-later
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
