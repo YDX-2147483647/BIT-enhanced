@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.2.8
 // @description  修改页面标题
+// @licence      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://*.bit.edu.cn/*
