@@ -34,7 +34,6 @@
         ]
     }
     ```
-
     - `name`——想显示的课程名。
     - `id`——课程链接最后的id，例如`https://lexue.bit.edu.cn/course/view.php?id=8819`就是`'8819'`。
     - `icon`——FontAwesome v4 的图标名称，默认为`'graduation-cap'`。请参考 [Font Awesome Icons](https://fontawesome.com/v4/icons/) 或 [Font Awesome 中文网](https://fontawesome.com.cn/v4/icons)。
