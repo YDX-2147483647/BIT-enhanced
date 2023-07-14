@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程
 // @namespace    http://tampermonkey.net/
-// @version      1.3.0-beta
+// @version      1.3.1
 // @description  在侧边栏添加并重新排列课程
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -21,7 +21,7 @@
    * @typedef {Object} CourseDescription
    * @property {string} name - 想显示的课程名
    * @property {string} id - 课程链接最后的id，例如`https://lexue.bit.edu.cn/course/view.php?id=8819`就是`'8819'`
-   * @property {?string} icon - FontAwesome 的图标名称，默认为`'graduation-cap'`。→ http://www.fontawesome.com.cn/faicons/
+   * @property {?string} icon - FontAwesome v4 的图标名称，默认为`'graduation-cap'`。
    * @property {?string} comment - 给自己看的注释，比如为什么要屏蔽这门课
    */
 
