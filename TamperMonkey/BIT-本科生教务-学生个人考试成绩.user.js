@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.0.1
 // @description  显示控件，调整速度
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://jwms.bit.edu.cn/jsxsd/kscj/cjcx_list

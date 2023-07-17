@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.1.2
 // @description  上色
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://10.133.22.200:7100/XPK/StuCourseElective

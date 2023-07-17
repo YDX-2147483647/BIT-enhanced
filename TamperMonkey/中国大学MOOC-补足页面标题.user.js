@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.4.0
 // @description  补充每个课程内作业、考试等页面的信息
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @require      https://gitee.com/YDX-2147483647/BIT-enhanced/raw/main/TamperMonkey/lib/mooc.js

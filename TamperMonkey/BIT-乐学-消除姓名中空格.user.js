@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.1.2
 // @description  消除中文姓名中间的空格
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        https://lexue.bit.edu.cn/mod/forum/discuss.php*

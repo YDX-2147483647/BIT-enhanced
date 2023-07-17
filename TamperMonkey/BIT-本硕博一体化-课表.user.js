@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.3
 // @description  去除课表中的“本”、课程及教学班编号、星期等
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*

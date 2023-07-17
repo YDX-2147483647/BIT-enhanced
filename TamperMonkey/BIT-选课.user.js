@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.3.4
 // @description  计算饱和度
+// @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/curriculavariable.do*
