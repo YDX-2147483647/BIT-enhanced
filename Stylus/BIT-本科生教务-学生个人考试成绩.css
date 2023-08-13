@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           BIT-本科生教务-学生个人考试成绩
 @namespace      github.com/openstyles/stylus
-@version        1.0.0
+@version        1.1.0
 @description    删除一般没数据的列，加镶边行等
 @author         Y.D.X.
 ==/UserStyle== */
@@ -16,7 +16,7 @@
 		display: none;
 	}
 
-	#dataList > * > tr:nth-child(odd):not(:first-child) {
+	#dataList > * > tr:nth-child(odd) {
 		background-color: #eee;
 	}
 

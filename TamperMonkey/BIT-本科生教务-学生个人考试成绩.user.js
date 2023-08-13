@@ -2,7 +2,7 @@
 // @name         BIT-本科生教务-学生个人考试成绩
 // @namespace    http://tampermonkey.net/
 // @version      0.0.1
-// @description  显示控件，调整速度
+// @description  计算平均绩点
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -10,7 +10,6 @@
 // @match        https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fae04c8f69326144300d8db9d6562d/jsxsd/kscj/cjcx_list
 // @grant        none
 // @run-at       document-end
-// @see          https://bitself.vercel.app/
 // ==/UserScript==
 
 (function () {
