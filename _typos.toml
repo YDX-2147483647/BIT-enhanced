@@ -1,5 +1,8 @@
 [type.TamperMonkey-BIT-hosts]
-extend-glob = ["BIT-补足页面标题.user.js"]
+extend-glob = [
+    "BIT-补足页面标题.user.js",
+    "BIT-补足下载附件时的默认文件名.user.js",
+]
 
 [type.TamperMonkey-BIT-hosts.extend-words]
 sie = "sie"  # School of Information and Electronics
