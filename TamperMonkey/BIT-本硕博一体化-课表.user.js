@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         BIT-本硕博一体化-课表
 // @namespace    http://tampermonkey.net/
-// @version      0.3
-// @description  去除课表中的“本”、课程及教学班编号、星期等
+// @version      0.3.1
+// @description  去除课表中的“本”、课程及教学班编号、星期等以简化信息
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*
+// @match        https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*
 // @grant        none
 // ==/UserScript==
 
@@ -36,8 +37,11 @@
 
       // 课程详细信息
       const course_detail = course_name.parentNode.querySelector('.mtt_item_room')
-      course_detail.textContent = course_detail.textContent.replace(
-        /良乡校区,?/, '').replace(/星期\d,/, '').replace('节-第', '-')
+      course_detail.textContent =
+        course_detail.textContent
+          .replace(/(良乡|中关村)校区,?/, '')
+          .replace(/星期[\d一二三四五六日],/, '')
+          .replace('节-第', '-')
       // 例：第8节-第10节 -> 第8-10节
     })
   }
