@@ -7,6 +7,7 @@
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/curriculavariable.do*
+// @match        https://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/curriculavariable.do*
 // @match        https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421e8fc0f9e2e2426557a1dc7af96/xsxkapp/*
 // @grant        none
 // ==/UserScript==
