@@ -1,12 +1,12 @@
 /* ==UserStyle==
 @name           BIT-本科生教务-首页
 @namespace      github.com/openstyles/stylus
-@version        1.0.1
+@version        1.0.2
 @description    灰化无用功能
 @author         Y.D.X.
 ==/UserStyle== */
 
-@-moz-document url("http://jwms.bit.edu.cn/jsxsd/framework/main.jsp"), url("http://jwms.bit.edu.cn/jsxsd/framework/xsMain.jsp"), url("https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fae04c8f69326144300d8db9d6562d/jsxsd/framework/main.jsp"), url("https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fae04c8f69326144300d8db9d6562d/jsxsd/framework/xsMain.jsp") {
+@-moz-document url("http://jwms.bit.edu.cn/jsxsd/framework/main.jsp"), url("http://jwms.bit.edu.cn/jsxsd/framework/xsMain.jsp"), url("https://jwms.bit.edu.cn/jsxsd/framework/main.jsp"), url("https://jwms.bit.edu.cn/jsxsd/framework/xsMain.jsp"), url("https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fae04c8f69326144300d8db9d6562d/jsxsd/framework/main.jsp"), url("https://webvpn.bit.edu.cn/http/77726476706e69737468656265737421fae04c8f69326144300d8db9d6562d/jsxsd/framework/xsMain.jsp") {
     /* 选课中心，已被[单独站点](http://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/index.do)替换 */
 	.block2,
 	/* 已收留言 */
