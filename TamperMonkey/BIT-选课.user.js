@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-选课
 // @namespace    http://tampermonkey.net/
-// @version      0.3.4
+// @version      0.3.5
 // @description  计算饱和度
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
