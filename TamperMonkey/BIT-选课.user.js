@@ -103,12 +103,14 @@
   }
 
   function add_listeners_for_rate () {
-    // console.log("add_listeners_for_rate.");
-
     if (document.querySelector('.cv-active > #aPublicCourse')) { // 公选课
       document.querySelectorAll('#publicBody > .cv-row').forEach(add_rate)
     } else { // 系统推荐课程、体育课
       document.querySelectorAll('.cv-row').forEach(row => {
+        // 当场更新
+        row.querySelectorAll('.cv-course-card').forEach(add_rate)
+
+        // 展开细节后也更新
         row.addEventListener('click', () => {
           wait_until_presence('.cv-course-card > .cv-info > .cv-caption-text').then(() => {
             row.querySelectorAll('.cv-course-card').forEach(add_rate)
