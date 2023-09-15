@@ -1,17 +1,28 @@
 // ==UserScript==
 // @name         BIT-校园网-上网明细
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  给“上网明细”中的“总流量”标注颜色，类似 lsd --long
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://10.0.0.54:8800/log/detail*
+// @match        http://10.0.0.54/log/detail*
 // @grant        none
 // ==/UserScript==
 
 (function () {
   'use strict'
+
+  if (window.location.port !== '8800') {
+    // 标准未写明如何处理端口。
+    // https://developer.chrome.com/docs/extensions/mv3/match_patterns/#special
+    // 有些实现匹配时完全不比较端口，并且要求`@match`不能包含端口。
+    // https://github.com/quoid/userscripts/blob/4200fb249ca61d491a61d20d6ba4c08bd0d16d52/xcode/Safari-Extension/Functions.swift#L1151
+    // https://github.com/quoid/userscripts/issues/301#issuecomment-1215009943
+    // 为了兼容，增加不带端口的`@match`并自己比较端口。
+    return
+  }
 
   const table = document.querySelector('#w0-container > table')
 
