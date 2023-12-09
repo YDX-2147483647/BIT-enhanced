@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.10
+// @version      1.2.11
 // @description  修改页面标题
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -85,15 +85,6 @@
       title_selectors: [
         '#home .page_box .txt > h2',
         '#home .page_box .top > h2'
-      ]
-    },
-    { // 第二课堂
-      host: 'dekt',
-      name: '第二课堂',
-      title_selectors: [
-        '.xx_content h1',
-        '.tilte01',
-        '.sui-breadcrumb > li:last-child'
       ]
     },
     { // 世纪（学生工作部、武装部、心理健康教育与咨询中心）
