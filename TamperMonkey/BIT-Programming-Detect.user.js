@@ -12,6 +12,9 @@
 // ==/UserScript==
 
 (function () {
+  'use strict'
+  /* global GM_registerMenuCommand */
+
   /** 提示“正在探测”的顶部提示栏 */
   const reminder = document.createElement('b')
   /** 弹出窗口的灰色背景 */
@@ -152,17 +155,17 @@
       const submit_xhr = new XMLHttpRequest()
       submit_xhr.open('GET', document.querySelector("[title='提交']").href, true)
       submit_xhr.onreadystatechange = async function () {
-        if (submit_xhr.readyState == 4) { // 请求完成
-          if (submit_xhr.status == 200) { // 请求正常，并且还能提交
+        if (submit_xhr.readyState === 4) { // 请求完成
+          if (submit_xhr.status === 200) { // 请求正常，并且还能提交
             try {
               resolve(new FormData(new DOMParser().parseFromString(submit_xhr.responseText, 'text/html').querySelector('form[action="https://lexue.bit.edu.cn/mod/programming/submit.php"]')))
             } catch (error) { // 迟交的程序会找不到表单数据
               hideReminder('时间已到，您不能再提交程序了！')
-              reject('FormData Error:' + error.message)
+              reject(Error('FormData Error:' + error.message))
             }
           } else {
             hideReminder('网络错误！')
-            reject('Network Error')
+            reject(Error('Network Error'))
           }
         }
       }
@@ -180,7 +183,8 @@
      */
     const arguments_ = {}
     let not_all_EOF = true
-    for (var i = start; (isNaN(end) || i <= end) && not_all_EOF; i++) {
+    let i = start
+    for (; (isNaN(end) || i <= end) && not_all_EOF; i++) {
       reminder.innerHTML = `正在探测第${i}个字符<button style="float:right;" onclick="this.parentNode.innerHTML='正在停止'">停止</button>`
       // 以下生成C语言代码：
       // delay函数用于拖延时间。程序的正常输入输出耗时误差只出现在运行时间的最后一位，因此最后一位舍弃，只拖延前两位的时间；
@@ -196,12 +200,12 @@
       xhr.send(fm)
       let result = await new Promise(resolve => {
         // 不断查看运行结果页面，直到“程序处理完毕”
-        var int = setInterval(() => {
+        const int = setInterval(() => {
           const x = new XMLHttpRequest()
           x.open('GET', 'https://lexue.bit.edu.cn/mod/programming/result.php?id=' + fm.get('id'), true)
           x.onreadystatechange = function () {
-            if (x.readyState == 4) {
-              if (x.status == 200) {
+            if (x.readyState === 4) {
+              if (x.status === 200) {
                 if (x.responseText.match('当前状态：程序已处理完毕。')) {
                   clearInterval(int)
                   return resolve(x.responseText)
@@ -234,16 +238,16 @@
       for (let r = 0; r < rows.length; r++) {
         const row_number = rows[r].querySelector("[class~='c0']").innerText; const // 测试用例编号
           error = rows[r].querySelector("[class~='c12']").innerText.split(':')[0]// 错误类型
-        if (error == 'FPE') { // 1/0的情况，意味着已经EOF了
+        if (error === 'FPE') { // 1/0的情况，意味着已经EOF了
           ++EOF_count
           continue
         }
-        if (rows[r].querySelector("[class~='c4']").innerText == '保密') {
-          if (i == start) { // i是start，说明是第一次循环，需要将json初始化为空数组[]。
+        if (rows[r].querySelector("[class~='c4']").innerText === '保密') {
+          if (i === start) { // i是start，说明是第一次循环，需要将json初始化为空数组[]。
             arguments_[row_number] = []
           }
           /* 接下来对结果进行解密 */
-          if (error == 'TLE') {
+          if (error === 'TLE') {
             // 对应的是ASCII 13 的\r
             arguments_[row_number][i] = 13
             continue
@@ -256,10 +260,10 @@
           arguments_[row_number][i] = result
         }
       }
-      if (reminder.innerHTML == '正在停止') {
+      if (reminder.innerHTML === '正在停止') {
         break
       }
-      if (EOF_count == rows.length) { // 全部都EOF了
+      if (EOF_count === rows.length) { // 全部都EOF了
         not_all_EOF = false
       }
     }
@@ -329,12 +333,12 @@
     document.body.append(popup)
     popup.querySelector('#char_end').focus()
     popup.querySelector('#char_start').addEventListener('keydown', function (e) {
-      if (e.keyCode == 13) { // 按下Enter键
+      if (e.keyCode === 13) { // 按下Enter键
         detect(parseInt(popup.querySelector('#char_start').value), parseInt(popup.querySelector('#char_end').value))
       }
     })
     popup.querySelector('#char_end').addEventListener('keydown', function (e) {
-      if (e.keyCode == 13) { // 按下Enter键
+      if (e.keyCode === 13) { // 按下Enter键
         detect(parseInt(popup.querySelector('#char_start').value), parseInt(popup.querySelector('#char_end').value))
       }
     })
