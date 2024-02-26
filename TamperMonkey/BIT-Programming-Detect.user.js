@@ -49,13 +49,13 @@
         downloadLink.download = filename//命名txt
         downloadLink.click()
     }
-    function print_arguments (arguments) {
+    function print_arguments (arguments_) {
         /*将测试输入打印成人类易读的形式
-        arguments: 记录了所有测试输入的词典，格式为 {<编号>: [<测试输入每一位的ASCII>]} 。
+        arguments_: 记录了所有测试输入的词典，格式为 {<编号>: [<测试输入每一位的ASCII>]} 。
         */
         var result = " No.  |测试输入\n"
-        for (var key in arguments) {
-            result += ("   " + key).slice(-4) + "  |" + String.fromCharCode(...arguments[key])
+        for (var key in arguments_) {
+            result += ("   " + key).slice(-4) + "  |" + String.fromCharCode(...arguments_[key])
                 .replaceAll("\b", "\\b")
                 .replaceAll("\t", "\\t")
                 .replaceAll("\n", "\\n")
@@ -149,12 +149,14 @@
             }
             submit_xhr.send()
         })
-        var arguments = {}
+        var arguments_ = {}
         /*
-         arguments = {'3': [65,12],
-                      '4': [5, 7, 534, 1, 543, 3, 2, 4, 6, 12, 3, 45, 3, 2, 13, 22, 1, 33, 56],
-                      '5': [4, 5, 1, 2, 3, 4, 5, 5, 4, 3, 2, 1, 2, 3, 4, 5, 1, 3, 4]}
-                      变量arguments将会变成类似的格式，冒号前面的代表题号，后面的数组代表每一位字符的ASCII数值。
+        arguments_ = {
+            '3': [65, 12],
+            '4': [5, 7, 534, 1, 543, 3, 2, 4, 6, 12, 3, 45, 3, 2, 13, 22, 1, 33, 56],
+            '5': [4, 5, 1, 2, 3, 4, 5, 5, 4, 3, 2, 1, 2, 3, 4, 5, 1, 3, 4]
+        }
+        变量arguments_将会变成类似的格式，冒号前面的代表题号，后面的数组代表每一位字符的ASCII数值。
         */
         var not_all_EOF = true
         for (var i = start; (isNaN(end) || i <= end) && not_all_EOF; i++) {
@@ -198,7 +200,7 @@
                 }, 500)//500意味着每0.5秒查看一次运行结果页面
             })
             if (!result) {//出错
-                var partial_content = document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~" + (i - 1) + ")\n探测于" + new Date().toLocaleString() + "\n" + print_arguments(arguments)//写入txt的探测内容
+                var partial_content = document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~" + (i - 1) + ")\n探测于" + new Date().toLocaleString() + "\n" + print_arguments(arguments_)//写入txt的探测内容
                 downloadTXT(partial_content, document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~" + (i - 1) + ").txt")
                 hideReminder()
                 show_results(partial_content)
@@ -215,18 +217,18 @@
                 }
                 if (rows[r].querySelector("[class~='c4']").innerText == "保密") {
                     if (i == start) {//i是start，说明是第一次循环，需要将json初始化为空数组[]。
-                        arguments[row_number] = []
+                        arguments_[row_number] = []
                     }
                     /*接下来对结果进行解密*/
                     if (error == "TLE") {
-                        arguments[row_number][i] = 13//对应的是ASCII 13 的\r
+                        arguments_[row_number][i] = 13//对应的是ASCII 13 的\r
                         continue
                     }
                     result = Math.floor(parseFloat(rows[r].querySelector("[class~='c8']").innerText) * 100 + 32)
                     if (result > 126) {
                         result -= 119//ASCII 8-12
                     }
-                    arguments[row_number][i] = result
+                    arguments_[row_number][i] = result
                 }
             }
             if (reminder.innerHTML == '正在停止') {
@@ -239,10 +241,10 @@
         hideReminder("已探明全部参数。")
         var content
         if (not_all_EOF) {
-            content = document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~" + i + ")\n探测于" + new Date().toLocaleString() + "\n" + print_arguments(arguments)//写入txt的探测内容
+            content = document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~" + i + ")\n探测于" + new Date().toLocaleString() + "\n" + print_arguments(arguments_)//写入txt的探测内容
             downloadTXT(content, document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~" + i + ").txt")
         } else {
-            content = document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~end)\n探测于" + new Date().toLocaleString() + "\n" + print_arguments(arguments)//写入txt的探测内容
+            content = document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~end)\n探测于" + new Date().toLocaleString() + "\n" + print_arguments(arguments_)//写入txt的探测内容
             downloadTXT(content, document.querySelector("title").innerText + " 保密测试用例(字符：" + start + "~end).txt")
         }
         show_results(content)
