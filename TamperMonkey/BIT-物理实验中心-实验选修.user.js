@@ -2,7 +2,7 @@
 // @name         BIT-物理实验中心-实验选修
 // @namespace    http://tampermonkey.net/
 // @version      1.1.2
-// @description  上色
+// @description  给满员、冲突的课程上色
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -10,12 +10,7 @@
 // @grant        none
 // ==/UserScript==
 
-// 一般选课是在“物理实验中心-（侧边栏）教学选排课-我的课程-课程选修-已选课程列表”左键单击“实验选修，这时对话框尺寸会很难受。
-// 若右键单击后选择“在新标签页中打开链接”（或直接 Ctrl+左键单击），则会舒服一些。
-
-// 单击对话框标题“实验选修”以上色。红：满；黄：冲突；绿：可选。
-
-// 初次使用时请修改 my_conflict_referee() 中的 bans，或者整个儿修改 my_conflict_referee()。
+// 修改函数`my_conflict_referee()`中的变量`bans`，或者完全重构`my_conflict_referee()`
 
 (function () {
   'use strict'
@@ -26,6 +21,8 @@
    * @returns {boolean}
    */
   function my_conflict_referee (course) {
+    // 如果您看不懂这段代码，也许读读`BIT-物理实验中心-实验选修.md`会有帮助。
+
     if (course.class_time.week >= 8 && course.class_time.week <= 11 &&
       course.class_time.day === 3 && course.class_time.section === 5) {
       return true
