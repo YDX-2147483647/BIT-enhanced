@@ -23,14 +23,18 @@
   const popup_cover = document.createElement('div')
   const popup = document.createElement('div')
   popup_cover.style = 'width:100%;height:100%;background-color:rgba(0,0,0,0.6);position:fixed;inset:0px;z-index:2000'
+
   function rewrite_sidebar (shown_courses) {
-    let node
     const current_id = (location.href.match(/(?<=id=)\w+/) || [])[0]
     const mycourses = document.querySelector('li:has([data-key="mycourses"])')
     const sidebar_course_list = mycourses.parentNode
-    while (node = mycourses.nextSibling) {
+
+    let node = mycourses.nextSibling
+    while (node) {
       node.parentNode.removeChild(node)
+      node = mycourses.nextSibling
     }
+
     for (let i = 0; i < shown_courses.length; i++) {
       const classList = (current_id === shown_courses[i][0] ? ['list-group-item-action active active_tree_node ', 'font-weight-bold '] : ['', ''])
       sidebar_course_list.innerHTML += `<li>
@@ -47,6 +51,7 @@
                     </li>`
     }
   }
+
   function openPopup () {
     popup.style = 'background-color:white;color:black;box-shadow:rgb(153,153,153) 0px 0px 2px;transform:translate(-50%,-50%);position:fixed;border:3px solid rgba(0,0,0,0.6);font-size:16px;overflow:hidden;z-index:3000;left:50%;top:50%;width:70%;text-align:center;'
     popup.innerHTML = `<style>
@@ -166,8 +171,8 @@ ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
       })
       shown_li.addEventListener('drop', function (e) {
         e.stopPropagation()
-        if (this != dragsrc) {
-          if (this.parentNode == dragsrc.parentNode && this.offsetTop > dragsrc.offsetTop) {
+        if (this !== dragsrc) {
+          if (this.parentNode === dragsrc.parentNode && this.offsetTop > dragsrc.offsetTop) {
             this.parentNode.insertBefore(dragsrc, this.nextSibling)// if this.nextSibling===null insert as the last child.
           } else {
             this.parentNode.insertBefore(dragsrc, this)
@@ -189,8 +194,8 @@ ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
       })
       hidden_li.addEventListener('drop', function (e) {
         e.stopPropagation()
-        if (this != dragsrc) {
-          if (this.parentNode == dragsrc.parentNode && this.offsetTop > dragsrc.offsetTop) {
+        if (this !== dragsrc) {
+          if (this.parentNode === dragsrc.parentNode && this.offsetTop > dragsrc.offsetTop) {
             this.parentNode.insertBefore(dragsrc, this.nextSibling)// if this.nextSibling===null insert as the last child.
           } else {
             this.parentNode.insertBefore(dragsrc, this)
@@ -203,14 +208,16 @@ ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
     document.body.append(popup_cover)
     document.body.append(popup)
   }
+
   function closePopup () {
     document.body.removeChild(popup_cover)
     document.body.removeChild(popup)
   }
+
   function reload_courses () {
     const xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         shown_courses = []
         hidden_courses = []
         const a = new DOMParser().parseFromString(xhr.responseText, 'text/html').querySelectorAll("a[href*='lexue.bit.edu.cn/user/view.php']")
@@ -223,11 +230,13 @@ ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
     xhr.open('GET', document.querySelector("[href*='lexue.bit.edu.cn/user/profile.php?id=']").href + '&showallcourses=1', true)
     xhr.send()
   }
+
   if (shown_courses || hidden_courses) {
     rewrite_sidebar(shown_courses)
   } else {
     reload_courses()
   }
+
   GM_registerMenuCommand('更新课程并修改侧边栏', function () {
     if (!popup.parentNode) {
       reload_courses()
