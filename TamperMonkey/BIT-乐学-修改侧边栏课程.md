@@ -1,6 +1,6 @@
 # BIT-乐学-修改侧边栏课程
 
-[Moodle](https://lexue.bit.edu.cn/) 好像是按某种规则挑选出最多 10 个课程。然而它并不能完全猜中，还不时更新，导致每次更新都要改。
+北京理工大学的[乐学（Moodle）](https://lexue.bit.edu.cn/)的侧边栏好像是按某种规则挑选出最多 10 个课程。然而它并不能完全猜中，还不时更新，导致每次更新都要改。
 
 这段脚本可以自主定义侧边栏课程。如下图，右侧 InPrivate 窗口是原版，左侧是此脚本修改后的。
 
@@ -39,3 +39,12 @@
     - `icon`——FontAwesome v4 的图标名称，默认为`'graduation-cap'`。请参考 [Font Awesome Icons](https://fontawesome.com/v4/icons/) 或 [Font Awesome 中文网](https://fontawesome.com.cn/v4/icons)。
 
     详情见源代码注释里的`Config`及`CourseDescription`。
+
+## 兼容性
+
+这段脚本与“BIT-乐学-修改侧边栏课程-GUI”矛盾，同时启用时效果不确定。
+
+- 此脚本能修改名称、图标，GUI版目前还不能；
+- GUI版的操作方式远比此脚本直观，直接拖动即可；
+
+欢迎有志之士前往 [YDX-2147483647/BIT-enhanced](https://github.com/YDX-2147483647/BIT-enhanced) 帮忙合并两段脚本。
