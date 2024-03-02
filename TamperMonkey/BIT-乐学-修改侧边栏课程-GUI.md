@@ -18,4 +18,6 @@
 这段脚本与“[BIT-乐学-修改侧边栏课程](https://greasyfork.org/scripts/470832)”矛盾，同时启用时效果不确定。
 
 - 此脚本的操作方式远比无GUI版直观，直接拖动即可；
-- 无GUI版能设置图标，此脚本目前还不能。
+- 无GUI版能修改名称、图标，此脚本目前还不能。
+
+欢迎有志之士前往 [YDX-2147483647/BIT-enhanced](https://github.com/YDX-2147483647/BIT-enhanced) 帮忙合并两段脚本。
