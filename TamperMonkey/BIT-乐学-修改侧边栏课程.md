@@ -39,3 +39,10 @@
     - `icon`——FontAwesome v4 的图标名称，默认为`'graduation-cap'`。请参考 [Font Awesome Icons](https://fontawesome.com/v4/icons/) 或 [Font Awesome 中文网](https://fontawesome.com.cn/v4/icons)。
 
     详情见源代码注释里的`Config`及`CourseDescription`。
+
+## 兼容性
+
+这段脚本与“BIT-乐学-修改侧边栏课程-GUI”矛盾，同时启用时效果不确定。
+
+- 此脚本能设置图标，GUI版目前还不能；
+- GUI版的操作方式远比此脚本直观，直接拖动即可；
