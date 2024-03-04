@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程-GUI
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  修改侧边栏显示的课程
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -26,7 +26,7 @@
   popup_cover.style = 'width:100%;height:100%;background-color:rgba(0,0,0,0.6);position:fixed;inset:0px;z-index:2000'
 
   function rewrite_sidebar (shown_courses) {
-    const current_id = (location.href.match(/(?<=id=)\w+/) || [])[0]
+    const current_id = (document.querySelector('[data-key="coursehome"].active_tree_node')?.href?.match(/(?<=id=)\w+/) || [])[0]
     const mycourses = document.querySelector('li:has([data-key="mycourses"])')
     const sidebar_course_list = mycourses.parentNode
 
@@ -116,6 +116,9 @@ ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
     width: 100%;
     text-align: center;
 }
+span[contenteditable='true']{
+    border:thin solid #C0C0C0;
+}
 </style><div id="popup_title">编辑侧边栏课程
 <div id="close_popup">×</div>
 </div>
@@ -180,7 +183,16 @@ ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
           }
         }
       })
-      shown_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-body">${shown_courses[i][1]}</span></div></div></a>`
+      shown_li.innerHTML =
+          `<a class="list-group-item list-group-item-action">
+              <div class="ml-1">
+                  <div class="media">
+                      <span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus()" onblur="this.removeAttribute('contenteditable')" onkeydown="if(event.keyCode===13){this.blur()}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))">
+                          ${shown_courses[i][1]}
+                      </span>
+                  </div>
+              </div>
+          </a>`
       popup.querySelector('#shown_courses').append(shown_li)
     }
     for (let j = 0; j < hidden_courses.length; j++) {
@@ -203,7 +215,16 @@ ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
           }
         }
       })
-      hidden_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-body">${hidden_courses[j][1]}</span></div></div></a>`
+      hidden_li.innerHTML =
+          `<a class="list-group-item list-group-item-action">
+              <div class="ml-1">
+                  <div class="media">
+                      <span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus()" onblur="this.removeAttribute('contenteditable')" onkeydown="if(event.keyCode===13){this.blur()}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))">
+                          ${hidden_courses[j][1]}
+                      </span>
+                  </div>
+              </div>
+          </a>`
       popup.querySelector('#hidden_courses').append(hidden_li)
     }
     document.body.append(popup_cover)
