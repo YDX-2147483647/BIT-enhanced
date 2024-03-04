@@ -44,7 +44,7 @@
 
 这段脚本与“[BIT-乐学-修改侧边栏课程-GUI](https://greasyfork.org/zh-CN/scripts/488788)”矛盾，同时启用时效果不确定。
 
-- 此脚本能修改名称、图标，GUI版目前还不能；
+- 此脚本能修改图标，GUI版目前还不能；
 - GUI版的操作方式远比此脚本直观，直接拖动即可；
 
 欢迎有志之士前往 [YDX-2147483647/BIT-enhanced](https://github.com/YDX-2147483647/BIT-enhanced) 帮忙合并两段脚本。
