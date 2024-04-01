@@ -46,7 +46,7 @@
       // Get info.
       const cv_row = course_card
       info = {
-        capacity: cv_row.querySelector('.cv-capcity-col').textContent.match(pattern)[1],
+        capacity: cv_row.querySelector('.cv-capacity-col').textContent.match(pattern)[1],
         applicant: cv_row.querySelector('.cv-firstVolunteer-col').textContent.match(pattern)[1]
       }
 
