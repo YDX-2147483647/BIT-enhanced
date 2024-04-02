@@ -25,7 +25,7 @@
     // 如果您看不懂这段代码，也许读读`BIT-物理实验中心-实验选修.md`会有帮助。
 
     if (course.class_time.week >= 8 && course.class_time.week <= 11 &&
-            course.class_time.day === 3 && course.class_time.section === 5) {
+      course.class_time.day === 3 && course.class_time.section === 5) {
       return true
     }
 
@@ -34,6 +34,11 @@
      * @type {number[][]} [[星期几（1-7）, 第几大节（1-5）]]
      */
     const bans = [
+      [1, 2], [1, 4],
+      [2, 2], [2, 3], [2, 4], [2, 5],
+      [3, 2], [3, 3],
+      [4, 1], [4, 2], [4, 3],
+      [5, 2]
     ]
 
     return bans.find(([day, section]) =>
