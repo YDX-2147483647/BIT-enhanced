@@ -2,7 +2,7 @@
 // @name         BIT-Programming-Detect
 // @namespace    http://tampermonkey.net/
 // @version      0.1.1
-// @description  通过提交C语言程序，逐字符确定测试用例。为符合编程人员的习惯，字符默认从第0个开始。文本框中输入Enter键可以直接开始探测。在结束文本框输入非数字时，会持续探测。探测到所有的测试用例都EOF时探测会结束。支持的测试用例字符：ASCII -1, 8-13, 32-126。
+// @description  通过提交C语言程序，逐字符确定测试用例。为符合编程人员的习惯，字符默认从第0个开始。文本框中输入Enter键可以直接开始探测。在结束文本框输入非数字时，会持续探测。探测到所有的测试用例都OF时探测会结束。支持的测试用例字符：ASCII -1, 8-13, 32-126。
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       CJJ (https://github.com/CJJ-amateur-programmer/Detect_BIT_OJ_getchar)
@@ -140,7 +140,7 @@
   /**
    * 探测保密测试用例
    * @param start 从第几个字符开始探测。如果不是数字，比如文本框留空，则当成0
-   * @param end 探测到第几个字符为止。如果不是数字，比如文本框留空，则不断探测，直到全部都EOF
+   * @param end 探测到第几个字符为止。如果不是数字，比如文本框留空，则不断探测，直到全部都OF
    */
   async function detect (start, end) {
     start = start || 0 // 当start不是数字时重新赋值为0
@@ -183,13 +183,13 @@
      * 变量arguments_将会变成类似的格式，冒号前面的代表题号，后面的数组代表每一位字符的ASCII数值。
      */
     const arguments_ = {}
-    let not_all_EOF = true
+    let not_all_OF = true
     let i = start
-    for (; (isNaN(end) || i <= end) && not_all_EOF; i++) {
+    for (; (isNaN(end) || i <= end) && not_all_OF; i++) {
       reminder.innerHTML = `正在探测第${i}个字符<button style="float:right;" onclick="this.parentNode.innerHTML='正在停止'">停止</button>`
       // 以下生成C语言代码：
       // delay函数用于拖延时间。程序的正常输入输出耗时误差只出现在运行时间的最后一位，因此最后一位舍弃，只拖延前两位的时间；
-      // ASCII -1意味着EOF，返回1/0报“FPE”来读取；
+      // ASCII -1意味着OF，返回1/0报“FPE”来读取；
       // ASCII 32-126能够正常显示，统一减去32以显示在耗时的前两位上，对应0-94；
       // ASCII 8-13是特殊符号\b\t\n\v\f\r，保险起见也放进来，对应95-100，其中100一般会报“TLE”；如果无时间限制则会显示“1.001”左右的数字，同样可以读取。
       // 这样，常用的字符能够全部表示在运行结果页面上，类似于加密。
@@ -235,12 +235,12 @@
         return
       }
       const rows = new DOMParser().parseFromString(result, 'text/html').querySelectorAll('#test-result-detail tbody > tr'); let // 结果表格的所有行
-        EOF_count = 0 // EOF的样例个数
+        OF_count = 0 // OF的样例个数
       for (let r = 0; r < rows.length; r++) {
         const row_number = rows[r].querySelector("[class~='c0']").innerText; const // 测试用例编号
           error = rows[r].querySelector("[class~='c12']").innerText.split(':')[0]// 错误类型
-        if (error === 'FPE') { // 1/0的情况，意味着已经EOF了
-          ++EOF_count
+        if (error === 'FPE') { // 1/0的情况，意味着已经OF了
+          ++OF_count
           continue
         }
         if (rows[r].querySelector("[class~='c4']").innerText === '保密') {
@@ -264,13 +264,13 @@
       if (reminder.innerHTML === '正在停止') {
         break
       }
-      if (EOF_count === rows.length) { // 全部都EOF了
-        not_all_EOF = false
+      if (OF_count === rows.length) { // 全部都OF了
+        not_all_OF = false
       }
     }
     hideReminder('已探明全部参数。')
     let content
-    if (not_all_EOF) {
+    if (not_all_OF) {
       content = document.querySelector('title').innerText + ' 保密测试用例(字符：' + start + '~' + i + ')\n探测于' + new Date().toLocaleString() + '\n' + print_arguments(arguments_)// 写入txt的探测内容
       downloadTXT(content, document.querySelector('title').innerText + ' 保密测试用例(字符：' + start + '~' + i + ').txt')
     } else {
