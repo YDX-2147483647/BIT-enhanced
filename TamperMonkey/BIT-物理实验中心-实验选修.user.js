@@ -1,14 +1,13 @@
 // ==UserScript==
 // @name         BIT-物理实验中心-实验选修
 // @namespace    http://tampermonkey.net/
-// @version      1.1.3
+// @version      1.2.0
 // @description  给满员、冲突的课程自动上色
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
 // @match        http://10.133.22.200:7100/XPK/StuCourseElective
 // @grant        none
-// @run-at       document-end
 // ==/UserScript==
 
 // 修改函数`my_conflict_referee()`中的变量`bans`，或者完全重构`my_conflict_referee()`
@@ -219,23 +218,26 @@
   }
 
   async function add_painter () {
-    // 是的，网页里的确是“lable”而非“label”
     const observer_config = {
       attributes: false,
       childList: true,
       subtree: true
     }
-    document.querySelector('.panel')
+
+    // 等待“实验选修”按钮出现
     const button = await new Promise((resolve, reject) => {
       const button_observer = new MutationObserver(() => {
-        const button_selector = document.querySelector('.panel.datagrid .datagrid-view2 .datagrid-body table lable:first-child')
-        if (button_selector) {
+        // 是的，网页里的确是“lable”而非“label”
+        const _button = document.querySelector('.panel.datagrid .datagrid-view2 .datagrid-body table lable:first-child')
+        if (_button) {
           button_observer.disconnect()
-          resolve(button_selector)
+          resolve(_button)
         }
       })
       button_observer.observe(document.body, observer_config)
     })
+
+    // 单击“实验选修”后稍等，会出现选课列表，这是再开始自动上色
     button.addEventListener('click', () => {
       const observer = new MutationObserver(() => {
         if (document.querySelector('.panel-title')) {
