@@ -11,6 +11,8 @@
 
 (function () {
   'use strict'
+  /* global GM_registerMenuCommand */
+
   GM_registerMenuCommand('导出当前物理实验课表', function () {
     const xhr = new XMLHttpRequest()
     xhr.open('POST', 'http://10.133.22.200:7100/XPK/StuCourseElective/LoadUsedLabCourses', true)
