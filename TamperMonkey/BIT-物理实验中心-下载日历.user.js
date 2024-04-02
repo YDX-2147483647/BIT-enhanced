@@ -23,7 +23,7 @@
         let content =
 `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:PHYEXP ${new Date().toLocaleString()}
+PRODID:-//BIT-enhanced//PHYEXP//
 TZID:Asia/Shanghai
 X-WR-CALNAME:物理实验课程表
 `
