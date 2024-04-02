@@ -1,11 +1,12 @@
 // ==UserScript==
-// @name         导出物理实验课表
-// @namespace    export_phyexp_schedule
+// @name         BIT-物理实验中心-下载日历
+// @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  download .ics file
-// @author       You
-// @match        *://10.133.22.200:7100/*
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @description  生成课程表的 iCalendar 文件并下载
+// @license      GPL-3.0-or-later
+// @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
+// @author       CJJ
+// @match        http://10.133.22.200:7100/*
 // @grant        GM_registerMenuCommand
 // ==/UserScript==
 
