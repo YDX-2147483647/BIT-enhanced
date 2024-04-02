@@ -237,7 +237,7 @@
       button_observer.observe(document.body, observer_config)
     })
 
-    // 单击“实验选修”后稍等，会出现选课列表，这是再开始自动上色
+    // 单击“实验选修”后稍等，会出现选课列表，这时再开始自动上色
     button.addEventListener('click', () => {
       const observer = new MutationObserver(() => {
         if (document.querySelector('.panel-title')) {
