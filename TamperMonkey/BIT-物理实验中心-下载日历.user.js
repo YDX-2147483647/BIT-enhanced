@@ -42,7 +42,7 @@ END:VEVENT
 `
         }
         content += 'END:VCALENDAR'
-        downloadLink.href = URL.createObjectURL(new Blob([content], { type: 'text/plain' }))
+        downloadLink.href = URL.createObjectURL(new Blob([content], { type: 'text/calendar' }))
         downloadLink.download = '物理实验课程表.ics'
         downloadLink.click()
       }
