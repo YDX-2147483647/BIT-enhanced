@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-物理实验中心-下载日历
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  生成课程表的 iCalendar 文件并下载
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
