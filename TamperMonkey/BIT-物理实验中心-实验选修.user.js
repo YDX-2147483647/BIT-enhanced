@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         BIT-物理实验中心-实验选修
 // @namespace    http://tampermonkey.net/
-// @version      1.1.2
-// @description  给满员、冲突的课程上色
+// @version      1.2.0
+// @description  给满员、冲突的课程自动上色
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       Y.D.X.
@@ -76,23 +76,6 @@
         }
         `
     document.head.appendChild(sheet)
-  }
-
-  /**
-   * 等待元素出现
-   * @param {string} selector 元素的 CSS 选择器
-   * @param {number} interval 单位为 ms
-   * @returns {Promise<HTMLElement>}
-   */
-  function wait_until_presence (selector, interval) {
-    return new Promise((resolve, reject) => {
-      const check = setInterval(function () {
-        if (document.querySelector(selector)) {
-          clearInterval(check)
-          resolve(document.querySelector(selector))
-        }
-      }, interval)
-    })
   }
 
   /**
@@ -234,25 +217,38 @@
     courses.forEach(c => c.update_category(my_conflict_referee))
   }
 
-  /**
-   * @param {HTMLElement} panel_title
-   */
-  function add_painter (panel_title) {
-    // 单击“查询”后不会立即出结果……
-    // selector: ".icon-search"
-    // search_button.addEventListener('click', paint);
+  async function add_painter () {
+    const observer_config = {
+      attributes: false,
+      childList: true,
+      subtree: true
+    }
 
-    panel_title.addEventListener('click', paint)
-  }
+    // 等待“实验选修”按钮出现
+    const button = await new Promise((resolve, reject) => {
+      const button_observer = new MutationObserver(() => {
+        // 是的，网页里的确是“lable”而非“label”
+        const _button = document.querySelector('.panel.datagrid .datagrid-view2 .datagrid-body table lable:first-child')
+        if (_button) {
+          button_observer.disconnect()
+          resolve(_button)
+        }
+      })
+      button_observer.observe(document.body, observer_config)
+    })
 
-  async function add_painter_caller () {
-    // 是的，网页里的确是“lable”而非“label”
-    const button = await wait_until_presence('.panel.datagrid .datagrid-view2 .datagrid-body table lable:first-child')
+    // 单击“实验选修”后稍等，会出现选课列表，这时再开始自动上色
     button.addEventListener('click', () => {
-      wait_until_presence('.panel-title', 1000).then(add_painter)
+      const observer = new MutationObserver(() => {
+        if (document.querySelector('.panel-title')) {
+          new MutationObserver(paint).observe(document.querySelector('#dialogChooseCourses .datagrid-view'), observer_config)
+          observer.disconnect()
+        }
+      })
+      observer.observe(document.body, observer_config)
     })
   }
 
   add_style_sheet()
-  add_painter_caller()
+  add_painter()
 })()
