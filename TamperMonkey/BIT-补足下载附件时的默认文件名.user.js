@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2.11
+// @version      0.2.12
 // @description  补充附件中 <a> 元素的 download 属性
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -16,10 +16,9 @@
 // @match        https://xcb.bit.edu.cn/*.htm
 // @match        https://grd.bit.edu.cn/*.htm
 // @match        https://sie.bit.edu.cn/*.htm
+// @match        https://cs.bit.edu.cn/*.htm
 // @grant        none
 // ==/UserScript==
-
-// 旧版本：BIT-教学运行与考务中心（0.1）。
 
 (function () {
   'use strict'
@@ -65,6 +64,10 @@
     { // School of Information and Electronics
       host: 'sie',
       attachments_selector: '.annexList > li > a'
+    },
+    { // Computer Science
+      host: 'cs',
+      attachments_selector: '.fujian > ul > li > a'
     }
   ]
 
