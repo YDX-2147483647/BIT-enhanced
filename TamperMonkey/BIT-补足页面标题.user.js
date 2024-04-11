@@ -17,14 +17,12 @@
 // @grant        none
 // ==/UserScript==
 
-// 旧版本：BIT-教学运行与考务中心（0.1）。
-
 (function () {
   'use strict'
 
   /**
    * @typedef {Object} Site
-   * @property {String} host 例：“jwc”“jwc.bit.edu.cn”
+   * @property {String} host 例：“jwb”“jwb.bit.edu.cn”
    * @property {String[]} title_selectors 优先使用在前面的 selector
    * @property {String?} name 默认从`<title>`获取
    */

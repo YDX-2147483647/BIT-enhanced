@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2.11
+// @version      0.2.12
 // @description  补充附件中 <a> 元素的 download 属性
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -16,10 +16,9 @@
 // @match        https://xcb.bit.edu.cn/*.htm
 // @match        https://grd.bit.edu.cn/*.htm
 // @match        https://sie.bit.edu.cn/*.htm
+// @match        https://cs.bit.edu.cn/*.htm
 // @grant        none
 // ==/UserScript==
-
-// 旧版本：BIT-教学运行与考务中心（0.1）。
 
 (function () {
   'use strict'
@@ -28,7 +27,7 @@
   const matches = [
     { // 教学中心
       host: 'jxzx',
-      attachments_selector: '.pageArticle > .Annex > ul > li > a:not([download])'
+      attachments_selector: '.pageArticle > .Annex > ul > li > a'
     },
     { // 教务部
       host: 'jwb',
@@ -36,35 +35,39 @@
     },
     { // World Wide Web
       host: 'www',
-      attachments_selector: '.article .Annex > ul > li > a:not([download])'
+      attachments_selector: '.article .Annex > ul > li > a'
     },
     { // Student
       host: 'student',
-      attachments_selector: '.fujian > ul  > li > a:not([download])'
+      attachments_selector: '.fujian > ul  > li > a'
     },
     { // Optics
       host: 'opt',
-      attachments_selector: '.fujian > ul > li > a:not([download])'
+      attachments_selector: '.fujian > ul > li > a'
     },
     { // 明德
       host: 'mingde',
-      attachments_selector: '.pageArticle .Annex > ul > li > a:not([download])'
+      attachments_selector: '.pageArticle .Annex > ul > li > a'
     },
     { // 徐特立
       host: 'xuteli',
-      attachments_selector: '.annex > ul > li > a:not([download])'
+      attachments_selector: '.annex > ul > li > a'
     },
     { // 宣传部
       host: 'xcb',
-      attachments_selector: '.rt_fujian > ul > li > a:not([download])'
+      attachments_selector: '.rt_fujian > ul > li > a'
     },
     { // Graduate
       host: 'grd',
-      attachments_selector: '.myfujian > ul > li > a:not([download])'
+      attachments_selector: '.myfujian > ul > li > a'
     },
     { // School of Information and Electronics
       host: 'sie',
       attachments_selector: '.annexList > li > a'
+    },
+    { // Computer Science
+      host: 'cs',
+      attachments_selector: '.fujian > ul > li > a'
     }
   ]
 
