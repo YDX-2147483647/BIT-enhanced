@@ -28,7 +28,7 @@
   const matches = [
     { // 教学中心
       host: 'jxzx',
-      attachments_selector: '.pageArticle > .Annex > ul > li > a:not([download])'
+      attachments_selector: '.pageArticle > .Annex > ul > li > a'
     },
     { // 教务部
       host: 'jwb',
@@ -36,31 +36,31 @@
     },
     { // World Wide Web
       host: 'www',
-      attachments_selector: '.article .Annex > ul > li > a:not([download])'
+      attachments_selector: '.article .Annex > ul > li > a'
     },
     { // Student
       host: 'student',
-      attachments_selector: '.fujian > ul  > li > a:not([download])'
+      attachments_selector: '.fujian > ul  > li > a'
     },
     { // Optics
       host: 'opt',
-      attachments_selector: '.fujian > ul > li > a:not([download])'
+      attachments_selector: '.fujian > ul > li > a'
     },
     { // 明德
       host: 'mingde',
-      attachments_selector: '.pageArticle .Annex > ul > li > a:not([download])'
+      attachments_selector: '.pageArticle .Annex > ul > li > a'
     },
     { // 徐特立
       host: 'xuteli',
-      attachments_selector: '.annex > ul > li > a:not([download])'
+      attachments_selector: '.annex > ul > li > a'
     },
     { // 宣传部
       host: 'xcb',
-      attachments_selector: '.rt_fujian > ul > li > a:not([download])'
+      attachments_selector: '.rt_fujian > ul > li > a'
     },
     { // Graduate
       host: 'grd',
-      attachments_selector: '.myfujian > ul > li > a:not([download])'
+      attachments_selector: '.myfujian > ul > li > a'
     },
     { // School of Information and Electronics
       host: 'sie',
