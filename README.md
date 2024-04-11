@@ -3,6 +3,7 @@
 [![best of BITs](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/YDX-2147483647/best-of-bits/main/config/badge/v1.json)](https://github.com/YDX-2147483647/best-of-bits)
 [![Source GitHub](https://img.shields.io/badge/Source-GitHub-lightgray?logo=github)](https://github.com/YDX-2147483647/BIT-enhanced/)
 [![Mirror Gitee](https://img.shields.io/badge/Mirror-Gitee-red?logo=gitee)](https://gitee.com/YDX-2147483647/BIT-enhanced/)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/YDX-2147483647/BIT-enhanced/main.svg)](https://results.pre-commit.ci/latest/github/YDX-2147483647/BIT-enhanced/main)
 
 一些方便大家使用 BIT 相关网站的用户脚本和用户样式表。
 
