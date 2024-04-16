@@ -9,7 +9,7 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
   - repo: https://github.com/crate-ci/typos
-    rev: v1.20.4
+    rev: v1.20.8
     hooks:
       - id: typos
   - repo: https://github.com/pre-commit/mirrors-eslint
