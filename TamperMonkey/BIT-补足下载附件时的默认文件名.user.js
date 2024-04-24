@@ -73,9 +73,9 @@
 
   /**
    * 猜测带有扩展名的文件名
-   * 
-   * @param {string} text 
-   * @param {string} url 
+   *
+   * @param {string} text
+   * @param {string} url
    * @returns {string}
    */
   function guess_filename (text, url) {
