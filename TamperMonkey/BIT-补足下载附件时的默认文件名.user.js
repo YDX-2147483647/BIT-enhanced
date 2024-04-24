@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足下载附件时的默认文件名
 // @namespace    http://tampermonkey.net/
-// @version      0.2.12
+// @version      0.2.13
 // @description  补充附件中 <a> 元素的 download 属性
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -71,6 +71,46 @@
     }
   ]
 
+  /**
+   * 猜测带有扩展名的文件名
+   * 
+   * @param {string} text 
+   * @param {string} url 
+   * @returns {string}
+   */
+  function guess_filename (text, url) {
+    const SUFFIX_PATTERN = /\.[0-9a-zA-Z]+$/
+
+    const match_text = SUFFIX_PATTERN.exec(text)
+    const suffix_by_text = match_text !== null ? match_text[0] : null
+    const match_url = SUFFIX_PATTERN.exec(url)
+    const suffix_by_url = match_url !== null ? match_url[0] : null
+
+    if (suffix_by_url === null) {
+      // 若`url`无更多信息，则照抄`text`
+      return text
+    } else {
+      // 若`url`提供了信息
+      if (suffix_by_text === null) {
+        // 若`text`缺扩展名，则加上扩展名
+        // 这是最常见的情况。
+        return text + suffix_by_url
+      } else {
+        // 若`text`也疑似有扩展名，则与`url`的比较一下，看情况决定是否加上
+        if (suffix_by_text === suffix_by_url) {
+          return text
+        }
+
+        if (suffix_by_text.match(/^\.[0-9]+$/) || (suffix_by_text.length < suffix_by_url)) {
+          // 例：`text`是`XeTeX-3.141592653-2.6-0.999996`，那么`suffix_by_text`会是`.999996`，并非真的扩展名。
+          return text + suffix_by_url
+        } else {
+          return text
+        }
+      }
+    }
+  }
+
   function set_attachments_filenames () {
     const site_host = window.location.host
 
@@ -78,14 +118,7 @@
       if (site_host === `${s.host}.bit.edu.cn`) {
         document.querySelectorAll(s.attachments_selector).forEach(attach => {
           if (!attach.download) {
-            let attach_filename = attach.textContent
-
-            if (!/\.[0-9a-zA-Z]+$/.test(attach_filename)) {
-              // textContent 不含扩展名
-              attach_filename += attach.href.match(/\.[0-9a-zA-Z]+$/)
-            }
-
-            attach.download = attach_filename
+            attach.download = guess_filename(attach.textContent, attach.href)
           }
         })
 
