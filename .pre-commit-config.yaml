@@ -9,11 +9,11 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
   - repo: https://github.com/crate-ci/typos
-    rev: v1.22.0
+    rev: v1.24.5
     hooks:
       - id: typos
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.4.0
+    rev: v9.10.0
     hooks:
       - id: eslint
         args:
@@ -26,3 +26,6 @@ repos:
           - eslint-plugin-promise@^6.0.0
 
 exclude: "/obsolete/"
+
+ci:
+  autoupdate_schedule: quarterly
