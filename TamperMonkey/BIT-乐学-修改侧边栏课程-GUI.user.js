@@ -27,8 +27,8 @@
   const popup = document.createElement('div')
   popup_cover.style = 'width:100%;height:100%;background-color:rgba(0,0,0,0.6);position:fixed;inset:0px;z-index:2000'
 
-  function rewrite_sidebar(shown_courses) {
-    const current_id = document.querySelector('[data-key="coursehome"].active_tree_node')?.href?.match(/(?<=id=)\w+/)?.join() //如果找不到返回undefined
+  function rewrite_sidebar (shown_courses) {
+    const current_id = document.querySelector('[data-key="coursehome"].active_tree_node')?.href?.match(/(?<=id=)\w+/)?.join() // 如果找不到返回undefined
     const mycourses = document.querySelector('li:has([data-key="mycourses"])')
     const sidebar_course_list = mycourses.parentNode
 
@@ -55,7 +55,7 @@
     }
   }
 
-  function openPopup() {
+  function openPopup () {
     popup.style = 'background-color:white;color:black;box-shadow:rgb(153,153,153) 0px 0px 2px;transform:translate(-50%,-50%);position:fixed;border:3px solid rgba(0,0,0,0.6);font-size:16px;overflow:hidden;z-index:3000;left:50%;top:50%;width:70%;text-align:center;'
     popup.innerHTML = `<style>
 #popup_title{
@@ -144,10 +144,10 @@ span[contenteditable='true']{
       const shown_lis = popup.querySelectorAll('#shown_courses>li')
       const hidden_lis = popup.querySelectorAll('#hidden_courses>li')
       for (let i = 0; i < shown_lis.length; i++) {
-        shown_courses.push([shown_lis[i].dataset.id, shown_lis[i].innerText.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(" ", "&nbsp;"), shown_lis[i].querySelector("[data-icon]").dataset.icon])
+        shown_courses.push([shown_lis[i].dataset.id, shown_lis[i].innerText.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll(' ', '&nbsp;'), shown_lis[i].querySelector('[data-icon]').dataset.icon])
       }
       for (let j = 0; j < hidden_lis.length; j++) {
-        hidden_courses.push([hidden_lis[j].dataset.id, hidden_lis[j].innerText.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(" ", "&nbsp;"), hidden_lis[j].querySelector("[data-icon]").dataset.icon])
+        hidden_courses.push([hidden_lis[j].dataset.id, hidden_lis[j].innerText.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll(' ', '&nbsp;'), hidden_lis[j].querySelector('[data-icon]').dataset.icon])
       }
       GM_setValue('lexue_shown_courses', shown_courses)
       GM_setValue('lexue_hidden_courses', hidden_courses)
@@ -181,7 +181,7 @@ span[contenteditable='true']{
           }
         }
       })
-      shown_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-left"><i class="icon fa fa-${shown_courses[i][2]} fa-fw" aria-hidden="true" ondblclick="this.style.display='none';this.nextSibling.style.display='block';this.nextSibling.focus();this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=false"></i><span class="media-body" style="cursor:auto;display:none" contenteditable="true" onfocus="this.innerText=this.dataset.icon" data-icon="${shown_courses[i][2]}" onblur="this.style.display='none';this.previousSibling.style.display='block';this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=true;this.dataset.icon=this.innerText;this.innerText='';this.previousSibling.className='icon fa fa-'+this.dataset.icon+' fa-fw';" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))"></span></span><span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus();this.style.cursor='auto';this.parentNode.parentNode.parentNode.parentNode.draggable=false" onblur="this.removeAttribute('contenteditable');this.style.cursor='grab';this.parentNode.parentNode.parentNode.parentNode.draggable=true" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,'')).replaceAll(' ','&nbsp;')">${shown_courses[i][1]}</span></div></div></a>`;
+      shown_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-left"><i class="icon fa fa-${shown_courses[i][2]} fa-fw" aria-hidden="true" ondblclick="this.style.display='none';this.nextSibling.style.display='block';this.nextSibling.focus();this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=false"></i><span class="media-body" style="cursor:auto;display:none" contenteditable="true" onfocus="this.innerText=this.dataset.icon" data-icon="${shown_courses[i][2]}" onblur="this.style.display='none';this.previousSibling.style.display='block';this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=true;this.dataset.icon=this.innerText;this.innerText='';this.previousSibling.className='icon fa fa-'+this.dataset.icon+' fa-fw';" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))"></span></span><span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus();this.style.cursor='auto';this.parentNode.parentNode.parentNode.parentNode.draggable=false" onblur="this.removeAttribute('contenteditable');this.style.cursor='grab';this.parentNode.parentNode.parentNode.parentNode.draggable=true" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,'')).replaceAll(' ','&nbsp;')">${shown_courses[i][1]}</span></div></div></a>`
       popup.querySelector('#shown_courses').append(shown_li)
     }
     for (let j = 0; j < hidden_courses.length; j++) {
@@ -204,34 +204,34 @@ span[contenteditable='true']{
           }
         }
       })
-      hidden_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-left"><i class="icon fa fa-${hidden_courses[j][2]} fa-fw" aria-hidden="true" ondblclick="this.style.display='none';this.nextSibling.style.display='block';this.nextSibling.focus();this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=false"></i><span class="media-body" style="cursor:auto;display:none" contenteditable="true" onfocus="this.innerText=this.dataset.icon" data-icon="${hidden_courses[j][2]}" onblur="this.style.display='none';this.previousSibling.style.display='block';this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=true;this.dataset.icon=this.innerText;this.innerText='';this.previousSibling.className='icon fa fa-'+this.dataset.icon+' fa-fw'" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))"></span></span><span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus();this.style.cursor='auto';this.parentNode.parentNode.parentNode.parentNode.draggable=false" onblur="this.removeAttribute('contenteditable');this.style.cursor='grab';this.parentNode.parentNode.parentNode.parentNode.draggable=true" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,'')).replaceAll(' ','&nbsp;')">${hidden_courses[j][1]}</span></div></div></a>`;
+      hidden_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-left"><i class="icon fa fa-${hidden_courses[j][2]} fa-fw" aria-hidden="true" ondblclick="this.style.display='none';this.nextSibling.style.display='block';this.nextSibling.focus();this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=false"></i><span class="media-body" style="cursor:auto;display:none" contenteditable="true" onfocus="this.innerText=this.dataset.icon" data-icon="${hidden_courses[j][2]}" onblur="this.style.display='none';this.previousSibling.style.display='block';this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=true;this.dataset.icon=this.innerText;this.innerText='';this.previousSibling.className='icon fa fa-'+this.dataset.icon+' fa-fw'" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))"></span></span><span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus();this.style.cursor='auto';this.parentNode.parentNode.parentNode.parentNode.draggable=false" onblur="this.removeAttribute('contenteditable');this.style.cursor='grab';this.parentNode.parentNode.parentNode.parentNode.draggable=true" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,'')).replaceAll(' ','&nbsp;')">${hidden_courses[j][1]}</span></div></div></a>`
       popup.querySelector('#hidden_courses').append(hidden_li)
     }
     document.body.append(popup_cover)
     document.body.append(popup)
   }
 
-  function closePopup() {
+  function closePopup () {
     document.body.removeChild(popup_cover)
     document.body.removeChild(popup)
   }
 
-  function reload_courses() {
+  function reload_courses () {
     const xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        let courses = JSON.parse(xhr.responseText)[0].data.courses
-        courses.sort((a,b) => a.enddate - b.enddate)
+        const courses = JSON.parse(xhr.responseText)[0].data.courses
+        courses.sort((a, b) => a.enddate - b.enddate)
         for (let i = 0; i < courses.length; i++) {
-          if(!hidden_courses.filter(hidden_course => parseInt(hidden_course[0]) === courses[i].id).length && !shown_courses.filter(shown_course => parseInt(shown_course[0]) === courses[i].id).length){
-            hidden_courses.unshift([courses[i].id, `<b style="color:red">${courses[i].fullname}</b>`, "graduation-cap"])
+          if (!hidden_courses.filter(hidden_course => parseInt(hidden_course[0]) === courses[i].id).length && !shown_courses.filter(shown_course => parseInt(shown_course[0]) === courses[i].id).length) {
+            hidden_courses.unshift([courses[i].id, `<b style="color:red">${courses[i].fullname}</b>`, 'graduation-cap'])
           }
         }
         openPopup()
       }
     }
     xhr.open('POST', `https://lexue.bit.edu.cn/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=core_course_get_enrolled_courses_by_timeline_classification`, true)
-    xhr.send(`[{"index":0,"methodname":"core_course_get_enrolled_courses_by_timeline_classification","args":{"offset":0,"limit":0,"classification":"all","sort":"fullname","customfieldname":"","customfieldvalue":""}}]`)
+    xhr.send('[{"index":0,"methodname":"core_course_get_enrolled_courses_by_timeline_classification","args":{"offset":0,"limit":0,"classification":"all","sort":"fullname","customfieldname":"","customfieldvalue":""}}]')
   }
 
   if (shown_courses.length || hidden_courses.length) {

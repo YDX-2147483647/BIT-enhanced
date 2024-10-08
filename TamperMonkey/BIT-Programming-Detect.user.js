@@ -193,8 +193,8 @@
       // ASCII 32-126能够正常显示，统一减去32以显示在耗时的前两位上，对应0-94；
       // ASCII 8-13是特殊符号\b\t\n\v\f\r，保险起见也放进来，对应95-100，其中100一般会报“TLE”；如果无时间限制则会显示“1.001”左右的数字，同样可以读取。
       // 这样，常用的字符能够全部表示在运行结果页面上，类似于加密。
-      fm.set('code',"#include<stdio.h>\n#include<time.h>\nvoid delay(int seconds){clock_t start = clock();clock_t lay=(clock_t)seconds*CLOCKS_PER_SEC/1000;while((clock()-start)<lay);}int main(){int x;long long i;for(i=0;i<"+
-                   i+";i++)getchar();x=getchar()-32;if(x==-33)return 1/0;else if(x<-18&&x>-25)x+=119;delay(x*10);return 0;}");
+      fm.set('code', '#include<stdio.h>\n#include<time.h>\nvoid delay(int seconds){clock_t start = clock();clock_t lay=(clock_t)seconds*CLOCKS_PER_SEC/1000;while((clock()-start)<lay);}int main(){int x;long long i;for(i=0;i<' +
+                   i + ';i++)getchar();x=getchar()-32;if(x==-33)return 1/0;else if(x<-18&&x>-25)x+=119;delay(x*10);return 0;}')
       const xhr = new XMLHttpRequest()
       xhr.open('POST', 'https://lexue.bit.edu.cn/mod/programming/submit.php', true)
       xhr.send(fm)
