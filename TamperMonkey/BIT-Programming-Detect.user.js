@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-Programming-Detect
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  通过提交C语言程序，逐字符确定测试用例。为符合编程人员的习惯，字符默认从第0个开始。文本框中输入Enter键可以直接开始探测。在结束文本框输入非数字时，会持续探测。探测到所有的测试用例都OF时探测会结束。支持的测试用例字符：ASCII -1, 8-13, 32-126。
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -193,9 +193,8 @@
       // ASCII 32-126能够正常显示，统一减去32以显示在耗时的前两位上，对应0-94；
       // ASCII 8-13是特殊符号\b\t\n\v\f\r，保险起见也放进来，对应95-100，其中100一般会报“TLE”；如果无时间限制则会显示“1.001”左右的数字，同样可以读取。
       // 这样，常用的字符能够全部表示在运行结果页面上，类似于加密。
-      fm.set('code', '#include<stdio.h>\n#include<time.h>\nvoid delay(int seconds){clock_t start = clock();clock_t lay=(clock_t)seconds*CLOCKS_PER_SEC/1000;while((clock()-start)<lay);}int main(){int x;long long i;for(i=' +
-        start + ';i<' +
-        i + ';i++)getchar();x=getchar()-32;if(x==-33)return 1/0;else if(x<-18&&x>-25)x+=119;delay(x*10);return 0;}')
+      fm.set('code',"#include<stdio.h>\n#include<time.h>\nvoid delay(int seconds){clock_t start = clock();clock_t lay=(clock_t)seconds*CLOCKS_PER_SEC/1000;while((clock()-start)<lay);}int main(){int x;long long i;for(i=0;i<"+
+                   i+";i++)getchar();x=getchar()-32;if(x==-33)return 1/0;else if(x<-18&&x>-25)x+=119;delay(x*10);return 0;}");
       const xhr = new XMLHttpRequest()
       xhr.open('POST', 'https://lexue.bit.edu.cn/mod/programming/submit.php', true)
       xhr.send(fm)
@@ -224,8 +223,8 @@
           }
           x.send()
         },
-        // 500意味着每0.5秒查看一次运行结果页面
-        500)
+        // 1000意味着每1秒查看一次运行结果页面
+        1000)
       })
       if (!result) { // 出错
         const partial_content = document.querySelector('title').innerText + ' 保密测试用例(字符：' + start + '~' + (i - 1) + ')\n探测于' + new Date().toLocaleString() + '\n' + print_arguments(arguments_)// 写入txt的探测内容
