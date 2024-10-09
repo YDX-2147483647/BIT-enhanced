@@ -11,15 +11,15 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
-// @downloadURL https://update.greasyfork.org/scripts/488788/BIT-%E4%B9%90%E5%AD%A6-%E4%BF%AE%E6%94%B9%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%AF%BE%E7%A8%8B-GUI.user.js
-// @updateURL https://update.greasyfork.org/scripts/488788/BIT-%E4%B9%90%E5%AD%A6-%E4%BF%AE%E6%94%B9%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%AF%BE%E7%A8%8B-GUI.meta.js
 // ==/UserScript==
 
 (async function () {
   'use strict'
-  /* global GM_getValue */
-  /* global GM_setValue */
-  /* global GM_registerMenuCommand */
+  // GreasyFork提供：
+  /* global GM_getValue, GM_setValue, GM_registerMenuCommand */
+  // 乐学提供：
+  /* global M */
+
   let dragsrc = null
   let shown_courses = await GM_getValue('lexue_shown_courses') || []
   let hidden_courses = await GM_getValue('lexue_hidden_courses') || []
