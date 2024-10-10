@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         BIT-乐学-修改侧边栏课程-GUI
 // @namespace    http://tampermonkey.net/
-// @version      0.1.2
+// @version      1.0.0
 // @description  修改侧边栏显示的课程
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
 // @author       CJJ
 // @match        *://lexue.bit.edu.cn/*
+// @icon         https://lexue.bit.edu.cn/theme/image.php/eguru/theme/1724573654/favicon
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
@@ -14,19 +15,20 @@
 
 (async function () {
   'use strict'
-  /* global GM_getValue */
-  /* global GM_setValue */
-  /* global GM_registerMenuCommand */
+  // GreasyFork提供：
+  /* global GM_getValue, GM_setValue, GM_registerMenuCommand */
+  // 乐学提供：
+  /* global M */
 
   let dragsrc = null
-  let shown_courses = await GM_getValue('lexue_shown_courses')
-  let hidden_courses = await GM_getValue('lexue_hidden_courses')
+  let shown_courses = await GM_getValue('lexue_shown_courses') || []
+  let hidden_courses = await GM_getValue('lexue_hidden_courses') || []
   const popup_cover = document.createElement('div')
   const popup = document.createElement('div')
   popup_cover.style = 'width:100%;height:100%;background-color:rgba(0,0,0,0.6);position:fixed;inset:0px;z-index:2000'
 
   function rewrite_sidebar (shown_courses) {
-    const current_id = (document.querySelector('[data-key="coursehome"].active_tree_node')?.href?.match(/(?<=id=)\w+/) || [])[0]
+    const current_id = document.querySelector('[data-key="coursehome"].active_tree_node')?.href?.match(/(?<=id=)\w+/)?.join() // 如果找不到返回undefined
     const mycourses = document.querySelector('li:has([data-key="mycourses"])')
     const sidebar_course_list = mycourses.parentNode
 
@@ -43,7 +45,7 @@
                             <div class="ml-1">
                                 <div class="media">
                                         <span class="media-left">
-                                            <i class="icon fa fa-graduation-cap fa-fw " aria-hidden="true"></i>
+                                            <i class="icon fa fa-${shown_courses[i][2]} fa-fw " aria-hidden="true"></i>
                                         </span>
                                     <span class="media-body ${classList[1]}">${shown_courses[i][1]}</span>
                                 </div>
@@ -65,7 +67,6 @@
     color:rgb(255,255,255);
     font-weight:700;
     font-size:20px;
-    cursor:move;
     -webkit-touch-callout:none;
     -webkit-user-select:none;
     -khtml-user-select:none;
@@ -108,13 +109,16 @@ ul#shown_courses,ul#hidden_courses{
 ul#shown_courses::-webkit-scrollbar,ul#hidden_courses::-webkit-scrollbar{
     width: 0px;/* 兼容火狐 */
 }
-ul#shown_courses>li,ul#hidden_courses>li,div.table-title{
-    cursor:grab;
+ul#shown_courses>li,ul#hidden_courses>li{
+    cursor: grab;
     font-size: 16px;
     font-weight: bold;
     border: 1px solid #000;
     width: 100%;
     text-align: center;
+}
+ul#shown_courses span,ul#hidden_courses span{
+    min-height:24px;
 }
 span[contenteditable='true']{
     border:thin solid #C0C0C0;
@@ -128,8 +132,8 @@ span[contenteditable='true']{
 <div style="width:45%;font-size:16px;">隐藏的课程</div>
 </div>
 <div style="display:flex;justify-content:center;">
-<ul id="shown_courses"></ul>
-<ul id="hidden_courses"></ul>
+<ul id="shown_courses" ondragover="event.preventDefault();"></ul>
+<ul id="hidden_courses" ondragover="event.preventDefault();"></ul>
 </div>
 <button id="rewrite_sidebar" style="margin:1% 1% 1% 1%;">完成</button></div>`
     popup.querySelector('#close_popup').onclick = () => closePopup()
@@ -140,24 +144,18 @@ span[contenteditable='true']{
       const shown_lis = popup.querySelectorAll('#shown_courses>li')
       const hidden_lis = popup.querySelectorAll('#hidden_courses>li')
       for (let i = 0; i < shown_lis.length; i++) {
-        shown_courses.push([shown_lis[i].dataset.id, shown_lis[i].innerText])
+        shown_courses.push([shown_lis[i].dataset.id, shown_lis[i].innerText.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll(' ', '&nbsp;'), shown_lis[i].querySelector('[data-icon]').dataset.icon])
       }
       for (let j = 0; j < hidden_lis.length; j++) {
-        hidden_courses.push([hidden_lis[j].dataset.id, hidden_lis[j].innerText])
+        hidden_courses.push([hidden_lis[j].dataset.id, hidden_lis[j].innerText.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll(' ', '&nbsp;'), hidden_lis[j].querySelector('[data-icon]').dataset.icon])
       }
       GM_setValue('lexue_shown_courses', shown_courses)
       GM_setValue('lexue_hidden_courses', hidden_courses)
       rewrite_sidebar(shown_courses)
     }
-    popup.querySelector('#shown_courses').addEventListener('dragover', function (e) {
-      e.preventDefault()
-    })
     popup.querySelector('#shown_courses').addEventListener('drop', function (e) {
       e.preventDefault()
       this.append(dragsrc)
-    })
-    popup.querySelector('#hidden_courses').addEventListener('dragover', function (e) {
-      e.preventDefault()
     })
     popup.querySelector('#hidden_courses').addEventListener('drop', function (e) {
       e.preventDefault()
@@ -183,16 +181,7 @@ span[contenteditable='true']{
           }
         }
       })
-      shown_li.innerHTML =
-          `<a class="list-group-item list-group-item-action">
-              <div class="ml-1">
-                  <div class="media">
-                      <span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus()" onblur="this.removeAttribute('contenteditable')" onkeydown="if(event.keyCode===13){this.blur()}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))">
-                          ${shown_courses[i][1]}
-                      </span>
-                  </div>
-              </div>
-          </a>`
+      shown_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-left"><i class="icon fa fa-${shown_courses[i][2]} fa-fw" aria-hidden="true" ondblclick="this.style.display='none';this.nextSibling.style.display='block';this.nextSibling.focus();this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=false"></i><span class="media-body" style="cursor:auto;display:none" contenteditable="true" onfocus="this.innerText=this.dataset.icon" data-icon="${shown_courses[i][2]}" onblur="this.style.display='none';this.previousSibling.style.display='block';this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=true;this.dataset.icon=this.innerText;this.innerText='';this.previousSibling.className='icon fa fa-'+this.dataset.icon+' fa-fw';" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))"></span></span><span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus();this.style.cursor='auto';this.parentNode.parentNode.parentNode.parentNode.draggable=false" onblur="this.removeAttribute('contenteditable');this.style.cursor='grab';this.parentNode.parentNode.parentNode.parentNode.draggable=true" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,'')).replaceAll(' ','&nbsp;')">${shown_courses[i][1]}</span></div></div></a>`
       popup.querySelector('#shown_courses').append(shown_li)
     }
     for (let j = 0; j < hidden_courses.length; j++) {
@@ -215,16 +204,7 @@ span[contenteditable='true']{
           }
         }
       })
-      hidden_li.innerHTML =
-          `<a class="list-group-item list-group-item-action">
-              <div class="ml-1">
-                  <div class="media">
-                      <span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus()" onblur="this.removeAttribute('contenteditable')" onkeydown="if(event.keyCode===13){this.blur()}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))">
-                          ${hidden_courses[j][1]}
-                      </span>
-                  </div>
-              </div>
-          </a>`
+      hidden_li.innerHTML = `<a class="list-group-item list-group-item-action"><div class="ml-1"><div class="media"><span class="media-left"><i class="icon fa fa-${hidden_courses[j][2]} fa-fw" aria-hidden="true" ondblclick="this.style.display='none';this.nextSibling.style.display='block';this.nextSibling.focus();this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=false"></i><span class="media-body" style="cursor:auto;display:none" contenteditable="true" onfocus="this.innerText=this.dataset.icon" data-icon="${hidden_courses[j][2]}" onblur="this.style.display='none';this.previousSibling.style.display='block';this.parentNode.parentNode.parentNode.parentNode.parentNode.draggable=true;this.dataset.icon=this.innerText;this.innerText='';this.previousSibling.className='icon fa fa-'+this.dataset.icon+' fa-fw'" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,''))"></span></span><span class="media-body" ondblclick="this.setAttribute('contenteditable','true');this.focus();this.style.cursor='auto';this.parentNode.parentNode.parentNode.parentNode.draggable=false" onblur="this.removeAttribute('contenteditable');this.style.cursor='grab';this.parentNode.parentNode.parentNode.parentNode.draggable=true" onkeydown="if(event.keyCode===13){this.blur();}" onpaste="event.preventDefault();document.execCommand('insertText',false,event.clipboardData.getData('text/plain').replace(/[\\n|\\r]/gm,'')).replaceAll(' ','&nbsp;')">${hidden_courses[j][1]}</span></div></div></a>`
       popup.querySelector('#hidden_courses').append(hidden_li)
     }
     document.body.append(popup_cover)
@@ -240,20 +220,21 @@ span[contenteditable='true']{
     const xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        shown_courses = []
-        hidden_courses = []
-        const a = new DOMParser().parseFromString(xhr.responseText, 'text/html').querySelectorAll("a[href*='lexue.bit.edu.cn/user/view.php']")
-        for (let i = 0; i < a.length; i++) {
-          shown_courses.push([a[i].href.match(/(?<=course=)\w+/)[0], a[i].innerText])
+        const courses = JSON.parse(xhr.responseText)[0].data.courses
+        courses.sort((a, b) => a.enddate - b.enddate)
+        for (let i = 0; i < courses.length; i++) {
+          if (!hidden_courses.filter(hidden_course => parseInt(hidden_course[0]) === courses[i].id).length && !shown_courses.filter(shown_course => parseInt(shown_course[0]) === courses[i].id).length) {
+            hidden_courses.unshift([courses[i].id, `<b style="color:red">${courses[i].fullname}</b>`, 'graduation-cap'])
+          }
         }
         openPopup()
       }
     }
-    xhr.open('GET', document.querySelector("[href*='lexue.bit.edu.cn/user/profile.php?id=']").href + '&showallcourses=1', true)
-    xhr.send()
+    xhr.open('POST', `https://lexue.bit.edu.cn/lib/ajax/service.php?sesskey=${M.cfg.sesskey}&info=core_course_get_enrolled_courses_by_timeline_classification`, true)
+    xhr.send('[{"index":0,"methodname":"core_course_get_enrolled_courses_by_timeline_classification","args":{"offset":0,"limit":0,"classification":"all","sort":"fullname","customfieldname":"","customfieldvalue":""}}]')
   }
 
-  if (shown_courses || hidden_courses) {
+  if (shown_courses.length || hidden_courses.length) {
     rewrite_sidebar(shown_courses)
   } else {
     reload_courses()
