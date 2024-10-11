@@ -8,8 +8,7 @@
 
 第一次使用会出现弹窗，在弹窗中拖放各个课程，来决定是否在侧边栏显示，以及显示顺序。单击“完成”以保存更改。
 
-![demo](https://github.com/user-attachments/assets/8a7b1710-a3eb-4353-906c-600e8cbef5b0)
-
+![BIT-乐学-修改侧边栏课程-GUI](https://github.com/user-attachments/assets/8a7b1710-a3eb-4353-906c-600e8cbef5b0)
 
 在脚本管理器（如[篡改猴](https://www.tampermonkey.net/)）的菜单中可以找到“更新课程并修改侧边栏”“仅修改侧边栏”两个选项。
 
