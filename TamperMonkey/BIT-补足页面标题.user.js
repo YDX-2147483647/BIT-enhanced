@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.11
+// @version      1.2.12
 // @description  修改页面标题
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -21,10 +21,10 @@
   'use strict'
 
   /**
-   * @typedef {Object} Site
-   * @property {String} host 例：“jwb”“jwb.bit.edu.cn”
-   * @property {String[]} title_selectors 优先使用在前面的 selector
-   * @property {String?} name 默认从`<title>`获取
+   * @typedef {object} Site
+   * @property {string} host 例：“jwb”“jwb.bit.edu.cn”
+   * @property {(string | { selector: string, post: (element: Element) => string? })[]} title_selectors 优先使用在前面的 selector
+   * @property {string?} name 默认从`<title>`获取
    */
 
   /* spell-checker: disable */
@@ -136,14 +136,29 @@
         'h2.listTitle',
         '.gp-bread > .gp-container > a:last-child'
       ]
+    },
+    { // Radar
+      host: 'radar',
+      title_selectors: [
+        {
+          selector: '.detailBox .name',
+          post: (el) => {
+            if (el.childNodes.length === 2 && el.childNodes[0].nodeType === Node.TEXT_NODE && el.childNodes[1].classList?.contains('gender')) {
+              return el.childNodes[0].textContent
+            }
+          }
+        },
+        'h3.gp-title',
+        '.bread > .gp-container > a:last-child'
+      ]
     }
   ]
   /* spell-checker: enable */
 
   function match_site () {
     const site = sites.find(s => [
-            `${s.host}.bit.edu.cn`,
-            s.host
+      `${s.host}.bit.edu.cn`,
+      s.host
     ].includes(window.location.host))
 
     if (site === undefined) {
@@ -160,17 +175,46 @@
   }
 
   /**
+   * Applies function to the elements of the array and returns the first non-empty result.
+   *
+   * https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.find_map
+   *
+   * @template T
+   * @template U
+   * @param {Array<T>} array
+   * @param {(element: T) => U?} fn
+   * @returns {U?}
+   */
+  function find_map (array, fn) {
+    for (const element of array) {
+      const result = fn(element)
+      if (result) {
+        return result
+      }
+    }
+  }
+
+  /**
      * @param {Site} site
      * @returns success
      */
   function change_title_for (site) {
-    const selector = site.title_selectors.find(s => document.querySelector(s))
-    if (!selector) {
+    const raw_title = find_map(site.title_selectors, s => {
+      if (typeof s === 'string') {
+        return document.querySelector(s)?.textContent
+      } else {
+        const el = document.querySelector(s.selector)
+        if (el) {
+          return s.post(el)
+        }
+      }
+    })
+
+    if (!raw_title) {
       return false
     }
 
-    const title = document.querySelector(selector).textContent
-      .replace(/^[>-]/, '').trim()
+    const title = raw_title.replace(/^[>-]/, '').trim()
     if (!title) {
       return false
     }
