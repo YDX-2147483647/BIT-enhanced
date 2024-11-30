@@ -176,13 +176,13 @@
 
   /**
    * Applies function to the elements of the array and returns the first non-empty result.
-   * 
+   *
    * https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.find_map
-   * 
+   *
    * @template T
    * @template U
-   * @param {Array<T>} array 
-   * @param {(element: T) => U?} fn 
+   * @param {Array<T>} array
+   * @param {(element: T) => U?} fn
    * @returns {U?}
    */
   function find_map (array, fn) {
@@ -200,7 +200,7 @@
      */
   function change_title_for (site) {
     const raw_title = find_map(site.title_selectors, s => {
-      if (typeof s === "string") {
+      if (typeof s === 'string') {
         return document.querySelector(s)?.textContent
       } else {
         const el = document.querySelector(s.selector)
