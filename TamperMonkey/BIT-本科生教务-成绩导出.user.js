@@ -71,7 +71,7 @@
 
     // 下载 CSV 文件
     const downloadLink = document.createElement('a')
-    downloadLink.download = `成绩导出-${format(new Date)}.csv`
+    downloadLink.download = `成绩导出-${format(new Date())}.csv`
     downloadLink.href = URL.createObjectURL(new Blob([content], { type: 'text/csv' }))
     downloadLink.click()
 
@@ -81,7 +81,7 @@
 
   /**
    * Format a date as a filename-compatible string
-   * @param {Date} date 
+   * @param {Date} date
    * @returns {string}
    */
   function format (date) {
@@ -95,7 +95,7 @@
   }
 
   /**
-   * @param {string} csv 
+   * @param {string} csv
    * @returns {string[]} Rows of an HTML <table>
    */
   function csv2table (csv) {
