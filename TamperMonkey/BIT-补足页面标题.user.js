@@ -111,7 +111,7 @@
         // https://www.yanhekt.cn/course/58931
         '.course-intro-title',
         // https://www.yanhekt.cn/session/666725
-        'nav.ant-breadcrumb',
+        'nav.ant-breadcrumb'
       ]
     },
     { // 信息公开
