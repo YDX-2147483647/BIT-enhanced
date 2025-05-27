@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BIT-补足页面标题
 // @namespace    http://tampermonkey.net/
-// @version      1.2.12
+// @version      1.2.13
 // @description  修改页面标题
 // @license      GPL-3.0-or-later
 // @supportURL   https://github.com/YDX-2147483647/BIT-enhanced/issues
@@ -100,11 +100,18 @@
     { // 延河课堂
       host: 'www.yanhekt.cn',
       title_selectors: [
+        // https://www.yanhekt.cn/recordCourse
         '.header-menu .ant-menu-item-selected',
+        // https://www.yanhekt.cn/profile/info
+        '.ant-menu .ant-menu-item-selected',
+        // Unknown
         '#root div[class^=secHeading] > span[class^=title]',
         '[class^=liveHeader], [class^=mobileLiveHeader]',
         '.title-bar > :last-child',
-        '.course-intro-title'
+        // https://www.yanhekt.cn/course/58931
+        '.course-intro-title',
+        // https://www.yanhekt.cn/session/666725
+        'nav.ant-breadcrumb',
       ]
     },
     { // 信息公开
@@ -225,10 +232,21 @@
 
   const site = match_site()
   if (site) {
-    const success = change_title_for(site)
-    if (!success) {
-      // 适应 I、延河课堂
-      setTimeout(() => change_title_for(site), 1500)
+    change_title_for(site)
+
+    // 适应 I、延河课堂
+    // 加载完成后刷新
+    setTimeout(() => change_title_for(site), 1500)
+    // URL 变化时也刷新
+    const history_pushState_original = history.pushState
+    history.pushState = function () {
+      const result = history_pushState_original.apply(this, arguments)
+      window.dispatchEvent(new Event('url-changed'))
+      return result
     }
+    window.addEventListener('url-changed', () => {
+      // 等待加载完成
+      setTimeout(() => change_title_for(site), 500)
+    })
   }
 })()
